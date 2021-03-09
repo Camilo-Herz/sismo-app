@@ -1,0 +1,246 @@
+/* Clases de todos los componentes */
+
+.marginInput {
+    margin-bottom: 10px;
+}
+
+html,
+body {
+    margin: 0;
+}
+
+body>app-root>app-login>div>div.forms-container>div>form.sign-up-form.ng-dirty.ng-touched.ng-valid>div.social-media.customBtnGoogle>div>div {
+    background: #e02d2c;
+    box-shadow: inherit;
+    background-color: #e02d2c;
+}
+
+/* INPUTS */
+form.sign-up-form {
+  opacity: 0;
+  z-index: 1;
+}
+
+.container.sign-up-mode form.sign-up-form {
+  opacity: 1;
+  z-index: 2;
+}
+
+.title {
+  font-size: 2.2rem;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+.input-field {
+  max-width: 380px;
+  width: 100%;
+  background-color: #f0f0f0;
+  margin: 10px 0;
+  height: 55px;
+  border-radius: 55px;
+  display: grid;
+  grid-template-columns: 15% 85%;
+  padding: 0 0.4rem;
+  position: relative;
+}
+
+.input-field i {
+  text-align: center;
+  line-height: 55px;
+  color: #acacac;
+  transition: 0.5s;
+  font-size: 1.1rem;
+}
+
+.input-field input {
+  background: none;
+  outline: none;
+  border: none;
+  line-height: 1;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.input-field input::placeholder {
+  color: #aaa;
+  font-weight: 500;
+}
+
+/* FIN INPUTS */
+
+/* SPINNER */
+.spinnerContainer {
+  width: 2.7em;
+  height: 2.7em;
+  border-radius: 50%;
+  background-color: #3a3a3a;
+  -webkit-display: flex;
+  -moz-display: flex;
+  -o-display: flex;
+  -ms-display: flex;
+  display: flex;
+  -webkit-justify-content: center;
+  -moz-justify-content: center;
+  -o-justify-content: center;
+  -ms-justify-content: center;
+  justify-content: center;
+  -webkit-align-items: center;
+  -moz-align-items: center;
+  -o-align-items: center;
+  -ms-align-items: center;
+  align-items: center;
+}
+
+.spinner {
+  font-size: 10px;
+  margin: 50px auto;
+  text-indent: -9999em;
+  width: 3.1em;
+  height: 3.1em;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  background: -moz-linear-gradient( left, rgba(255, 255, 255, 0.3) 10%, rgba(255, 255, 255, 0) 80%);
+  background: -webkit-linear-gradient( left, rgba(255, 255, 255, 0.3) 10%, rgba(255, 255, 255, 0) 80%);
+  background: -o-linear-gradient( left, rgba(255, 255, 255, 0.3) 10%, rgba(255, 255, 255, 0) 80%);
+  background: -ms-linear-gradient( left, rgba(255, 255, 255, 0.3) 10%, rgba(255, 255, 255, 0) 80%);
+  background: linear-gradient( to right, rgba(255, 255, 255, 0.3) 10%, rgba(255, 255, 255, 0) 80%);
+  position: relative;
+  -webkit-animation: load3 1.4s infinite linear;
+  animation: load3 1.4s infinite linear;
+  -webkit-transform: translateZ(0);
+  -ms-transform: translateZ(0);
+  transform: translateZ(0);
+}
+
+.spinner:after {
+  background: #3a3a3a;
+  width: 70%;
+  height: 70%;
+  border-radius: 50%;
+  content: "";
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.spinner:before {
+  background: #3a3a3a;
+  width: 1.2em;
+  height: 1.5em;
+  content: "";
+  margin: auto;
+  position: absolute;
+  top: -2px;
+  right: 25%;
+  transform: rotate(-10deg);
+}
+
+@-webkit-keyframes load3 {
+  0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+}
+
+@keyframes load3 {
+  0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+  }
+  100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+  }
+}
+
+.contStudyProcess-loading {
+  opacity: none;
+}
+
+.contStudyProcess {
+  -webkit-display: flex;
+  -ms-display: flex;
+  -moz-display: flex;
+  display: -webkit-box;
+  display: flex;
+  -ms-align-items: center;
+  -moz-align-items: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-align-content: center;
+  -ms-flex-line-pack: center;
+  align-content: center;
+  -ms-justify-content: space-evenly;
+  -moz-justify-content: space-evenly;
+  -webkit-box-pack: space-evenly;
+  -ms-flex-pack: space-evenly;
+  justify-content: space-evenly;
+  -ms-flex-direction: column;
+  -moz-flex-direction: column;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: center;
+  z-index: 999;
+  pointer-events: none;
+  -webkit-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+  cursor: wait;
+}
+
+.contStudyProcess__title {
+  text-align: center;
+}
+
+.contStudyProcess .contStudyProcess__title {
+  font-size: 18px;
+  font-weight: bold;
+  text-align: center;
+  width: 85%;
+  color: #fff;
+}
+
+.contStudyProcess .contStudyProcess__text {
+  display: inline-block;
+  width: 85%;
+  text-align: center;
+}
+
+.contStudyProcess .contStudyProcess__text span {
+  display: inline-block;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 300;
+  margin-bottom: 25px;
+  font-weight: normal;
+}
+
+.contStudyProcess .contStudyProcess__text strong {
+  font-size: 14px;
+  color: #dd141d;
+  font-weight: bold;
+}
+
+.contStudyProcess--isShow {
+  opacity: 1;
+  pointer-events: inherit;
+}
+/* FIN SPINNER */

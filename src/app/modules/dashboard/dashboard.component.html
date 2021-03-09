@@ -1,0 +1,83 @@
+<!-- menu vertical -->
+<div>
+
+    <nav id="menu" class="left show">
+        <div class="conte-icon imageUser">
+            <img src="../../../assets/img/logoUD.png" width="150px" alt="">
+        </div>
+        <ul>
+            <li>Inicio</li>
+            <li>Topic´s</li>
+            <li>Cerrar sesion</li>
+        </ul>
+        <a href="#" id="showmenu">
+            <i class="fa fa-align-justify"></i>
+        </a>
+    </nav>
+    <!-- /menu vertical -->
+
+    <!-- contenido de pagina, realmente no importa -->
+    <div class="dash-home">
+        <div class="head">
+            <br>
+            <span class="title-view">Tablero</span>
+            <input class="input-search" type="text" placeholder="Buscar" />
+        </div>
+        <div class="cont-dahs1">
+            <div class="card card-1" (click)="modalActive()">
+                <div class="wrapper">
+                    <h1 class="textCenter marginTitle">Nuevo proyecto</h1>
+                    <p class="textCenter"> Asocia nuevos procesos y sensores</p>
+                    <ul class="bg-bubbles">
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="card card-1">
+                <br> <strong>Planta 1</strong>
+                <ngx-charts-bar-horizontal [view]="view" [scheme]="colorScheme" [results]="single" [xAxis]="showXAxis"
+                    [yAxis]="showYAxis" [legend]="false" [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel">
+                </ngx-charts-bar-horizontal>
+            </div>
+            <div class="card card-1">
+                <br> <strong>Planta 2</strong>
+                <ngx-charts-bar-horizontal [view]="view" [scheme]="colorScheme" [results]="single" [xAxis]="showXAxis"
+                    [yAxis]="showYAxis" [legend]="false" [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel">
+                </ngx-charts-bar-horizontal>
+            </div>
+            <div class="card card-1">
+                <br> <strong>Planta 3</strong>
+                <ngx-charts-bar-horizontal [view]="view" [scheme]="colorScheme" [results]="single" [xAxis]="showXAxis"
+                    [yAxis]="showYAxis" [legend]="false" [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel">
+                </ngx-charts-bar-horizontal>
+            </div>
+            <div class="card card-1">
+                <br> <strong>Planta 4</strong>
+                <ngx-charts-bar-horizontal [view]="view" [scheme]="colorScheme" [results]="single" [xAxis]="showXAxis"
+                    [yAxis]="showYAxis" [legend]="false" [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel">
+                </ngx-charts-bar-horizontal>
+            </div>
+            <div class="card card-1">
+                <br> <strong>Planta 5</strong>
+                <ngx-charts-bar-horizontal [view]="view" [scheme]="colorScheme" [results]="single" [xAxis]="showXAxis"
+                    [yAxis]="showYAxis" [legend]="false" [showXAxisLabel]="showXAxisLabel"
+                    [showYAxisLabel]="showYAxisLabel">
+                </ngx-charts-bar-horizontal>
+            </div>
+        </div>
+    </div>
+
+</div>
