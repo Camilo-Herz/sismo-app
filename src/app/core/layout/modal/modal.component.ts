@@ -53,13 +53,18 @@ export class ModalComponent implements OnInit {
 
   actionBtnDerecha(action: string) {
     switch (action) {
-      case 'login':
-        this.applicationService.resetDataLogin();
-        this.data = this.clear();
+      case 'modal':
+        if (this.data.payload.deleteProject) {
+          this.deleteCard(this.data.payload.deleteProject);
+          this.data = this.clear();
+        } else {
+          this.applicationService.resetDataLogin();
+          this.data = this.clear();
+        }
         break;
       case 'newProject':
         this.clearDataPayload();
-        this.workflow.callWorkflowPut('newProject', this.data.payload.id, this.payload).finally(() => {
+        this.workflow.callWorkflowPut('project', this.data.payload.id, this.payload).finally(() => {
           this.removeTopic(999, 'removeAll');
           this.payload = {};
           this.registerForm.reset();
@@ -107,7 +112,6 @@ export class ModalComponent implements OnInit {
     return this.registerForm.get('topics') as FormArray;
   }
 
-
   clear(): any {
     return {
       type: '',
@@ -116,6 +120,10 @@ export class ModalComponent implements OnInit {
       labelBtnDerecha: '',
       urlRedir: ''
     };
+  }
+
+  deleteCard(name: string) {
+    this.workflow.callWorkflowPut('project', this.data.payload.id, { deleteProject: name }).finally(() => { });
   }
 
 }

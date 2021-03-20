@@ -80,4 +80,18 @@ export class DashboardComponent implements OnInit {
       this.dataView.projects = resp.projects;
     });
   }
+
+  deleteCard(nameProject: string) {
+    this.workflow.modalActive({
+      type: 'error',
+      message: '¿Esta seguro de eliminar el proyecto? Recuerde que no podra restaurarlo despues de ser eliminado.',
+      labelBtnIzquierda: 'Cancelar',
+      labelBtnDerecha: 'Aceptar',
+      urlRedir: '',
+      payload: {
+        id: this.dataView.id,
+        deleteProject: nameProject
+      }
+    });
+  }
 }

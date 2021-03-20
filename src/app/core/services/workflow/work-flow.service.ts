@@ -22,23 +22,7 @@ export class WorkFlowService {
     console.log('Datos enviados:', payload);
     this.http.post<{}>(`${environment.workflowUrl}/api/${stepId}`, payload).subscribe((resp: any) => {
       console.log('Datos recibidos: ', resp);
-      switch (resp.status) {
-        case 1:
-          this.setPayload(resp.payload);
-          this.router.navigate([resp.urlRedir]);
-          break;
-        case 2:
-          this.modalActive({
-            type: 'error',
-            message: resp.message,
-            labelBtnDerecha: resp.labelBtnDerecha,
-            urlRedir: resp.urlRedir
-          });
-          break;
-
-        default:
-          break;
-      }
+      this.actionResponse(resp);
     }, err => {
       this.modalActive({
         type: 'error',
@@ -50,16 +34,30 @@ export class WorkFlowService {
   }
 
   async callWorkflowPut(step: string, id: string, payload: any): Promise<any> {
+    console.log('step', step, 'id', id, 'payload', payload);
     this.http.put<{}>(`${environment.workflowUrl}/api/${step}/${id}`, payload).subscribe((resp: any) => {
-      switch (resp.status) {
-        case 1:
-          this.setPayload(resp.payload);
-          this.router.navigate([resp.urlRedir]);
-          break;
-        default:
-          break;
-      }
+      console.log('Datos recibidos: ', resp);
+      this.actionResponse(resp);
     });
+  }
+
+  private actionResponse(resp: any) {
+    switch (resp.status) {
+      case 1:
+        this.setPayload(resp.payload);
+        this.router.navigate([resp.urlRedir]);
+        break;
+      case 2:
+        this.modalActive({
+          type: 'error',
+          message: resp.message,
+          labelBtnDerecha: resp.labelBtnDerecha,
+          urlRedir: resp.urlRedir
+        });
+        break;
+      default:
+        break;
+    }
   }
 
   modalActive(data: modal) {
@@ -73,7 +71,7 @@ export class WorkFlowService {
     });
   }
 
-  setPayload(payload: any) {
+  private setPayload(payload: any) {
     this.payload.next(payload);
   }
 

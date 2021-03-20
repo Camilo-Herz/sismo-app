@@ -6,9 +6,10 @@
 
 ::placeholder {
     color: #acacac;
-  }
+}
 
 /*Menu*/
+
 #menu {
     position: absolute;
     width: 20%;
@@ -79,8 +80,7 @@
     float: right;
 }
 
-#menu ul :hover,
-#menu>ul>li:nth-child(1) {
+#menu ul :hover, #menu>ul>li:nth-child(1) {
     background-color: rgb(17, 17, 17);
     border-left-color: #50addc;
 }
@@ -133,7 +133,6 @@
 strong {
     margin: 15px;
 }
-
 
 /* /////////////////////////////// ANIMACION NUEVO */
 
@@ -258,7 +257,6 @@ strong {
     }
 }
 
-
 /* ////////////////////////////////// FIN ANIMACION NUEVO */
 
 .textCenter {
@@ -267,4 +265,10 @@ strong {
 
 .marginTitle {
     margin-top: 25%;
+}
+
+.imgTrash {
+    width: 20px;
+    float: right;
+    margin-right: 15px;
 }

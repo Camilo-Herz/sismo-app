@@ -43,7 +43,7 @@
                 </div>
             </div>
             <div class="card card-1" *ngFor="let item of dataView.projects">
-                <br> <strong>{{item.nombreProceso}}</strong>
+                <br><strong>{{item.nombreProceso}}<img src="../../../assets/img/trash-512.png" class="imgTrash" (click)="deleteCard(item.nombreProceso)"></strong>
                 <ngx-charts-bar-horizontal [view]="view" [scheme]="colorScheme" [results]="single" [xAxis]="showXAxis"
                     [yAxis]="showYAxis" [legend]="false" [showXAxisLabel]="showXAxisLabel"
                     [showYAxisLabel]="showYAxisLabel">
