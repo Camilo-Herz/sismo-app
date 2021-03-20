@@ -4,4 +4,5 @@ export interface modal {
     labelBtnIzquierda?: string;
     labelBtnDerecha: string;
     urlRedir: string;
+    payload?: object
 }

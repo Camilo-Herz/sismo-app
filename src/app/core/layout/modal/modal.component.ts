@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { ApplicationService } from '../../services/application/application.service';
 import { ModalService } from '../../services/modal/modal.service';
 import { WorkFlowService } from '../../services/workflow/work-flow.service';
@@ -19,7 +19,7 @@ export class ModalComponent implements OnInit {
     labelBtnIzquierda: string,
     labelBtnDerecha: string,
     urlRedir: string,
-    payload: object
+    payload: any
   };
 
   constructor(
@@ -59,7 +59,7 @@ export class ModalComponent implements OnInit {
         break;
       case 'newProject':
         this.clearDataPayload();
-        this.workflow.callWorkflow('newProject', this.payload).finally(() => {
+        this.workflow.callWorkflowPut('newProject', this.data.payload.id, this.payload).finally(() => {
           this.removeTopic(999, 'removeAll');
           this.payload = {};
           this.registerForm.reset();

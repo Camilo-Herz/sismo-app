@@ -42,36 +42,8 @@
                     </ul>
                 </div>
             </div>
-            <div class="card card-1">
-                <br> <strong>Planta 1</strong>
-                <ngx-charts-bar-horizontal [view]="view" [scheme]="colorScheme" [results]="single" [xAxis]="showXAxis"
-                    [yAxis]="showYAxis" [legend]="false" [showXAxisLabel]="showXAxisLabel"
-                    [showYAxisLabel]="showYAxisLabel">
-                </ngx-charts-bar-horizontal>
-            </div>
-            <div class="card card-1">
-                <br> <strong>Planta 2</strong>
-                <ngx-charts-bar-horizontal [view]="view" [scheme]="colorScheme" [results]="single" [xAxis]="showXAxis"
-                    [yAxis]="showYAxis" [legend]="false" [showXAxisLabel]="showXAxisLabel"
-                    [showYAxisLabel]="showYAxisLabel">
-                </ngx-charts-bar-horizontal>
-            </div>
-            <div class="card card-1">
-                <br> <strong>Planta 3</strong>
-                <ngx-charts-bar-horizontal [view]="view" [scheme]="colorScheme" [results]="single" [xAxis]="showXAxis"
-                    [yAxis]="showYAxis" [legend]="false" [showXAxisLabel]="showXAxisLabel"
-                    [showYAxisLabel]="showYAxisLabel">
-                </ngx-charts-bar-horizontal>
-            </div>
-            <div class="card card-1">
-                <br> <strong>Planta 4</strong>
-                <ngx-charts-bar-horizontal [view]="view" [scheme]="colorScheme" [results]="single" [xAxis]="showXAxis"
-                    [yAxis]="showYAxis" [legend]="false" [showXAxisLabel]="showXAxisLabel"
-                    [showYAxisLabel]="showYAxisLabel">
-                </ngx-charts-bar-horizontal>
-            </div>
-            <div class="card card-1">
-                <br> <strong>Planta 5</strong>
+            <div class="card card-1" *ngFor="let item of dataView.projects">
+                <br> <strong>{{item.nombreProceso}}</strong>
                 <ngx-charts-bar-horizontal [view]="view" [scheme]="colorScheme" [results]="single" [xAxis]="showXAxis"
                     [yAxis]="showYAxis" [legend]="false" [showXAxisLabel]="showXAxisLabel"
                     [showYAxisLabel]="showYAxisLabel">

@@ -18,13 +18,13 @@ export class WorkFlowService {
     private http: HttpClient
   ) { }
 
-  async callWorkflow(stepId: string, payload: any): Promise<any> {
+  async callWorkflowPost(stepId: string, payload: any): Promise<any> {
     console.log('Datos enviados:', payload);
     this.http.post<{}>(`${environment.workflowUrl}/api/${stepId}`, payload).subscribe((resp: any) => {
       console.log('Datos recibidos: ', resp);
       switch (resp.status) {
         case 1:
-          this.setPayload(resp);
+          this.setPayload(resp.payload);
           this.router.navigate([resp.urlRedir]);
           break;
         case 2:
@@ -49,13 +49,27 @@ export class WorkFlowService {
     });
   }
 
+  async callWorkflowPut(step: string, id: string, payload: any): Promise<any> {
+    this.http.put<{}>(`${environment.workflowUrl}/api/${step}/${id}`, payload).subscribe((resp: any) => {
+      switch (resp.status) {
+        case 1:
+          this.setPayload(resp.payload);
+          this.router.navigate([resp.urlRedir]);
+          break;
+        default:
+          break;
+      }
+    });
+  }
+
   modalActive(data: modal) {
     this.modal.showModal({
       type: data.type,
       message: data.message,
       labelBtnIzquierda: data.labelBtnIzquierda,
       labelBtnDerecha: data.labelBtnDerecha,
-      urlRedir: data.urlRedir
+      urlRedir: data.urlRedir,
+      payload: data.payload
     });
   }
 

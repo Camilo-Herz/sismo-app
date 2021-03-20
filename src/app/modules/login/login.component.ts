@@ -89,7 +89,7 @@ export class LoginComponent implements OnInit {
   private onCall(dataLogin: any): void {
     delete this.payloadRegister.confirmPassword;
     Object.assign(this.payloadRegister, dataLogin)
-    this.workflow.callWorkflow('register', this.payloadRegister).finally(() => {
+    this.workflow.callWorkflowPost('register', this.payloadRegister).finally(() => {
       this.registerForm.reset();
       this.payloadRegister = {};
       this.loading = false;
@@ -98,7 +98,7 @@ export class LoginComponent implements OnInit {
 
   callOnSignIn() {
     this.loading = true;
-    this.workflow.callWorkflow('login', this.payloadLogin).finally(() => {
+    this.workflow.callWorkflowPost('login', this.payloadLogin).finally(() => {
       this.loginForm.get('password')?.reset();
       this.payloadRegister.password = '';
       this.loading = false;

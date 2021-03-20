@@ -41,7 +41,7 @@ export class LabComponent implements OnInit,OnDestroy {
   }
 
   public onCall(verb: string): void {
-    this.workflow.callWorkflow(verb, this.payload).finally(() => {
+    this.workflow.callWorkflowPost(verb, this.payload).finally(() => {
       if (verb === '2') {
         this.subscription = this.workflow.getPayload().subscribe(data => {
           this.dataView = data;

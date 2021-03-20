@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { Subscription } from 'rxjs';
 import { SocketWebService } from 'src/app/core/services/socketWeb/socket-web.service';
 import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.service';
 
@@ -12,11 +13,11 @@ import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.servic
 export class DashboardComponent implements OnInit {
 
   dataSocket: any;
+  subscription = new Subscription;
+  dataView: any = {};
 
   single: any = [];
-  
   view: any = [280, 150];
-
   // configuracion graficas
   showXAxis = true;
   showYAxis = true;
@@ -58,15 +59,27 @@ export class DashboardComponent implements OnInit {
     this.dataSocket = this.router.snapshot.paramMap.get('data');
     this.cookieService.set('dato', this.dataSocket);
     this.socketWebService.emitEvent({ nuevoParticipante: true });
+    this.subscription = this.workflow.getPayload().subscribe((resp) => {
+      console.log('123123');
+      
+      this.dataView = resp;
+    });
   }
 
   modalActive() {
+    this.subscription.unsubscribe();
     this.workflow.modalActive({
       type: 'newProject',
       message: 'Introduzca los datos del proceso',
       labelBtnDerecha: 'Aceptar',
       labelBtnIzquierda: 'Cancelar',
-      urlRedir: ''
+      urlRedir: '',
+      payload: {
+        id: this.dataView.id
+      }
+    });
+    this.workflow.getPayload().subscribe((resp) => {
+      this.dataView.projects = resp.projects;
     });
   }
 }
