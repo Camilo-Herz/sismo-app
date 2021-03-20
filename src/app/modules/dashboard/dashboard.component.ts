@@ -60,8 +60,6 @@ export class DashboardComponent implements OnInit {
     this.cookieService.set('dato', this.dataSocket);
     this.socketWebService.emitEvent({ nuevoParticipante: true });
     this.subscription = this.workflow.getPayload().subscribe((resp) => {
-      console.log('123123');
-      
       this.dataView = resp;
     });
   }
