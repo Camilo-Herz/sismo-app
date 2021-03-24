@@ -29,7 +29,8 @@
             ],
             "styles": [
               "src/styles.css",
-              "src/assets/css/styles.css"
+              "src/assets/css/styles.css",
+              "node_modules/font-awesome/css/font-awesome.css"
             ],
             "scripts": [
               "src/lib/anfitrion.min.js"
