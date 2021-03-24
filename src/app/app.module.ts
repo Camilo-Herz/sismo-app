@@ -4,16 +4,15 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ModalComponent } from './core/layout/modal/modal.component';
 import { ModalService } from "./core/services/modal/modal.service";
 import { CookieService } from 'ngx-cookie-service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ModulesModule } from './modules/modules.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    ModalComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +20,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ModulesModule
   ],
   exports: [
     FormsModule,

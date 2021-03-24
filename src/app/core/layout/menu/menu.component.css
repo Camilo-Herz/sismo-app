@@ -1,0 +1,65 @@
+/*Menu*/
+
+#menu {
+    width: 20%;
+    background-color: #1d252c;
+    height: 100%;
+    z-index: 10;
+    color: #bbb;
+    top: 0;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    opacity: 1;
+    font-family: 'Source Sans Pro', sans-serif;
+    display: inline-block;
+    position: sticky;
+}
+
+.conte-icon {
+    height: 20%;
+    background: #222932;
+    border: 3px inset #54575a;
+}
+
+#menu ul {
+    list-style: none;
+    margin-top: 0;
+    padding: 0;
+    cursor: pointer;
+}
+
+#menu ul li {
+    border-bottom: 1px solid #2a2a2a;
+}
+
+#menu>ul>li {
+    border-left: 4px solid #222;
+}
+
+#menu ul li {
+    color: inherit;
+    font-size: 16px;
+    display: block;
+    padding: 8px 0 8px 7px;
+    text-decoration: none;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+    font-weight: 600;
+}
+
+#menu ul i[class*='fa-caret'] {
+    float: right;
+}
+
+#menu ul :hover, #menu>ul>li:nth-child(1) {
+    background-color: rgb(17, 17, 17);
+    border-left-color: #50addc;
+}
+
+.imageUser {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -8,6 +8,7 @@ import { LabComponent } from './lab/lab.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { LayoutModule } from '../core/layout/layout.module';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,11 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     ModulesRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    NgxChartsModule
+    NgxChartsModule,
+    LayoutModule
+  ],
+  exports: [
+    LayoutModule
   ]
 })
 export class ModulesModule { }

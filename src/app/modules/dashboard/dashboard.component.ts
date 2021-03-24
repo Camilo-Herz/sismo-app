@@ -16,8 +16,20 @@ export class DashboardComponent implements OnInit {
   subscription = new Subscription;
   dataView: any = {};
 
-  single: any = [];
-  view: any = [280, 150];
+  single: any = [
+    {
+      "name": "Germany",
+      "value": Math.random() * (100 - 10) + 10
+    },
+    {
+      "name": "United States",
+      "value": Math.random() * (100 - 10) + 10
+    },
+    {
+      "name": "France",
+      "value": Math.random() * (100 - 10) + 10
+    }
+  ];
   // configuracion graficas
   showXAxis = true;
   showYAxis = true;
@@ -35,7 +47,7 @@ export class DashboardComponent implements OnInit {
     private cookieService: CookieService,
     private socketWebService: SocketWebService) {
     this.socketWebService.callback.subscribe((dataSocket: any) => {
-      this.graphicData(dataSocket);
+      // this.graphicData(dataSocket);
     });
   }
 

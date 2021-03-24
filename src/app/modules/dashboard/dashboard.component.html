@@ -1,21 +1,6 @@
-<!-- menu vertical -->
+
 <div>
-
-    <nav id="menu" class="left show">
-        <div class="conte-icon imageUser">
-            <img src="../../../assets/img/logoUD.png" width="150px" alt="">
-        </div>
-        <ul>
-            <li>Inicio</li>
-            <li>Topic´s</li>
-            <li>Cerrar sesion</li>
-        </ul>
-        <a href="#" id="showmenu">
-            <i class="fa fa-align-justify"></i>
-        </a>
-    </nav>
-    <!-- /menu vertical -->
-
+    <app-menu></app-menu>
     <!-- contenido de pagina, realmente no importa -->
     <div class="dash-home">
         <div class="head">
@@ -43,8 +28,9 @@
                 </div>
             </div>
             <div class="card card-1" *ngFor="let item of dataView.projects">
-                <br><strong>{{item.nombreProceso}}<img src="../../../assets/img/trash-512.png" class="imgTrash" (click)="deleteCard(item.nombreProceso)"></strong>
-                <ngx-charts-bar-horizontal [view]="view" [scheme]="colorScheme" [results]="single" [xAxis]="showXAxis"
+                <br><strong>{{item.nombreProceso}}<img src="../../../assets/img/trash-512.png" class="imgTrash"
+                        (click)="deleteCard(item.nombreProceso)"></strong>
+                <ngx-charts-bar-horizontal [scheme]="colorScheme" [results]="single" [xAxis]="showXAxis"
                     [yAxis]="showYAxis" [legend]="false" [showXAxisLabel]="showXAxisLabel"
                     [showYAxisLabel]="showYAxisLabel">
                 </ngx-charts-bar-horizontal>
