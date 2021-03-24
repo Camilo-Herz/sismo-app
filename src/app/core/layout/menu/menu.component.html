@@ -1,4 +1,5 @@
 <!-- tomado de: https://codepen.io/azouaoui-med/pen/wpBadb -->
+<!-- iconos que se pueden colocar: https://fontawesome.com/v4.7.0/icons/ -->
 
 <div class="page-wrapper chiller-theme toggled">
     <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
@@ -9,18 +10,19 @@
             <div class="sidebar-brand">
                 <a href="#">SISMO APP</a>
                 <div id="close-sidebar">
-                    <i class="fas fa-times"></i>
+                    <i class="fa fa-microchip" aria-hidden="true"></i>
                 </div>
             </div>
             <div class="sidebar-header">
                 <div class="user-pic">
                     <img class="img-responsive img-rounded alignMeddle"
-                        src="https://raw.githubusercontent.com/azouaoui-med/pro-sidebar-template/gh-pages/src/img/user.jpg"
+                        [src]="dataMenu.profilePicture"
+                        onError="this.src='../../../../assets/img/userNull.jpg'"
                         alt="User picture">
                 </div>
                 <div class="user-info">
-                    <span class="user-name">Jhon
-                        <strong>Smith</strong>
+                    <span class="user-name">{{dataMenu.secondName}}
+                        <strong>{{dataMenu.firstLastName}}</strong>
                     </span>
                     <span class="user-role">Estudiante</span>
                     <span class="user-status">

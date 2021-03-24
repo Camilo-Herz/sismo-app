@@ -1,4 +1,3 @@
-
 <div>
     <app-menu></app-menu>
     <!-- contenido de pagina, realmente no importa -->
@@ -28,8 +27,8 @@
                 </div>
             </div>
             <div class="card card-1" *ngFor="let item of dataView.projects">
-                <br><strong>{{item.nombreProceso}}<img src="../../../assets/img/trash-512.png" class="imgTrash"
-                        (click)="deleteCard(item.nombreProceso)"></strong>
+                <br><strong>{{item.nombreProceso}}<i class="fa fa-trash-o fa-lg imgTrash"
+                        (click)="deleteCard(item.nombreProceso)"></i></strong>
                 <ngx-charts-bar-horizontal [scheme]="colorScheme" [results]="single" [xAxis]="showXAxis"
                     [yAxis]="showYAxis" [legend]="false" [showXAxisLabel]="showXAxisLabel"
                     [showYAxisLabel]="showYAxisLabel">
