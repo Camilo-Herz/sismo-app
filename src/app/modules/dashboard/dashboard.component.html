@@ -26,13 +26,14 @@
                     </ul>
                 </div>
             </div>
-            <div class="card card-1" *ngFor="let item of dataView.projects">
+            <div class="card card-1" *ngFor="let item of dataView.projects; let i=index">
                 <br><strong>{{item.nombreProceso}}<i class="fa fa-trash-o fa-lg imgTrash"
                         (click)="deleteCard(item.nombreProceso)"></i></strong>
-                <ngx-charts-bar-horizontal [scheme]="colorScheme" [results]="single" [xAxis]="showXAxis"
-                    [yAxis]="showYAxis" [legend]="false" [showXAxisLabel]="showXAxisLabel"
-                    [showYAxisLabel]="showYAxisLabel">
+                <ngx-charts-bar-horizontal *ngIf="i % 2 === 0" [scheme]="colorScheme" [results]="single" [xAxis]="true"
+                    [yAxis]="true" [legend]="false" [showXAxisLabel]="true" [showYAxisLabel]="true">
                 </ngx-charts-bar-horizontal>
+                <ngx-charts-pie-chart *ngIf="i % 2 !== 0" [scheme]="colorScheme" [results]="single" [legend]="true">
+                </ngx-charts-pie-chart>
             </div>
         </div>
     </div>

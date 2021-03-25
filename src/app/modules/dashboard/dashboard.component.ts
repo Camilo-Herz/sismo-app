@@ -30,13 +30,6 @@ export class DashboardComponent implements OnInit {
       "value": Math.random() * (100 - 10) + 10
     }
   ];
-  // configuracion graficas
-  showXAxis = true;
-  showYAxis = true;
-  showLegend = true;
-  showXAxisLabel = true;
-  showYAxisLabel = true;
-
   colorScheme = {
     domain: ['#5ac3f4', '#793f7b', '#acdfae', '#3041b1', '#8a4fc4', '#c0440c', '#35f6ba']
   };
