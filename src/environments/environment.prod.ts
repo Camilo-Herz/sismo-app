@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  workflowUrl: 'http://localhost:3700',
+  title: 'SISMO'
 };
