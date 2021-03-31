@@ -1,0 +1,104 @@
+<!-- tomado de: https://codepen.io/azouaoui-med/pen/wpBadb -->
+<!-- iconos que se pueden colocar: https://fontawesome.com/v4.7.0/icons/ -->
+
+<div class="page-wrapper chiller-theme toggled">
+    <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
+        <i class="fas fa-bars"></i>
+    </a>
+    <nav id="sidebar" class="sidebar-wrapper navBar">
+        <div class="sidebar-content">
+            <div class="sidebar-brand">
+                <a href="#">SISMO APP</a>
+                <div id="close-sidebar">
+                    <i class="fa fa-microchip" aria-hidden="true"></i>
+                </div>
+            </div>
+            <div class="sidebar-header">
+                <div class="user-pic">
+                    <img class="img-responsive img-rounded alignMeddle"
+                        [src]="dataMenu.profilePicture"
+                        onError="this.src='../../../../assets/img/userNull.jpg'"
+                        alt="User picture">
+                </div>
+                <div class="user-info">
+                    <span class="user-name">{{dataMenu.secondName}}
+                        <strong>{{dataMenu.firstLastName}}</strong>
+                    </span>
+                    <span class="user-role">Estudiante</span>
+                    <span class="user-status">
+                        <i class="fa fa-circle"></i>
+                        <span>En linea</span>
+                    </span>
+                </div>
+            </div>
+            <!-- sidebar-header  -->
+            <div class="sidebar-search">
+                <div>
+                    <div class="input-group">
+                        <input type="text" class="search-menu search" placeholder="Search...">
+                        <div class="input-group-append">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- sidebar-search  -->
+            <div class="sidebar-menu">
+                <ul>
+                    <li class="header-menu">
+                        <span>General</span>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-columns"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-asterisk"></i>
+                            <span>Componentes</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-asterisk"></i>
+                            <span>Gráficas</span>
+                        </a>
+                    </li>
+                    <li class="header-menu">
+                        <span>Extra</span>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-book"></i>
+                            <span>Documentación</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-folder"></i>
+                            <span>Ejemplos</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- sidebar-menu  -->
+        </div>
+        <!-- sidebar-content  -->
+        <div class="sidebar-footer">
+            <a href="#">
+                <i class="fa fa-bell"></i>
+            </a>
+            <a href="#">
+                <i class="fa fa-envelope"></i>
+            </a>
+            <a href="#">
+                <i class="fa fa-cog"></i>
+            </a>
+            <a href="#">
+                <i class="fa fa-power-off"></i>
+            </a>
+        </div>
+    </nav>
+</div>
+<!-- page-wrapper -->

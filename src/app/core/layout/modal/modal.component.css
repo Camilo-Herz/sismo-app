@@ -1,0 +1,298 @@
+@media (min-width: 50em) {
+    .button {
+        font-size: 18px;
+        width: 25%;
+    }
+}
+
+.modalTextForm {
+    text-align: center;
+    font-size: 1rem;
+    color: #444;
+    margin-bottom: 10px;
+}
+
+.button {
+    display: inline-block;
+    width: 35%;
+    min-width: 110px;
+    margin: 0 10px 20px;
+    border: none;
+    outline: none;
+    font-size: 18px;
+    font-family: "Roboto", sans-serif;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    padding: 9px 15px;
+    border-radius: 6px;
+    -webkit-transition: all 0.3s;
+    transition: all 0.3s;
+    cursor: pointer;
+    -webkit-box-shadow: inherit;
+    box-shadow: inherit;
+    background-color: #939393;
+}
+
+.contButtons {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin: 15px 0;
+}
+
+.contModal--isShow {
+    opacity: 1;
+    pointer-events: inherit;
+}
+
+.contModal--isShow .modal {
+    top: 50%;
+}
+
+.button--primary {
+    background-color: #dd141d;
+}
+
+.button--primary:disabled {
+    background-color: #939393;
+}
+
+.button--primary--color {
+    background-color: #dd141d !important;
+}
+
+.contModal .modal .contButtons .button {
+    margin: 20px 2% 0;
+}
+
+.contModal .modal--min .contButtons .button {
+    margin: 15px 2% 0;
+    width: 45%;
+}
+
+.modalContainer--isShow .canguroModal {
+    -webkit-transform: translateY(0);
+    -moz-transform: translateY(0);
+    -o-transform: translateY(0);
+    -ms-transform: translateY(0);
+    transform: translateY(0);
+}
+
+.contModal {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    left: 0;
+    font-family: "Roboto", sans-serif;
+    z-index: 999;
+    pointer-events: none;
+    opacity: 0;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+.contModal .modal {
+    display: inline-block;
+    width: 85%;
+    min-width: 310px;
+    max-width: 450px;
+    background: #f8f8f8;
+    padding: 20px;
+    margin: 0 auto;
+    border-radius: 6px;
+    position: absolute;
+    left: 50%;
+    top: 30%;
+    -webkit-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+}
+
+.contModal .modal--min {
+    width: 65%;
+    min-width: 291px;
+    max-width: 350px;
+}
+
+.contModal .modal--min .contButtons .button {
+    margin: 15px 2% 0;
+    width: 45%;
+}
+
+.contModal .modal .modal__body .parrafo {
+    color: #000000;
+}
+
+.contModal .modal .modal__body strong.big {
+    font-size: 16px;
+}
+
+.contModal .modal .modal__body {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+}
+
+.contModal .modal .modal__body p,
+.contModal .modal .modal__body strong {
+    display: inline-block;
+    font-size: 14px;
+    color: #575757;
+}
+
+.contModal .modal .modal__body strong {
+    font-weight: bold;
+}
+
+.contModal .modal .contButtons {
+    margin: 0 0;
+}
+
+.contModal--isShow {
+    opacity: 1;
+    pointer-events: inherit;
+}
+
+.modalContainer {
+    font-size: initial !important;
+    background-color: rgba(0, 0, 0, 0.8);
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: 100;
+    -webkit-display: flex;
+    -moz-display: flex;
+    -o-display: flex;
+    -ms-display: flex;
+    display: flex;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    -o-justify-content: center;
+    -ms-justify-content: center;
+    justify-content: center;
+    -webkit-align-items: center;
+    -moz-align-items: center;
+    -o-align-items: center;
+    -ms-align-items: center;
+    align-items: center;
+    -webkit-flex-direction: column;
+    -moz-flex-direction: column;
+    -o-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-transition: ease all 0.4s;
+    -moz-transition: ease all 0.4s;
+    -o-transition: ease all 0.4s;
+    -ms-transition: ease all 0.4s;
+    transition: ease all 0.4s;
+    -webkit-pointer-events: none;
+    -moz-pointer-events: none;
+    -o-pointer-events: none;
+    -ms-pointer-events: none;
+    pointer-events: none;
+}
+
+.modalContainer--canguro {
+    z-index: 80;
+}
+
+.modalContainer--isShow {
+    -webkit-pointer-events: auto;
+    -moz-pointer-events: auto;
+    -o-pointer-events: auto;
+    -ms-pointer-events: auto;
+    pointer-events: auto;
+    -webkit-opacity: 1;
+    -moz-opacity: 1;
+    -o-opacity: 1;
+    -ms-opacity: 1;
+    opacity: 1;
+}
+
+.contModal--isShow .modal {
+    top: 50%;
+}
+
+.contButtons {
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    margin: 15px 0;
+}
+
+@media only screen and (min-width: 575px) {
+    .contButtons.contButtons--escritorioMini {
+        width: 61%;
+        padding-left: 80px;
+        box-sizing: initial;
+    }
+    .pickler {
+        z-index: 0;
+    }
+}
+
+.contButtons.contButtons--noMrgn {
+    margin: 0 0;
+}
+
+@media only screen and (max-width: 575px) {
+    .contButtons.contButtons--noMrgnTop {
+        margin-top: 0;
+        box-sizing: initial;
+    }
+    .pickler {
+        z-index: 0;
+    }
+}
+
+.separate a {
+    margin-left: 1px;
+}
+
+.contButtons.contButtons--sameWidth {
+    font-size: 0;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.contButtons.contButtons--sameWidth .button {
+    width: 43%;
+    margin: 0 2% 20px;
+}
+
+.contButtons.contButtons--autoWidth .button {
+    width: auto;
+}
+
+.contButtons.contButtons--noMrgnBottom {
+    margin-bottom: 0;
+}
+
+.max-width-topic {
+    max-width: 290px !important;
+}
+
+.img-menos {
+    width: 40px;
+    position: absolute;
+    left: 86%;
+    margin-top: -57px;
+    cursor: pointer;
+}
+
+.img-mas {
+    width: 48px;
+    left: 85%;
+    margin-top: -61px;
+    position: absolute;
+    cursor: pointer;
+}

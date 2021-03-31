@@ -1,0 +1,49 @@
+<!-- POPUP-CANCELACIÓN -->
+
+<!-- Modales -->
+<ng-container [ngSwitch]="data.type">
+    <section class="contModal contModal--isShow" id="modalDefault" *ngSwitchCase="'error'">
+        <div class="modal modal--min">
+            <div class="modal__body">
+                <p>
+                    {{data.message}}
+                </p>
+            </div>
+            <div class="contButtons contButtons--minMgrTop contButtons contButtons--minMgrTop--sameWidth">
+                <button *ngIf="data.labelBtnIzquierda !== undefined" type="button" class="button button--secondary" (click)="actionBtnIzquierda()">{{data.labelBtnIzquierda}}</button>
+                <button type="button" class="button button--primary" (click)="actionBtnDerecha('modal')">{{data.labelBtnDerecha}}</button>
+            </div>
+        </div>
+    </section>
+    <section class="contModal contModal--isShow" id="modalDefault" *ngSwitchCase="'newProject'">
+        <div class="modal modal--min">
+            <form action="#" [formGroup]="registerForm">
+                <h2 class="modalTextForm">{{data.message}}</h2>
+                <hr>
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Nombre del proceso" formControlName="nombreProceso" (change)="onChange($event, 'nombreProceso')" />
+                </div>
+                <div class="input-field">
+                    <i class="fas fa-user"></i>
+                    <input type="text" placeholder="Descripcion del proceso" formControlName="descripcionProceso" (change)="onChange($event, 'descripcionProceso')" />
+                </div>
+                <div formArrayName="topics">
+                    <div *ngFor="let item of getTopics.controls; let indexTopic=index" [formGroupName]="indexTopic">
+                        <div class="input-field max-width-topic">
+                            <i class="fas fa-user"></i>
+                            <input type="text" placeholder="Topic" formControlName="topic" (change)="onChange($event, 'topic' + indexTopic )" />
+                        </div>
+                        <img src="../../../assets/img/icon-menos.svg" alt="check" class="img-menos" (click)="removeTopic(indexTopic, 'removeAt')">
+                    </div>
+                </div>
+                <img src="../../../assets/img/icon-mas.svg" alt="check" class="img-mas" (click)="addTopic()">
+            </form>
+            <div class="contButtons contButtons--minMgrTop contButtons contButtons--minMgrTop--sameWidth">
+                <button *ngIf="data.labelBtnIzquierda !== undefined" type="button" class="button button--secondary" (click)="actionBtnIzquierda()">{{data.labelBtnIzquierda}}</button>
+                <button type="button" class="button button--primary" (click)="actionBtnDerecha('newProject')">{{data.labelBtnDerecha}}</button>
+            </div>
+        </div>
+    </section>
+</ng-container>
+<!-- Fin Modales -->
