@@ -4,12 +4,12 @@
       <form action="#" class="sign-in-form" [formGroup]="loginForm">
         <h2 class="title">Inicia sesión</h2>
         <div class="input-field">
-          <i class="fas fa-user"></i>
+          <i class="fa fa-user"></i>
           <input type="text" placeholder="Usuario" formControlName="user"
           (ngModelChange)="onChange($event, 'user', 'login')"/>
         </div>
         <div class="input-field">
-          <i class="fas fa-ck"></i>
+          <i class="fa fa-key"></i>
           <input type="password" placeholder="Contraseña" formControlName="password"
           (ngModelChange)="onChange($event, 'password', 'login')"/>
         </div>
@@ -22,17 +22,17 @@
       <form action="#" class="sign-up-form" [formGroup]="registerForm">
         <h2 class="title">Regístrate</h2>
         <div class="input-field">
-          <i class="fas fa-user"></i>
+          <i class="fa fa-user"></i>
           <input type="text" placeholder="Usuario" formControlName="user"
             (ngModelChange)="onChange($event, 'user', 'register')" />
         </div>
         <div class="input-field">
-          <i class="fas fa-lock"></i>
+          <i class="fa fa-key"></i>
           <input type="password" placeholder="Contraseña" formControlName="password"
             (ngModelChange)="onChange($event, 'password', 'register')" />
         </div>
         <div class="input-field">
-          <i class="fas fa-lock"></i>
+          <i class="fa fa-key"></i>
           <input type="password" placeholder="Confrimar Contraseña" formControlName="confirmPassword"
             (ngModelChange)="onChange($event, 'confirmPassword', 'register')" />
         </div>

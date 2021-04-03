@@ -99,4 +99,9 @@ export class DashboardComponent implements OnInit {
       }
     });
   }
+
+  process(nameProcess: string) {
+      this.workflow.callWorkflowPost('processes', {process: nameProcess}).finally(() => {
+      });
+  }
 }

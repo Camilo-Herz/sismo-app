@@ -2,24 +2,6 @@
     color: #acacac;
 }
 
-.dash-home {
-    width: 78%;
-    height: 100vh;
-    margin-left: 22%;
-    background: #e6e7e8;
-    padding-left: 0px;
-    display: table;
-    margin-top: -609px;
-}
-
-.dash-home .head {
-    height: 30px;
-    margin-left: 1rem;
-    display: flex;
-    justify-content: center;
-    padding-top: 25px;
-}
-
 .cont-dahs1 {
     margin-left: 25px;
     margin-top: 25px;
@@ -48,7 +30,7 @@
     background: #fff;
     border-radius: 2px;
     display: inline-block;
-    height: 230px;
+    height: 240px;
     margin: 1% 1.2%;
     position: relative;
     width: 30%;

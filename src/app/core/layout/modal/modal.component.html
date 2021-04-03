@@ -21,17 +21,17 @@
                 <h2 class="modalTextForm">{{data.message}}</h2>
                 <hr>
                 <div class="input-field">
-                    <i class="fas fa-user"></i>
+                    <i class=""></i>
                     <input type="text" placeholder="Nombre del proceso" formControlName="nombreProceso" (change)="onChange($event, 'nombreProceso')" />
                 </div>
                 <div class="input-field">
-                    <i class="fas fa-user"></i>
+                    <i class=""></i>
                     <input type="text" placeholder="Descripcion del proceso" formControlName="descripcionProceso" (change)="onChange($event, 'descripcionProceso')" />
                 </div>
                 <div formArrayName="topics">
                     <div *ngFor="let item of getTopics.controls; let indexTopic=index" [formGroupName]="indexTopic">
                         <div class="input-field max-width-topic">
-                            <i class="fas fa-user"></i>
+                            <i class=""></i>
                             <input type="text" placeholder="Topic" formControlName="topic" (change)="onChange($event, 'topic' + indexTopic )" />
                         </div>
                         <img src="../../../assets/img/icon-menos.svg" alt="check" class="img-menos" (click)="removeTopic(indexTopic, 'removeAt')">

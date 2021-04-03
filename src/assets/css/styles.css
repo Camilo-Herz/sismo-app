@@ -15,6 +15,24 @@ body>app-root>app-login>div>div.forms-container>div>form.sign-up-form.ng-dirty.n
     background-color: #e02d2c;
 }
 
+.pageRight{
+  width: 78%;
+  height: 100vh;
+  margin-left: 22%;
+  background: #e6e7e8;
+  padding-left: 0px;
+  display: table;
+  margin-top: -796px;
+}
+
+.pageRight .head {
+  height: 30px;
+  margin-left: 1rem;
+  display: flex;
+  justify-content: center;
+  padding-top: 25px;
+}
+
 /* INPUTS */
 form.sign-up-form {
   opacity: 0;
