@@ -9,13 +9,15 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LayoutModule } from '../core/layout/layout.module';
+import { ProcessesComponent } from './processes/processes.component';
 
 @NgModule({
   declarations: [
     GuidesComponent,
     LoginComponent,
     DashboardComponent,
-    LabComponent
+    LabComponent,
+    ProcessesComponent
   ],
   imports: [
     CommonModule,
