@@ -10,6 +10,7 @@ import { ModalService } from '../modal/modal.service';
 })
 export class WorkFlowService {
 
+  private dataUser = new BehaviorSubject<any>(null);
   private payload = new BehaviorSubject<any>(null);
 
   constructor(
@@ -73,6 +74,13 @@ export class WorkFlowService {
 
   private setPayload(payload: any) {
     this.payload.next(payload);
+    if (payload.dataMenu !== undefined) {
+      this.dataUser.next(payload.dataMenu);
+    }
+  }
+
+  getDataUser(): Observable<any> {
+    return this.dataUser.asObservable();
   }
 
   getPayload(): Observable<any> {

@@ -17,9 +17,9 @@ export class MenuComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.subscription = this.workflow.getPayload().subscribe((resp) => {
-      if (resp.dataMenu) {
-        this.dataMenu = resp.dataMenu;
+    this.subscription = this.workflow.getDataUser().subscribe((resp) => {
+      if (resp) {
+        this.dataMenu = resp;
         const fullName = this.dataMenu.name.split(" ");
         this.dataMenu.firstName = fullName[0];
         this.dataMenu.secondName = fullName[1];
@@ -27,6 +27,10 @@ export class MenuComponent implements OnInit {
         this.dataMenu.secondLastName = fullName[3];
       }
     });
+  }
+
+  public dashboard() {
+    // this.workflow.callWorkflowPost
   }
 
 }

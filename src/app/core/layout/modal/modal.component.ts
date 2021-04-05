@@ -54,7 +54,7 @@ export class ModalComponent implements OnInit {
   actionBtnDerecha(action: string) {
     switch (action) {
       case 'modal':
-        if (this.data.payload.deleteProject) {
+        if (this.data.payload && this.data.payload.deleteProject) {
           this.deleteCard(this.data.payload.deleteProject);
           this.data = this.clear();
         } else {
