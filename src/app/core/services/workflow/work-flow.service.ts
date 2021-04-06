@@ -42,11 +42,19 @@ export class WorkFlowService {
     });
   }
 
+  async callWorkflowGet(step: string, id: String): Promise<any> {
+    console.log('step', step, 'id', id, 'payload');
+    this.http.get<{}>(`${environment.workflowUrl}/api/${step}/${id}`).subscribe((resp: any) => {
+      console.log('Datos recibidos: ', resp);
+      this.actionResponse(resp);
+    });
+  }
+
   private actionResponse(resp: any) {
     switch (resp.status) {
       case 1:
-        this.setPayload(resp.payload);
         this.router.navigate([resp.urlRedir]);
+        this.setPayload(resp.payload);
         break;
       case 2:
         this.modalActive({
@@ -74,7 +82,7 @@ export class WorkFlowService {
 
   private setPayload(payload: any) {
     this.payload.next(payload);
-    if (payload.dataMenu !== undefined) {
+    if (payload !== undefined && payload.dataMenu !== undefined) {
       this.dataUser.next(payload.dataMenu);
     }
   }

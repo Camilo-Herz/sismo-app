@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.service';
+import { ApplicationService } from '../../services/application/application.service';
 
 @Component({
   selector: 'app-menu',
@@ -13,7 +15,9 @@ export class MenuComponent implements OnInit {
   dataMenu: any = {};
 
   constructor(
-    private workflow: WorkFlowService
+    public router: Router,
+    private workflow: WorkFlowService,
+    private applicationService: ApplicationService,
   ) { }
 
   ngOnInit(): void {
@@ -29,8 +33,24 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  public dashboard() {
-    // this.workflow.callWorkflowPost
+  public navigate(val: string) {
+    switch (val) {
+      case 'dashboard':
+        this.workflow.callWorkflowGet('pageNavigation', val);
+        break;
+      case 'guides':
+        this.router.navigate(['guides']);
+        break;
+      case 'examples':
+        this.router.navigate(['examples']);
+        break;
+      default:
+        break;
+    }
+  }
+
+  public logout() {
+    this.workflow.callWorkflowPut('logout', '', {});
   }
 
 }

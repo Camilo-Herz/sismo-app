@@ -5,6 +5,7 @@ import { LoginComponent } from './login/login.component';
 import { GuidesComponent } from './guides/guides.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProcessesComponent } from './processes/processes.component';
+import { ExamplesComponent } from './examples/examples.component';
 
 const routes: Routes = [
   {
@@ -21,6 +22,9 @@ const routes: Routes = [
   },
   {
     path: 'guides', component: GuidesComponent
+  },
+  {
+    path: 'examples', component: ExamplesComponent
   },
   {
     path: '**', component: LoginComponent

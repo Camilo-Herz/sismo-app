@@ -48,20 +48,20 @@
                         <span>General</span>
                     </li>
                     <li>
-                        <a href="#">
+                        <a (click)="navigate('dashboard')">
                             <i class="fa fa-columns"></i>
                             <span>Dashboard</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a (click)="navigate('NA')">
                             <i class="fa fa-asterisk"></i>
                             <span>Componentes</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <i class="fa fa-asterisk"></i>
+                        <a (click)="navigate('NA')">
+                            <i class="fa fa-area-chart" aria-hidden="true"></i>
                             <span>Gráficas</span>
                         </a>
                     </li>
@@ -69,13 +69,13 @@
                         <span>Extra</span>
                     </li>
                     <li>
-                        <a href="#">
+                        <a (click)="navigate('guides')">
                             <i class="fa fa-book"></i>
                             <span>Documentación</span>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a (click)="navigate('examples')">
                             <i class="fa fa-folder"></i>
                             <span>Ejemplos</span>
                         </a>
@@ -95,7 +95,7 @@
             <a href="#">
                 <i class="fa fa-cog"></i>
             </a>
-            <a href="#">
+            <a (click)="logout()">
                 <i class="fa fa-power-off"></i>
             </a>
         </div>
