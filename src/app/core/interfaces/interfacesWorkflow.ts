@@ -3,6 +3,6 @@ export interface modal {
     message: string;
     labelBtnIzquierda?: string;
     labelBtnDerecha: string;
-    urlRedir: string;
+    stepId: string;
     payload?: object
 }

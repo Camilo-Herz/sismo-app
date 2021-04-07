@@ -18,7 +18,7 @@ export class ModalComponent implements OnInit {
     message: string,
     labelBtnIzquierda: string,
     labelBtnDerecha: string,
-    urlRedir: string,
+    stepId: string,
     payload: any
   };
 
@@ -118,7 +118,7 @@ export class ModalComponent implements OnInit {
       message: '',
       labelBtnIzquierda: '',
       labelBtnDerecha: '',
-      urlRedir: ''
+      stepId: ''
     };
   }
 

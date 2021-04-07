@@ -76,7 +76,7 @@ export class DashboardComponent implements OnInit {
       message: 'Introduzca los datos del proceso',
       labelBtnDerecha: 'Aceptar',
       labelBtnIzquierda: 'Cancelar',
-      urlRedir: '',
+      stepId: '',
       payload: {
         id: this.dataView.id
       }
@@ -92,7 +92,7 @@ export class DashboardComponent implements OnInit {
       message: '¿Esta seguro de eliminar el proyecto? Recuerde que no podra restaurarlo despues de ser eliminado.',
       labelBtnIzquierda: 'Cancelar',
       labelBtnDerecha: 'Aceptar',
-      urlRedir: '',
+      stepId: '',
       payload: {
         id: this.dataView.id,
         deleteProject: nameProject
@@ -101,7 +101,7 @@ export class DashboardComponent implements OnInit {
   }
 
   process(nameProcess: string) {
-      this.workflow.callWorkflowPost('processes', {process: nameProcess}).finally(() => {
-      });
+    this.workflow.callWorkflowPost('processes', { process: nameProcess }).finally(() => {
+    });
   }
 }

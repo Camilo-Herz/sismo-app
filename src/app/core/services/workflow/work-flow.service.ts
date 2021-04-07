@@ -12,6 +12,7 @@ export class WorkFlowService {
 
   private dataUser = new BehaviorSubject<any>(null);
   private payload = new BehaviorSubject<any>(null);
+  private clientId = '';
 
   constructor(
     public router: Router,
@@ -29,7 +30,7 @@ export class WorkFlowService {
         type: 'error',
         message: 'Endpoint no encontrado, intente mas tarde.',
         labelBtnDerecha: 'Aceptar',
-        urlRedir: ''
+        stepId: ''
       })
     });
   }
@@ -53,15 +54,15 @@ export class WorkFlowService {
   private actionResponse(resp: any) {
     switch (resp.status) {
       case 1:
-        this.router.navigate([resp.urlRedir]);
-        this.setPayload(resp.payload);
+        this.router.navigate([resp.stepId]);
+        this.setPayload(resp.payload, resp.accessToken);
         break;
       case 2:
         this.modalActive({
           type: 'error',
           message: resp.message,
           labelBtnDerecha: resp.labelBtnDerecha,
-          urlRedir: resp.urlRedir
+          stepId: resp.stepId
         });
         break;
       default:
@@ -75,16 +76,27 @@ export class WorkFlowService {
       message: data.message,
       labelBtnIzquierda: data.labelBtnIzquierda,
       labelBtnDerecha: data.labelBtnDerecha,
-      urlRedir: data.urlRedir,
+      stepId: data.stepId,
       payload: data.payload
     });
   }
 
-  private setPayload(payload: any) {
-    this.payload.next(payload);
-    if (payload !== undefined && payload.dataMenu !== undefined) {
-      this.dataUser.next(payload.dataMenu);
+  private setPayload(payload: any, token?: string) {
+    if (token !== undefined) {
+      const decodeAccessToken = this.parseJwt(token);
+      this.clientId = decodeAccessToken.id;
+      this.dataUser.next(decodeAccessToken);
     }
+    payload['id'] = this.clientId;
+    this.payload.next(payload);
+  }
+
+  parseJwt(token: string) {
+    const base64Url = token.split('.')[1];
+    const base64 = decodeURIComponent(atob(base64Url).split('').map((c) => {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(base64);
   }
 
   getDataUser(): Observable<any> {
