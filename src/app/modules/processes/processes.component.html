@@ -1,5 +1,12 @@
 <app-menu></app-menu>
 
 <div class="pageRight">
-    Bienvenido a su proceso
+    <p class="title">Bienvenido a su proceso</p>
+    <div class="align">
+        <ngx-charts-bar-vertical [view]="[700, 400]" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
+            [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
+            (select)="onSelect($event)">
+        </ngx-charts-bar-vertical>
+    </div>
 </div>
