@@ -28,20 +28,6 @@ export class ProcessesComponent implements OnInit {
   constructor(
     private socketWebService: SocketWebService
   ) { 
-    // this.single = [
-    //   {
-    //     "name": "Germany",
-    //     "value": 8940000
-    //   },
-    //   {
-    //     "name": "USA",
-    //     "value": 5000000
-    //   },
-    //   {
-    //     "name": "France",
-    //     "value": 7200000
-    //   }
-    // ];
     this.socketWebService.callback.subscribe((dataSocket: any) => {
       this.graphicData(dataSocket);
     });

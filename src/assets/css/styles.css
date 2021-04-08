@@ -16,13 +16,12 @@ body>app-root>app-login>div>div.forms-container>div>form.sign-up-form.ng-dirty.n
 }
 
 .pageRight{
-  width: 78%;
+  width: 80%;
   height: 100vh;
-  margin-left: 22%;
+  margin-left: 20%;
   background: #e6e7e8;
   padding-left: 0px;
   display: table;
-  margin-top: -796px;
 }
 
 .pageRight .head {
@@ -262,3 +261,7 @@ form.sign-up-form {
   pointer-events: inherit;
 }
 /* FIN SPINNER */
+
+.cursorPointer {
+  cursor: pointer;
+}
