@@ -6,6 +6,7 @@ import { GuidesComponent } from './guides/guides.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProcessesComponent } from './processes/processes.component';
 import { ExamplesComponent } from './examples/examples.component';
+import { ConnectionsComponent } from './connections/connections.component';
 
 const routes: Routes = [
   {
@@ -19,6 +20,9 @@ const routes: Routes = [
   },
   {
     path: 'process', component: ProcessesComponent
+  },
+  {
+    path: 'connections', component: ConnectionsComponent
   },
   {
     path: 'guides', component: GuidesComponent

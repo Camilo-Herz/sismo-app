@@ -36,7 +36,7 @@ export class WorkFlowService {
   }
 
   async callWorkflowPut(step: string, id: string, payload: any): Promise<any> {
-    console.log('step', step, 'id', id, 'payload', payload);
+    console.log('step: ', step, 'id: ', id, 'payload: ', payload);
     this.http.put<{}>(`${environment.workflowUrl}/api/${step}/${id}`, payload).subscribe((resp: any) => {
       console.log('Datos recibidos: ', resp);
       this.actionResponse(resp);
@@ -44,7 +44,7 @@ export class WorkFlowService {
   }
 
   async callWorkflowGet(step: string, id: String): Promise<any> {
-    console.log('step', step, 'id', id, 'payload');
+    console.log('step: ', step, 'id: ', id, 'payload: ');
     this.http.get<{}>(`${environment.workflowUrl}/api/${step}/${id}`).subscribe((resp: any) => {
       console.log('Datos recibidos: ', resp);
       this.actionResponse(resp);

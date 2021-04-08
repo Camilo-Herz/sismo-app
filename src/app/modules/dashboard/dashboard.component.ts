@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs';
 import { SocketWebService } from 'src/app/core/services/socketWeb/socket-web.service';
 import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.service';
@@ -12,7 +10,6 @@ import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.servic
 })
 export class DashboardComponent implements OnInit {
 
-  dataSocket: any;
   subscription = new Subscription;
   dataView: any = {};
 
@@ -36,13 +33,9 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private workflow: WorkFlowService,
-    private router: ActivatedRoute,
-    private cookieService: CookieService,
-    private socketWebService: SocketWebService) {}
+    private socketWebService: SocketWebService) { }
 
   ngOnInit(): void {
-    this.dataSocket = this.router.snapshot.paramMap.get('data');
-    this.cookieService.set('dato', this.dataSocket);
     this.socketWebService.emitEvent({ nuevoParticipante: true });
     this.subscription = this.workflow.getPayload().subscribe((resp) => {
       this.dataView = resp;
@@ -66,7 +59,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  deleteCard(nameProject: string) {
+  deleteCard(idProject: string) {
     this.workflow.modalActive({
       type: 'error',
       message: '¿Esta seguro de eliminar el proyecto? Recuerde que no podra restaurarlo despues de ser eliminado.',
@@ -75,13 +68,14 @@ export class DashboardComponent implements OnInit {
       stepId: '',
       payload: {
         id: this.dataView.id,
-        deleteProject: nameProject
+        deleteProject: true,
+        idProject: idProject
       }
     });
   }
 
-  process(nameProcess: string) {
-    this.workflow.callWorkflowPost('processes', { process: nameProcess }).finally(() => {
+  process(dataprocess: string) {
+    this.workflow.callWorkflowPost('processes', dataprocess).finally(() => {
     });
   }
 }

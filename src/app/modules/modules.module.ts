@@ -10,6 +10,7 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LayoutModule } from '../core/layout/layout.module';
 import { ProcessesComponent } from './processes/processes.component';
 import { ExamplesComponent } from './examples/examples.component';
+import { ConnectionsComponent } from './connections/connections.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { ExamplesComponent } from './examples/examples.component';
     LoginComponent,
     DashboardComponent,
     ProcessesComponent,
-    ExamplesComponent
+    ExamplesComponent,
+    ConnectionsComponent
   ],
   imports: [
     CommonModule,

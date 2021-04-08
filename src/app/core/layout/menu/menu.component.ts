@@ -38,6 +38,9 @@ export class MenuComponent implements OnInit {
       case 'dashboard':
         this.workflow.callWorkflowGet('pageNavigation', val);
         break;
+      case 'connections':
+        this.workflow.callWorkflowGet('pageNavigation', val);
+        break;
       case 'guides':
         this.router.navigate(['guides']);
         break;

@@ -1,5 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+import { Subscription } from 'rxjs';
 import { SocketWebService } from 'src/app/core/services/socketWeb/socket-web.service';
+import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.service';
 
 @Component({
   selector: 'app-processes',
@@ -7,6 +11,10 @@ import { SocketWebService } from 'src/app/core/services/socketWeb/socket-web.ser
   styleUrls: ['./processes.component.css']
 })
 export class ProcessesComponent implements OnInit {
+
+  subscription = new Subscription;
+  dataView: any = {};
+  dataSocket: any;
 
   single: any = [];
   multi: any = [];
@@ -26,7 +34,10 @@ export class ProcessesComponent implements OnInit {
   };
 
   constructor(
-    private socketWebService: SocketWebService
+    private socketWebService: SocketWebService,
+    private workflow: WorkFlowService,
+    private router: ActivatedRoute,
+    private cookieService: CookieService,
   ) { 
     this.socketWebService.callback.subscribe((dataSocket: any) => {
       this.graphicData(dataSocket);
@@ -54,6 +65,11 @@ export class ProcessesComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dataSocket = this.router.snapshot.paramMap.get('data');
+    this.cookieService.set('dato', this.dataSocket);
+    this.subscription = this.workflow.getPayload().subscribe((resp) => {
+      this.dataView = resp;
+    });
   }
 
 }

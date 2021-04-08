@@ -28,13 +28,13 @@
             </div>
             <div class="card card-1" *ngFor="let item of dataView.projects; let i=index">
                 <br><strong>{{item.nombreProceso}}<i class="fa fa-trash-o fa-lg imgTrash"
-                        (click)="deleteCard(item.nombreProceso)"></i></strong>
+                        (click)="deleteCard(item.idProject)"></i></strong>
                 <ngx-charts-bar-horizontal *ngIf="i % 2 === 0" [view]="[270, 200]" [scheme]="colorScheme"
                     [results]="single" [xAxis]="true" [yAxis]="true" [legend]="false" [showXAxisLabel]="true"
-                    [showYAxisLabel]="true" (click)="process(item.nombreProceso)">
+                    [showYAxisLabel]="true" (click)="process(item)">
                 </ngx-charts-bar-horizontal>
                 <ngx-charts-pie-chart *ngIf="i % 2 !== 0" [view]="[260, 200]" [scheme]="colorScheme" [results]="single"
-                    [legend]="true" (click)="process(item.nombreProceso)">
+                    [legend]="true" (click)="process(item)">
                 </ngx-charts-pie-chart>
             </div>
         </div>
