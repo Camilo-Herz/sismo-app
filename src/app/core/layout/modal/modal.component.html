@@ -32,6 +32,11 @@
                     <input type="text" placeholder="Descripcion del proceso" formControlName="descripcionProceso"
                         (change)="onChange($event, 'descripcionProceso')" />
                 </div>
+                <div class="input-field">
+                    <i class=""></i>
+                    <input type="text" placeholder="URI OPC-UA" formControlName="endpointOPC"
+                        (change)="onChange($event, 'endpointOPC')" />
+                </div>
                 <div formArrayName="topics">
                     <div *ngFor="let item of getTopics.controls; let indexTopic=index" [formGroupName]="indexTopic">
                         <div class="input-field max-width-topic">

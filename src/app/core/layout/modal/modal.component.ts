@@ -32,6 +32,7 @@ export class ModalComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       nombreProceso: ['', []],
       descripcionProceso: ['', []],
+      endpointOPC: ['', []],
       topics: this.formBuilder.array([this.formBuilder.group({ topic: [''] })])
     });
   }
