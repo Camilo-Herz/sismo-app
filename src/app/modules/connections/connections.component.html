@@ -3,8 +3,15 @@
 <div class="pageRight">
     <p class="title">Conexiones</p>
 
-    <div class="card card-1 cardConnections" *ngFor="let item of dataView.projects; let i=index">
-        <br><strong>{{item.nombreProceso}}</strong>
-        <input type="text">
+    <div class="card card-1 cardConnections radiusCards" *ngFor="let item of dataView.projects; let i=index">
+        <div class="divWidth3 justify"><strong>{{item.nombreProceso}}</strong></div>
+        <div class="input-field divWidth5">
+            <i class=""></i>
+            <input type="text" placeholder="URL OPC-UA" />
+        </div>
+        <div class="divWidth2">
+            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                <button type="button" class="btnRed">Aceptar</button>
+        </div>
     </div>
 </div>

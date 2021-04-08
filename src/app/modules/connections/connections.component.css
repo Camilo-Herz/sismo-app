@@ -2,10 +2,34 @@
     width: 93%;
     margin: 25px 25px 0px;
     padding: 10px;
-    border-radius: 20px;
     height: 85px;
+    display: -webkit-inline-box;
   }
 
   .title {
     text-align: center;
+  }
+
+  .divWidth2 {
+    width: 20%;
+    height: 85px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 20px;
+  }
+
+  .divWidth5 {
+    width: 50%;
+  }
+
+  .divWidth3 {
+    width: 30%;
+  }
+
+  .justify {
+    height: 85px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
