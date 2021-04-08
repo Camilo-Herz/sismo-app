@@ -38,27 +38,7 @@ export class DashboardComponent implements OnInit {
     private workflow: WorkFlowService,
     private router: ActivatedRoute,
     private cookieService: CookieService,
-    private socketWebService: SocketWebService) {
-    this.socketWebService.callback.subscribe((dataSocket: any) => {
-      // this.graphicData(dataSocket);
-    });
-  }
-
-  graphicData(dataSocket: any) {
-    const graphicData = this.single.filter((item: any) => item.name === dataSocket.name);
-    if (graphicData.length === 0) {
-      this.single = this.single.concat([dataSocket]);
-    }
-    else {
-      const datosVista: any = [];
-      this.single.forEach((elementos: any) => {
-        if (dataSocket.name !== elementos.name) {
-          datosVista.push(elementos)
-        }
-      });
-      this.single = datosVista.concat([dataSocket]);
-    }
-  }
+    private socketWebService: SocketWebService) {}
 
   ngOnInit(): void {
     this.dataSocket = this.router.snapshot.paramMap.get('data');
