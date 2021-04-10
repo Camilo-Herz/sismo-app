@@ -11,6 +11,8 @@ export class ConnectionsComponent implements OnInit {
 
   subscription = new Subscription;
   dataView: any = {};
+  viewTopics: any = {};
+  editUriOPC: any = {};
 
   constructor(
     private workflow: WorkFlowService
@@ -20,6 +22,14 @@ export class ConnectionsComponent implements OnInit {
     this.subscription = this.workflow.getPayload().subscribe((resp) => {
       this.dataView = resp;
     });
+  }
+
+  showTopics(key: string) {
+    this.viewTopics[key] = !this.viewTopics[key];
+  }
+
+  editUri(key: string) {
+    this.editUriOPC[key] = !this.editUriOPC[key];
   }
 
 }
