@@ -55,5 +55,4 @@ export class MenuComponent implements OnInit {
   public logout() {
     this.workflow.callWorkflowPut('logout', '', {});
   }
-
 }

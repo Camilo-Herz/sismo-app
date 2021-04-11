@@ -66,6 +66,7 @@ export class WorkFlowService {
         });
         break;
       default:
+        this.router.navigate([resp.stepId]);
         break;
     }
   }
@@ -87,7 +88,7 @@ export class WorkFlowService {
       this.clientId = decodeAccessToken.id;
       this.dataUser.next(decodeAccessToken);
     }
-    payload['id'] = this.clientId;
+    payload['id'] = (this.clientId === undefined) ? '' : this.clientId;
     this.payload.next(payload);
   }
 

@@ -7,32 +7,42 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProcessesComponent } from './processes/processes.component';
 import { ExamplesComponent } from './examples/examples.component';
 import { ConnectionsComponent } from './connections/connections.component';
+import { GuardsService } from '../core/services/guards/guards.service';
 
 const routes: Routes = [
-  {
-    path: 'dashboard', component: DashboardComponent
-  },
-  {
-    path: 'dashboard/:data', component: DashboardComponent
-  },
   {
     path: 'login', component: LoginComponent
   },
   {
-    path: 'process', component: ProcessesComponent
+    path: 'dashboard',
+    component: DashboardComponent,
+    canActivate: [GuardsService]
   },
   {
-    path: 'connections', component: ConnectionsComponent
+    path: 'dashboard/:data',
+    component: DashboardComponent,
+    canActivate: [GuardsService]
   },
   {
-    path: 'guides', component: GuidesComponent
+    path: 'process',
+    component: ProcessesComponent,
+    canActivate: [GuardsService]
   },
   {
-    path: 'examples', component: ExamplesComponent
+    path: 'connections',
+    component: ConnectionsComponent,
+    canActivate: [GuardsService]
   },
   {
-    path: '**', component: LoginComponent
+    path: 'guides',
+    component: GuidesComponent,
+    canActivate: [GuardsService]
   },
+  {
+    path: 'examples',
+    component: ExamplesComponent,
+    canActivate: [GuardsService]
+  }
 ];
 
 @NgModule({
