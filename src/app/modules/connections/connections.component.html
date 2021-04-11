@@ -13,13 +13,13 @@
                     <div class="input-field">
                         <i class=""></i>
                         <input type="text" placeholder="URL OPC-UA" value="{{item.endpointOPC}}"
-                            [disabled]="!editUriOPC['uri'+i]" />
+                            [disabled]="!editUriOPC['uri'+i]" (change)="onChange($event, item.idProject )"/>
                     </div>
                 </div>
                 <div class="divWidth2">
-                    <i class="fa fa-pencil-square-o fa-3x iconEdit" aria-hidden="true" (click)="editUri('uri'+i)"
+                    <i class="fa fa-pencil-square-o fa-3x iconEdit cursorPointer" aria-hidden="true" (click)="editUri('uri'+i)"
                         *ngIf="!editUriOPC['uri'+i]"></i>
-                    <button type="button" class="btnRed">Aceptar</button>
+                    <button type="button" class="btnRed" (click)="onCall(item.idProject)">Aceptar</button>
                 </div>
                 <div class="divMore cursorPointer">
                     <div class="botonmore" (click)="showTopics('topic'+i)">

@@ -13,6 +13,9 @@ export class ConnectionsComponent implements OnInit {
   dataView: any = {};
   viewTopics: any = {};
   editUriOPC: any = {};
+  payload: any = {
+    endpointsOPC: []
+  };
 
   constructor(
     private workflow: WorkFlowService
@@ -32,4 +35,24 @@ export class ConnectionsComponent implements OnInit {
     this.editUriOPC[key] = !this.editUriOPC[key];
   }
 
+  public onChange(data: any, controlName: string): void {
+    const value = (data.target.value === '') ? '' : data.target.value;
+    const auxPayload = this.payload.endpointsOPC.filter((item: any) => item.idProject === controlName);
+    if (auxPayload.length === 0) {
+      this.payload.endpointsOPC.push({
+        idProject: controlName,
+        newEndpoint: value
+      });
+    } else {
+      auxPayload[0].newEndpoint = value;
+    }
+  }
+
+  public onCall(value: string): void {
+    const itemEdit = this.payload.endpointsOPC.find((element: any) => element.idProject === value);
+    itemEdit.editEndpointOPC = true;
+    this.workflow.callWorkflowPut('project', this.dataView.id, itemEdit).finally(() => {
+
+    });
+  }
 }
