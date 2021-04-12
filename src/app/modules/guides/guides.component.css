@@ -9,10 +9,12 @@
   }
 
   .divDocument {
-    border: 1px solid;
+    border: 0;
     margin: 2% 5% 2% 5%;
     border-radius: 15px;
-    padding: 0px 15px 25px;
+    padding: 15px 15px 25px;
+    background-color: #ffffff;
+    box-shadow: 1px 3px 5px rgb(0 0 0 / 15%)
   }
 
   .alignDescription {
