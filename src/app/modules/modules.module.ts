@@ -11,6 +11,7 @@ import { LayoutModule } from '../core/layout/layout.module';
 import { ProcessesComponent } from './processes/processes.component';
 import { ExamplesComponent } from './examples/examples.component';
 import { ConnectionsComponent } from './connections/connections.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { ConnectionsComponent } from './connections/connections.component';
     FormsModule,
     ReactiveFormsModule,
     NgxChartsModule,
-    LayoutModule
+    LayoutModule,
+    PdfViewerModule
   ],
   exports: [
     LayoutModule

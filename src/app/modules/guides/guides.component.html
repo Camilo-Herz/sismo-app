@@ -1,5 +1,11 @@
 <app-menu></app-menu>
 
 <div class="pageRight">
-    Manuales
+    <p class="title">Manuales</p>
+    <div *ngFor="let item of dataView.documents; let i=index" class="divDocument">
+        <p class="titleDocument">{{item.title}}</p>
+        <p class="alignDescription">{{item.description}}</p>
+        <p class="alignDescription cursorPointer" (click)="showPDF('PDF'+i)">---- Previsualizar ----</p>
+        <pdf-viewer *ngIf="viewPDF['PDF'+i]" [src]="item.document" [zoom]="1"></pdf-viewer>
+    </div>
 </div>

@@ -1,0 +1,20 @@
+.title {
+    text-align: center;
+    font-size: xx-large;
+  }
+  
+  .titleDocument {
+    text-align: center;
+    font-size: larger;
+  }
+
+  .divDocument {
+    border: 1px solid;
+    margin: 2% 5% 2% 5%;
+    border-radius: 15px;
+    padding: 0px 15px 25px;
+  }
+
+  .alignDescription {
+    text-align: center;
+  }

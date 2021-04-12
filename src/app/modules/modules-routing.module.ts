@@ -36,7 +36,7 @@ const routes: Routes = [
   {
     path: 'guides',
     component: GuidesComponent,
-    canActivate: [GuardsService]
+    // canActivate: [GuardsService]
   },
   {
     path: 'examples',
