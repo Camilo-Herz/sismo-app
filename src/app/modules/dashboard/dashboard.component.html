@@ -1,15 +1,15 @@
 <div>
     <app-menu></app-menu>
     <!-- contenido de pagina, realmente no importa -->
-    <div class="dash-home">
+    <div class="pageRight">
         <div class="head">
             <br>
             <span class="title-view">Tablero</span>
             <input class="input-search" type="text" placeholder="Buscar" />
         </div>
         <div class="cont-dahs1">
-            <div class="card card-1" (click)="modalActive()">
-                <div class="wrapper">
+            <div class="card card-1 radiusCards" (click)="modalActive()">
+                <div class="wrapper radiusCards">
                     <h1 class="textCenter marginTitle">Nuevo proyecto</h1>
                     <p class="textCenter"> Asocia nuevos procesos y sensores</p>
                     <ul class="bg-bubbles">
@@ -26,13 +26,15 @@
                     </ul>
                 </div>
             </div>
-            <div class="card card-1" *ngFor="let item of dataView.projects; let i=index">
+            <div class="card card-1 radiusCards" *ngFor="let item of dataView.projects; let i=index">
                 <br><strong>{{item.nombreProceso}}<i class="fa fa-trash-o fa-lg imgTrash"
-                        (click)="deleteCard(item.nombreProceso)"></i></strong>
-                <ngx-charts-bar-horizontal *ngIf="i % 2 === 0" [scheme]="colorScheme" [results]="single" [xAxis]="true"
-                    [yAxis]="true" [legend]="false" [showXAxisLabel]="true" [showYAxisLabel]="true">
+                        (click)="deleteCard(item.idProject)"></i></strong>
+                <ngx-charts-bar-horizontal *ngIf="i % 2 === 0" [view]="[270, 200]" [scheme]="colorScheme"
+                    [results]="single" [xAxis]="true" [yAxis]="true" [legend]="false" [showXAxisLabel]="true"
+                    [showYAxisLabel]="true" (click)="process(item)">
                 </ngx-charts-bar-horizontal>
-                <ngx-charts-pie-chart *ngIf="i % 2 !== 0" [scheme]="colorScheme" [results]="single" [legend]="true">
+                <ngx-charts-pie-chart *ngIf="i % 2 !== 0" [view]="[260, 200]" [scheme]="colorScheme" [results]="single"
+                    [legend]="true" (click)="process(item)">
                 </ngx-charts-pie-chart>
             </div>
         </div>

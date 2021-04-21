@@ -1,0 +1,42 @@
+<app-menu></app-menu>
+
+<div class="pageRight">
+    <p class="title">Conexiones</p>
+
+    <div class="divGenral">
+        <div *ngFor="let item of dataView.projects; let i=index">
+            <div class="tarjeta">
+                <div class="divTitleProcess">
+                    <p class="pTitleProcess">{{item.nombreProceso}}</p>
+                </div>
+                <div class="divInput">
+                    <div class="input-field">
+                        <i class=""></i>
+                        <input type="text" placeholder="URL OPC-UA" value="{{item.endpointOPC}}"
+                            [disabled]="!editUriOPC['uri'+i]" (change)="onChange($event, item.idProject )"/>
+                    </div>
+                </div>
+                <div class="divWidth2">
+                    <i class="fa fa-pencil-square-o fa-3x iconEdit cursorPointer" aria-hidden="true" (click)="editUri('uri'+i)"
+                        *ngIf="!editUriOPC['uri'+i]"></i>
+                    <button type="button" class="btnRed" (click)="onCall(item.idProject)">Aceptar</button>
+                </div>
+                <div class="divMore cursorPointer">
+                    <div class="botonmore" (click)="showTopics('topic'+i)">
+                        <img id="imgMore1" [ngClass]="{'transformArrow': !viewTopics['topic'+i]}"
+                            src="../../../assets/img/icon-fd-arrowRed.svg" alt="">
+                        <p id="pMore1" class="parrafo smallBoton">{{!viewTopics['topic'+i] ? 'Mostrar topics' : 'Ocultar
+                            topics'}}</p>
+                    </div>
+                </div>
+            </div>
+            <div id="detalleMore" class="contentBox" *ngIf="viewTopics['topic'+i]">
+                <p>Actualmente cuenta con los siguientes topics en el proceso: </p>
+                <ul>
+                    <li *ngFor="let item2 of item.topics">{{item2}}</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="marginBottom"></div>
+</div>

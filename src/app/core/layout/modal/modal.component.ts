@@ -18,7 +18,7 @@ export class ModalComponent implements OnInit {
     message: string,
     labelBtnIzquierda: string,
     labelBtnDerecha: string,
-    urlRedir: string,
+    stepId: string,
     payload: any
   };
 
@@ -32,6 +32,7 @@ export class ModalComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       nombreProceso: ['', []],
       descripcionProceso: ['', []],
+      endpointOPC: ['', []],
       topics: this.formBuilder.array([this.formBuilder.group({ topic: [''] })])
     });
   }
@@ -48,14 +49,20 @@ export class ModalComponent implements OnInit {
   }
 
   actionBtnIzquierda() {
+    this.payload = {};
+    this.registerForm.reset();
     this.data = this.clear();
   }
 
   actionBtnDerecha(action: string) {
     switch (action) {
       case 'modal':
-        if (this.data.payload.deleteProject) {
-          this.deleteCard(this.data.payload.deleteProject);
+        if (this.data.payload && this.data.payload.deleteProject) {
+          const dataDelete = {
+            deleteProject: true,
+            idProject: this.data.payload.idProject
+          }
+          this.deleteCard(dataDelete);
           this.data = this.clear();
         } else {
           this.applicationService.resetDataLogin();
@@ -64,6 +71,7 @@ export class ModalComponent implements OnInit {
         break;
       case 'newProject':
         this.clearDataPayload();
+        this.payload.idProject = this.ramdom().toString();
         this.workflow.callWorkflowPut('project', this.data.payload.id, this.payload).finally(() => {
           this.removeTopic(999, 'removeAll');
           this.payload = {};
@@ -75,6 +83,8 @@ export class ModalComponent implements OnInit {
         break;
     }
   }
+
+  ramdom = () => { return Math.floor(Math.random() * (1000 - 10)) + 10; }
 
   public onChange(data: any, controleName: string): void {
     this.payload[controleName] = data.target.value;
@@ -118,12 +128,13 @@ export class ModalComponent implements OnInit {
       message: '',
       labelBtnIzquierda: '',
       labelBtnDerecha: '',
-      urlRedir: ''
+      stepId: '',
+      payload: {}
     };
   }
 
-  deleteCard(name: string) {
-    this.workflow.callWorkflowPut('project', this.data.payload.id, { deleteProject: name }).finally(() => { });
+  deleteCard(dataDelete: object) {
+    this.workflow.callWorkflowPut('project', this.data.payload.id, dataDelete).finally(() => { });
   }
 
 }

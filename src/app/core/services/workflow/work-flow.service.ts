@@ -10,7 +10,9 @@ import { ModalService } from '../modal/modal.service';
 })
 export class WorkFlowService {
 
+  private dataUser = new BehaviorSubject<any>(null);
   private payload = new BehaviorSubject<any>(null);
+  private clientId = '';
 
   constructor(
     public router: Router,
@@ -28,14 +30,22 @@ export class WorkFlowService {
         type: 'error',
         message: 'Endpoint no encontrado, intente mas tarde.',
         labelBtnDerecha: 'Aceptar',
-        urlRedir: ''
+        stepId: ''
       })
     });
   }
 
   async callWorkflowPut(step: string, id: string, payload: any): Promise<any> {
-    console.log('step', step, 'id', id, 'payload', payload);
+    console.log('step: ', step, 'id: ', id, 'payload: ', payload);
     this.http.put<{}>(`${environment.workflowUrl}/api/${step}/${id}`, payload).subscribe((resp: any) => {
+      console.log('Datos recibidos: ', resp);
+      this.actionResponse(resp);
+    });
+  }
+
+  async callWorkflowGet(step: string, id: String): Promise<any> {
+    console.log('step: ', step, 'id: ', id, 'payload: ');
+    this.http.get<{}>(`${environment.workflowUrl}/api/${step}/${id}`).subscribe((resp: any) => {
       console.log('Datos recibidos: ', resp);
       this.actionResponse(resp);
     });
@@ -44,18 +54,19 @@ export class WorkFlowService {
   private actionResponse(resp: any) {
     switch (resp.status) {
       case 1:
-        this.setPayload(resp.payload);
-        this.router.navigate([resp.urlRedir]);
+        this.router.navigate([resp.stepId]);
+        this.setPayload(resp.payload, resp.accessToken);
         break;
       case 2:
         this.modalActive({
           type: 'error',
           message: resp.message,
           labelBtnDerecha: resp.labelBtnDerecha,
-          urlRedir: resp.urlRedir
+          stepId: resp.stepId
         });
         break;
       default:
+        this.router.navigate([resp.stepId]);
         break;
     }
   }
@@ -66,13 +77,31 @@ export class WorkFlowService {
       message: data.message,
       labelBtnIzquierda: data.labelBtnIzquierda,
       labelBtnDerecha: data.labelBtnDerecha,
-      urlRedir: data.urlRedir,
+      stepId: data.stepId,
       payload: data.payload
     });
   }
 
-  private setPayload(payload: any) {
+  private setPayload(payload: any, token?: string) {
+    if (token !== undefined) {
+      const decodeAccessToken = this.parseJwt(token);
+      this.clientId = decodeAccessToken.id;
+      this.dataUser.next(decodeAccessToken);
+    }
+    payload['id'] = (this.clientId === undefined) ? '' : this.clientId;
     this.payload.next(payload);
+  }
+
+  parseJwt(token: string) {
+    const base64Url = token.split('.')[1];
+    const base64 = decodeURIComponent(atob(base64Url).split('').map((c) => {
+      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+    }).join(''));
+    return JSON.parse(base64);
+  }
+
+  getDataUser(): Observable<any> {
+    return this.dataUser.asObservable();
   }
 
   getPayload(): Observable<any> {

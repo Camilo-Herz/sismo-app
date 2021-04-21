@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { CookieService } from 'ngx-cookie-service';
 import { Subscription } from 'rxjs';
 import { SocketWebService } from 'src/app/core/services/socketWeb/socket-web.service';
 import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.service';
@@ -12,7 +10,6 @@ import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.servic
 })
 export class DashboardComponent implements OnInit {
 
-  dataSocket: any;
   subscription = new Subscription;
   dataView: any = {};
 
@@ -36,33 +33,9 @@ export class DashboardComponent implements OnInit {
 
   constructor(
     private workflow: WorkFlowService,
-    private router: ActivatedRoute,
-    private cookieService: CookieService,
-    private socketWebService: SocketWebService) {
-    this.socketWebService.callback.subscribe((dataSocket: any) => {
-      // this.graphicData(dataSocket);
-    });
-  }
-
-  graphicData(dataSocket: any) {
-    const graphicData = this.single.filter((item: any) => item.name === dataSocket.name);
-    if (graphicData.length === 0) {
-      this.single = this.single.concat([dataSocket]);
-    }
-    else {
-      const datosVista: any = [];
-      this.single.forEach((elementos: any) => {
-        if (dataSocket.name !== elementos.name) {
-          datosVista.push(elementos)
-        }
-      });
-      this.single = datosVista.concat([dataSocket]);
-    }
-  }
+    private socketWebService: SocketWebService) { }
 
   ngOnInit(): void {
-    this.dataSocket = this.router.snapshot.paramMap.get('data');
-    this.cookieService.set('dato', this.dataSocket);
     this.socketWebService.emitEvent({ nuevoParticipante: true });
     this.subscription = this.workflow.getPayload().subscribe((resp) => {
       this.dataView = resp;
@@ -76,7 +49,7 @@ export class DashboardComponent implements OnInit {
       message: 'Introduzca los datos del proceso',
       labelBtnDerecha: 'Aceptar',
       labelBtnIzquierda: 'Cancelar',
-      urlRedir: '',
+      stepId: '',
       payload: {
         id: this.dataView.id
       }
@@ -86,17 +59,23 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  deleteCard(nameProject: string) {
+  deleteCard(idProject: string) {
     this.workflow.modalActive({
       type: 'error',
       message: '¿Esta seguro de eliminar el proyecto? Recuerde que no podra restaurarlo despues de ser eliminado.',
       labelBtnIzquierda: 'Cancelar',
       labelBtnDerecha: 'Aceptar',
-      urlRedir: '',
+      stepId: '',
       payload: {
         id: this.dataView.id,
-        deleteProject: nameProject
+        deleteProject: true,
+        idProject: idProject
       }
+    });
+  }
+
+  process(dataprocess: string) {
+    this.workflow.callWorkflowPost('processes', dataprocess).finally(() => {
     });
   }
 }
