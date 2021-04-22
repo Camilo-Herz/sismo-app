@@ -166,3 +166,39 @@ li {
   font-size: initial;
   margin-right: 13px;
 }
+
+@media (min-width: 50em) {
+  .button {
+      font-size: 18px;
+      width: 25%;
+  }
+}
+
+.button {
+  display: inline-block;
+  width: 35%;
+  min-width: 110px;
+  border: none;
+  outline: none;
+  font-size: 18px;
+  font-family: "Roboto", sans-serif;
+  font-weight: bold;
+  color: #fff;
+  text-align: center;
+  padding: 9px 10px;
+  border-radius: 6px;
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
+  cursor: pointer;
+  -webkit-box-shadow: inherit;
+  box-shadow: inherit;
+  background-color: #939393;
+}
+
+.margin10px {
+  margin-bottom: 10px;
+}
+
+.margin5px {
+  margin-bottom: 5px;
+}
