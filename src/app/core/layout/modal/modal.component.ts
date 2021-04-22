@@ -79,6 +79,17 @@ export class ModalComponent implements OnInit {
           this.data = this.clear();
         });
         break;
+      case 'editTopic':
+        const itemEdit = {
+          oldTopic: this.data.payload.topic,
+          newTopic: this.payload.topic,
+          idProject: this.data.payload.idProject
+        }
+        this.workflow.callWorkflowPut('project', this.data.payload.id, itemEdit).finally(() => { 
+          this.payload = {};
+          this.data = this.clear();
+        });
+        break
       default:
         break;
     }
