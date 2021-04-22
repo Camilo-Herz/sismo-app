@@ -3,11 +3,11 @@ const express = require('express');
 const app = express();
 
 // Serve static files
-app.use(express.static(__dirname + '/dist/sismo'));
+app.use(express.static(__dirname + '/dist/SISMO'));
 
 // Send all requests to index.html
 app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname + '/dist/sismo/index.html'));
+  res.sendFile(path.join(__dirname + '/dist/SISMO/index.html'));
 });
 
 // default Heroku port
