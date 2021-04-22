@@ -48,7 +48,7 @@ export class ConnectionsComponent implements OnInit {
     }
   }
 
-  public editTopic(topic: string, item: string) {
+  public editTopic(topic: string, idProj: string, topicsProject: any) {
     this.subscription.unsubscribe();
     this.workflow.modalActive({
       type: 'editTopic',
@@ -59,7 +59,8 @@ export class ConnectionsComponent implements OnInit {
       payload: {
         id: this.dataView.id,
         topic: topic,
-        idProject: item
+        idProject: idProj,
+        arrayTopics: topicsProject
       }
     });
     this.workflow.getPayload().subscribe((resp) => {

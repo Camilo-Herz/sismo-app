@@ -40,7 +40,7 @@
                 <p>Actualmente cuenta con los siguientes topics en el proceso, si desea modificar alguno de ellos solo
                     debe dar clic encima y posteriormente presionar el boton de aceptar. </p>
                 <ul>
-                    <li class="cursorPointer margin5px" *ngFor="let item2 of item.topics" (click)="editTopic(item2, item.idProject)">{{item2}}
+                    <li class="cursorPointer margin5px" *ngFor="let item2 of item.topics" (click)="editTopic(item2, item.idProject, item.topics)">{{item2}}
                     </li>
                 </ul>
             </div>
