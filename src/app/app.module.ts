@@ -5,7 +5,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ModalService } from "./core/services/modal/modal.service";
-import { CookieService } from 'ngx-cookie-service';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModulesModule } from './modules/modules.module';
@@ -28,7 +27,6 @@ import { ModulesModule } from './modules/modules.module';
     ReactiveFormsModule
   ],
   providers: [
-    CookieService,
     ModalService
   ],
   bootstrap: [AppComponent]
