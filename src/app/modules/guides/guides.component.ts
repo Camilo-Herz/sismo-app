@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.service';
 
@@ -7,7 +7,7 @@ import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.servic
   templateUrl: './guides.component.html',
   styleUrls: ['./guides.component.css']
 })
-export class GuidesComponent implements OnInit {
+export class GuidesComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription;
   viewPDF: any = {};
@@ -21,14 +21,16 @@ export class GuidesComponent implements OnInit {
 
   ngOnInit(): void {
     this.subscription = this.workflow.getPayload().subscribe((resp) => {
-      resp.documents.forEach((element: any) => {
-        element.document = this.showPdf(element.document);
-        this.dataView.documents.push(element);
-      });
+      if (resp.documents) {
+        resp.documents.forEach((element: any) => {
+          element.document = this.decodePDF(element.document);
+          this.dataView.documents.push(element);
+        });
+      }
     });
   }
 
-  showPdf(base64: any) {
+  private decodePDF(base64: any) {
     var binary_string = base64.replace(/\\n/g, '');
     binary_string = window.atob(base64);
     var len = binary_string.length;
@@ -39,7 +41,12 @@ export class GuidesComponent implements OnInit {
     return bytes.buffer;
   }
 
-  showPDF(key: string) {
+  public showPDF(key: string) {
     this.viewPDF[key] = !this.viewPDF[key];
   }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
 }
