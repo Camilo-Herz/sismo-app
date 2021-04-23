@@ -30,7 +30,6 @@
     "express": "^4.17.1",
     "font-awesome": "^4.7.0",
     "ng2-pdf-viewer": "^6.4.1",
-    "ngx-cookie-service": "^11.0.1",
     "ngx-socket-io": "^3.0.1",
     "path": "^0.12.7",
     "rxjs": "~6.6.0",

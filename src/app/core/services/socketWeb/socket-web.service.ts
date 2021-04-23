@@ -1,5 +1,4 @@
 import { Injectable, EventEmitter } from '@angular/core';
-import { CookieService } from 'ngx-cookie-service';
 import { Socket } from 'ngx-socket-io';
 import { environment } from 'src/environments/environment';
 
@@ -10,14 +9,12 @@ export class SocketWebService extends Socket{
 
   callback: EventEmitter<any> = new EventEmitter();
 
-  constructor(
-    private cookieService: CookieService
-  ) {
+  constructor() {
     super({
       url: environment.workflowUrl,
       options: {
         query: {
-          nameRoom: cookieService.get('dato')
+          nameRoom: sessionStorage.getItem('clientId')
         }
       }
     });
@@ -26,7 +23,7 @@ export class SocketWebService extends Socket{
    }
 
   //  emite eventos al back -> event hace referencia a la llave con que se va a recibir
-   emitEvent = (payload = {}) => {
+   emitEvent = (payload: any) => {
      this.ioSocket.emit('event', payload);
    }
 }

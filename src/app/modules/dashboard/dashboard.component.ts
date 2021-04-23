@@ -1,14 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
-import { SocketWebService } from 'src/app/core/services/socketWeb/socket-web.service';
 import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.service';
-
 @Component({
   selector: 'app-dashboard',
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription;
   dataView: any = {};
@@ -32,17 +30,16 @@ export class DashboardComponent implements OnInit {
   };
 
   constructor(
-    private workflow: WorkFlowService,
-    private socketWebService: SocketWebService) { }
+    private workflow: WorkFlowService
+  ) { }
 
   ngOnInit(): void {
-    this.socketWebService.emitEvent({ nuevoParticipante: true });
     this.subscription = this.workflow.getPayload().subscribe((resp) => {
       this.dataView = resp;
     });
   }
 
-  modalActive() {
+  public modalActive() {
     this.subscription.unsubscribe();
     this.workflow.modalActive({
       type: 'newProject',
@@ -59,7 +56,7 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  deleteCard(idProject: string) {
+  public deleteCard(idProject: string) {
     this.workflow.modalActive({
       type: 'error',
       message: '¿Esta seguro de eliminar el proyecto? Recuerde que no podra restaurarlo despues de ser eliminado.',
@@ -74,8 +71,12 @@ export class DashboardComponent implements OnInit {
     });
   }
 
-  process(dataprocess: string) {
+  public process(dataprocess: string) {
     this.workflow.callWorkflowPost('processes', dataprocess).finally(() => {
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

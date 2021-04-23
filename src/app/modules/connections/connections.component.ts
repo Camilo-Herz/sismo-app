@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.service';
 
@@ -7,7 +7,7 @@ import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.servic
   templateUrl: './connections.component.html',
   styleUrls: ['./connections.component.css']
 })
-export class ConnectionsComponent implements OnInit {
+export class ConnectionsComponent implements OnInit, OnDestroy  {
 
   subscription = new Subscription;
   dataView: any = {};
@@ -27,11 +27,11 @@ export class ConnectionsComponent implements OnInit {
     });
   }
 
-  showTopics(key: string) {
+  public showTopics(key: string) {
     this.viewTopics[key] = !this.viewTopics[key];
   }
 
-  editUri(key: string) {
+  public editUri(key: string) {
     this.editUriOPC[key] = !this.editUriOPC[key];
   }
 
@@ -74,5 +74,9 @@ export class ConnectionsComponent implements OnInit {
     itemEdit.editEndpointOPC = true;
     this.workflow.callWorkflowPut('project', this.dataView.id, itemEdit).finally(() => {
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

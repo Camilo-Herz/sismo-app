@@ -96,7 +96,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  callOnSignIn() {
+  public callOnSignIn() {
     this.loading = true;
     this.workflow.callWorkflowPost('login', this.payloadLogin).finally(() => {
       this.loginForm.get('password')?.reset();

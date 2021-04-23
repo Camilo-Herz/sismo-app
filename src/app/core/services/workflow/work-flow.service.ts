@@ -86,6 +86,7 @@ export class WorkFlowService {
     if (token !== undefined) {
       const decodeAccessToken = this.parseJwt(token);
       this.clientId = decodeAccessToken.id;
+      sessionStorage.setItem('clientId', this.clientId.substr(-10));
       this.dataUser.next(decodeAccessToken);
     }
     payload['id'] = (this.clientId === undefined) ? '' : this.clientId;
