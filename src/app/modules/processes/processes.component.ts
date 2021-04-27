@@ -61,6 +61,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    this.socketWebService.connect();
     this.dataSocket = this.router.snapshot.paramMap.get('data');
     this.subscription = this.workflow.getPayload().subscribe((resp) => {
       this.dataView = resp;
@@ -74,5 +75,6 @@ export class ProcessesComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
+    this.socketWebService.disconnect();
   }
 }

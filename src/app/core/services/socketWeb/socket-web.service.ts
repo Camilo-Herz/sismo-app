@@ -5,7 +5,7 @@ import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class SocketWebService extends Socket{
+export class SocketWebService extends Socket {
 
   callback: EventEmitter<any> = new EventEmitter();
 
@@ -20,10 +20,20 @@ export class SocketWebService extends Socket{
     });
     // escucha cuando un evento desde el back es emitido -> event hace referencia a la llave
     this.ioSocket.on('event', (res: any) => this.callback.emit(res))
-   }
+  }
 
   //  emite eventos al back -> event hace referencia a la llave con que se va a recibir
-   emitEvent = (payload: any) => {
-     this.ioSocket.emit('event', payload);
-   }
+  emitEvent = (payload: any) => {
+    this.ioSocket.emit('event', payload);
+  }
+
+  connect = () => {
+    console.log('conectado');
+    this.ioSocket.connect();
+  }
+
+  disconnect = () => {
+    console.log('desconectado');
+    this.ioSocket.disconnect();
+  }
 }
