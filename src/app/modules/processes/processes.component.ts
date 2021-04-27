@@ -56,6 +56,8 @@ export class ProcessesComponent implements OnInit, OnDestroy {
       });
       this.single = datosVista.concat([dataSocket]);
     }
+    console.log('Socket in: ', this.single);
+    
   }
 
   ngOnInit(): void {

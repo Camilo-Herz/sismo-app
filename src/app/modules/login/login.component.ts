@@ -104,4 +104,9 @@ export class LoginComponent implements OnInit {
       this.loading = false;
     });
   }
+
+  ngOnDestroy(): void {
+    this.loading = false;
+    this.subscription.unsubscribe();
+  }
 }
