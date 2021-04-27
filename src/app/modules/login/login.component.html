@@ -74,9 +74,4 @@
     </div>
   </div>
 
-  <section *ngIf="loading" [ngClass]="{'contStudyProcess': loading }" class="contStudyProcess-loading opacity-loading"
-    id="StudyProcess">
-    <div class="modalContainer" id="loaderModal">
-      <div class="spinnerContainer"><span class="spinner"></span></div>
-    </div>
-  </section>
+  <app-loader *ngIf="loading"></app-loader>
