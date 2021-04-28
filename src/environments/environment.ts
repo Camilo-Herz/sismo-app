@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  // workflowUrl: 'http://localhost:3700',
-  workflowUrl: 'https://sismo-service.herokuapp.com',
+  workflowUrl: 'http://localhost:3700',
+  // workflowUrl: 'https://sismo-service.herokuapp.com',
   title: 'SISMO'
 };

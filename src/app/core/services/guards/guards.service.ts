@@ -18,7 +18,9 @@ export class GuardsService implements CanActivate {
       if (resp !== null) {
         statusLogin = true
       } else {
-        this.workflow.callWorkflowPut('logout', '', { forbidden: true});
+        let id = sessionStorage.getItem('client') || '';
+        id = id.substr(6);
+        this.workflow.callWorkflowPut('logout', id, { forbidden: true});
         this.router.navigate(['forbidden']);
       }
     });

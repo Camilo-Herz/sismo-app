@@ -13,6 +13,7 @@ export class ForbiddenComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    sessionStorage.clear();
   }
 
   public login(): void {
