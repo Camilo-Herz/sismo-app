@@ -1,4 +1,4 @@
-/* Clases de todos los componentes */
+Clases de todos los componentes
 
 .marginInput {
   margin-bottom: 10px;
@@ -270,7 +270,7 @@ form.sign-up-form {
 
 /*Card*/
 
-.card {
+.cardDashboard {
   background: #fff;
   border-radius: 2px;
   display: inline-block;
