@@ -39,26 +39,32 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     private router: ActivatedRoute
   ) {
     this.socketWebService.callback.subscribe((dataSocket: any) => {
+
       this.graphicData(dataSocket);
     });
   }
 
   graphicData(dataSocket: any) {
-    const graphicData = this.single.filter((item: any) => item.name === dataSocket.name);
+    const graphicData = this.single.filter((item: any) => item.name === dataSocket.topic);
     if (graphicData.length === 0) {
-      this.single = this.single.concat([dataSocket]);
+      this.single = this.single.concat([{
+        name: dataSocket.topic,
+        value: dataSocket.dataTopic
+      }]);
     }
     else {
       const datosVista: any = [];
       this.single.forEach((elementos: any) => {
-        if (dataSocket.name !== elementos.name) {
+        if (dataSocket.topic !== elementos.name) {
           datosVista.push(elementos)
         }
       });
-      this.single = datosVista.concat([dataSocket]);
+      this.single = datosVista.concat([{
+        name: dataSocket.topic,
+        value: dataSocket.dataTopic
+      }]);
     }
     console.log('Socket in: ', this.single);
-
   }
 
   ngOnInit(): void {
@@ -117,8 +123,6 @@ export class ProcessesComponent implements OnInit, OnDestroy {
         name: element,
         series
       });
-    });
-    console.log('----->', this.swimLineChart);
-    
+    });    
   }
 }
