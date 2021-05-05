@@ -26,7 +26,6 @@
     "ng2-pdf-viewer": "^6.4.1",
     "ngx-socket-io": "^4.0.0",
     "rxjs": "~6.6.0",
-    "socket.io": "^2.4.1",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
   },
