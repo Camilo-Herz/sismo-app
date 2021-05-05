@@ -43,9 +43,9 @@ export class WorkFlowService {
     });
   }
 
-  async callWorkflowGet(step: string, id: String): Promise<any> {
-    console.log('step: ', step, 'id: ', id, 'payload: ');
-    this.http.get<{}>(`${environment.workflowUrl}/api/${step}/${id}`).subscribe((resp: any) => {
+  async callWorkflowGet(step: string, dir: String, id: string): Promise<any> {
+    console.log('step: ', step, 'id: ', dir, 'payload: ');
+    this.http.get<{}>(`${environment.workflowUrl}/api/${step}/${dir}/${id}`).subscribe((resp: any) => {
       console.log('Datos recibidos: ', resp);
       this.actionResponse(resp);
     });
@@ -86,11 +86,24 @@ export class WorkFlowService {
     if (token !== undefined) {
       const decodeAccessToken = this.parseJwt(token);
       this.clientId = decodeAccessToken.id;
+      sessionStorage.setItem('clientId', this.clientId.substr(-10));
+      sessionStorage.setItem('client', this.generateRandomString(5) + this.clientId);
       this.dataUser.next(decodeAccessToken);
     }
     payload['id'] = (this.clientId === undefined) ? '' : this.clientId;
     this.payload.next(payload);
   }
+
+  private generateRandomString = (num: number) => {
+    const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result1= ' ';
+    const charactersLength = characters.length;
+    for ( let i = 0; i < num; i++ ) {
+        result1 += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    return result1;
+}
 
   parseJwt(token: string) {
     const base64Url = token.split('.')[1];

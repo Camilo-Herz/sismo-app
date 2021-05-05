@@ -33,16 +33,16 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  public navigate(val: string) {
-    switch (val) {
+  public navigate(dir: string) {
+    switch (dir) {
       case 'dashboard':
-        this.workflow.callWorkflowGet('pageNavigation', val);
+        this.workflow.callWorkflowGet('pageNavigation', dir, this.dataMenu.id);
         break;
       case 'connections':
-        this.workflow.callWorkflowGet('pageNavigation', val);
+        this.workflow.callWorkflowGet('pageNavigation', dir, this.dataMenu.id);
         break;
       case 'guides':
-        this.workflow.callWorkflowGet('pageNavigation', val);
+        this.workflow.callWorkflowGet('pageNavigation', dir, 'NA');
         break;
       case 'examples':
         this.router.navigate(['examples']);

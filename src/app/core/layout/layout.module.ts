@@ -6,12 +6,14 @@ import { MenuComponent } from './menu/menu.component';
 import { ModalComponent } from './modal/modal.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LoaderComponent } from './loader/loader.component';
 
 @NgModule({
   declarations: [
     MenuComponent,
     ModalComponent,
-    ForbiddenComponent
+    ForbiddenComponent,
+    LoaderComponent
   ],
   imports: [
     CommonModule,
@@ -21,7 +23,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   ],
   exports: [
     MenuComponent,
-    ModalComponent
+    ModalComponent,
+    LoaderComponent
   ]
 })
 export class LayoutModule { }

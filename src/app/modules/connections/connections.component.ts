@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.service';
 
@@ -7,7 +7,7 @@ import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.servic
   templateUrl: './connections.component.html',
   styleUrls: ['./connections.component.css']
 })
-export class ConnectionsComponent implements OnInit {
+export class ConnectionsComponent implements OnInit, OnDestroy  {
 
   subscription = new Subscription;
   dataView: any = {};
@@ -27,11 +27,11 @@ export class ConnectionsComponent implements OnInit {
     });
   }
 
-  showTopics(key: string) {
+  public showTopics(key: string) {
     this.viewTopics[key] = !this.viewTopics[key];
   }
 
-  editUri(key: string) {
+  public editUri(key: string) {
     this.editUriOPC[key] = !this.editUriOPC[key];
   }
 
@@ -48,11 +48,35 @@ export class ConnectionsComponent implements OnInit {
     }
   }
 
-  public onCall(value: string): void {
+  public editTopic(topic: string, idProj: string, topicsProject: any) {
+    this.subscription.unsubscribe();
+    this.workflow.modalActive({
+      type: 'editTopic',
+      message: '¿Cual es el nuevo nombre que desea para el topic ' + topic + '?',
+      labelBtnDerecha: 'Aceptar',
+      labelBtnIzquierda: 'Cancelar',
+      stepId: '',
+      payload: {
+        id: this.dataView.id,
+        topic: topic,
+        idProject: idProj,
+        arrayTopics: topicsProject
+      }
+    });
+    this.workflow.getPayload().subscribe((resp) => {
+      this.dataView.projects = resp.projects;
+    });
+  }
+
+  public onCall(value: string, valueDisable: number): void {
+    this.editUri('uri' + valueDisable);
     const itemEdit = this.payload.endpointsOPC.find((element: any) => element.idProject === value);
     itemEdit.editEndpointOPC = true;
     this.workflow.callWorkflowPut('project', this.dataView.id, itemEdit).finally(() => {
-
     });
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

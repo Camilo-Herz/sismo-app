@@ -3,11 +3,30 @@
 <div class="pageRight">
     <p class="title">{{dataView.nombreProceso}}</p>
     <p class="description">{{dataView.descripcionProceso}}</p>
+    <p class="titleGraphics">Linea de tiempo real</p>
+    <div class="align" *ngFor="let item of areaChartStackedFor; let i = index">
+        <ngx-charts-area-chart-stacked [view]="view" [scheme]="colorScheme" [legend]="true" [showXAxisLabel]="true"
+            [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true" [xAxisLabel]="'Year'" [yAxisLabel]="'Population'"
+            [timeline]="true" [results]="areaChartStacked[i]">
+        </ngx-charts-area-chart-stacked>
+    </div>
+    <p class="titleGraphics">Promedio de los sensores</p>
     <div class="align">
-        <ngx-charts-bar-vertical [view]="[700, 400]" [scheme]="colorScheme" [results]="single" [gradient]="gradient"
-            [xAxis]="showXAxis" [yAxis]="showYAxis" [legend]="showLegend" [showXAxisLabel]="showXAxisLabel"
-            [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel"
-            (select)="onSelect($event)">
+        <ngx-charts-number-card [view]="view" [scheme]="colorScheme" [results]="grafCard" [cardColor]="cardColor">
+        </ngx-charts-number-card>
+    </div>
+    <p class="titleGraphics">Historico</p>
+    <div class="align">
+        <ngx-charts-line-chart [view]="view" [scheme]="colorScheme" [legend]="true" [showXAxisLabel]="true"
+            [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true" [xAxisLabel]="'Year'" [yAxisLabel]="'Population'"
+            [timeline]="true" [results]="swimLineChart">
+        </ngx-charts-line-chart>
+    </div>
+    <p class="titleGraphics">Una grafica que quiero usar</p>
+    <div class="align">
+        <ngx-charts-bar-vertical [view]="[700, 400]" [scheme]="colorScheme" [results]="single" [gradient]="false"
+            [xAxis]="true" [yAxis]="true" [legend]="true" [showXAxisLabel]="true" [showYAxisLabel]="true"
+            [xAxisLabel]="'Country'" [yAxisLabel]="'Population'">
         </ngx-charts-bar-vertical>
     </div>
 </div>
