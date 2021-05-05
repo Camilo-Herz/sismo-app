@@ -14,16 +14,38 @@ export class ProcessesComponent implements OnInit, OnDestroy {
   ///////////////////////////////////////////////////////////////////////////////
   ////////////////////////Configuracion de las graficas//////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
-  single: any = [];
+  single: any = [{
+    "name": "Germany",
+    "value": 40632,
+    "extra": {
+      "code": "de"
+    }
+  },
+  {
+    "name": "United States",
+    "value": 50000,
+    "extra": {
+      "code": "us"
+    }
+  },
+  {
+    "name": "France",
+    "value": 36745,
+    "extra": {
+      "code": "fr"
+    }
+  }];
+  swimLineChart: any = [];
+  areaChartStacked: any = [];
+  areaChartStackedFor: any = [];
+
   grafCard: any = [];
   view: any = [700, 400];
 
   colorScheme = {
-    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5']
+    domain: [this.colorHEX(), this.colorHEX(), this.colorHEX(), this.colorHEX(), this.colorHEX(), this.colorHEX()]
   };
   cardColor: string = '#232837';
-
-  swimLineChart: any = [];
 
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
@@ -39,32 +61,50 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     private router: ActivatedRoute
   ) {
     this.socketWebService.callback.subscribe((dataSocket: any) => {
-
       this.graphicData(dataSocket);
     });
   }
 
-  graphicData(dataSocket: any) {
-    const graphicData = this.single.filter((item: any) => item.name === dataSocket.topic);
-    if (graphicData.length === 0) {
-      this.single = this.single.concat([{
+  private valueInitAreaChartStacked(dataSocket: any) {
+    this.areaChartStackedFor.push('');
+    return [
+      {
         name: dataSocket.topic,
-        value: dataSocket.dataTopic
-      }]);
-    }
-    else {
-      const datosVista: any = [];
-      this.single.forEach((elementos: any) => {
-        if (dataSocket.topic !== elementos.name) {
-          datosVista.push(elementos)
+        series: [
+          {
+            value: dataSocket.dataTopic,
+            name: dataSocket.date
+          }
+        ]
+      }
+    ];
+  }
+
+  private graphicData(dataSocket: any) {
+    let topicExists = this.areaChartStacked.find((element: any) => element[0].name === dataSocket.topic);
+    if (this.areaChartStacked.length === 0 || !topicExists) {
+      let valueInit: any = {};
+      valueInit = this.valueInitAreaChartStacked(dataSocket);
+      this.areaChartStacked.push(valueInit);
+    } else {
+      let indexArray: any;
+      let datosVista: any = [];
+      this.areaChartStacked.forEach((elementArray: any, index: number) => {
+        const dataObject = elementArray[0];
+        if (dataSocket.topic === dataObject.name) {
+          datosVista = dataObject;
+          indexArray = index;
         }
       });
-      this.single = datosVista.concat([{
-        name: dataSocket.topic,
-        value: dataSocket.dataTopic
-      }]);
+      if (topicExists) {
+        datosVista.series.push({
+          value: dataSocket.dataTopic,
+          name: dataSocket.date
+        });
+        this.areaChartStacked[indexArray] = [datosVista];
+      }
     }
-    console.log('Socket in: ', this.single);
+    console.log('--> ', this.areaChartStacked);
   }
 
   ngOnInit(): void {
@@ -123,6 +163,22 @@ export class ProcessesComponent implements OnInit, OnDestroy {
         name: element,
         series
       });
-    });    
+    });
   }
+
+  private colorHEX() {
+    let coolor = "";
+    for (let i = 0; i < 6; i++) {
+      coolor = coolor + this.generarLetra();
+    }
+    return "#" + coolor;
+  }
+
+  private generarLetra() {
+    const letras = ["a", "b", "c", "d", "e", "f", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    const numero: any = (Math.random() * 15).toFixed(0);
+    return letras[numero];
+  }
+
+
 }
