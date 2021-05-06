@@ -101,6 +101,9 @@ export class ProcessesComponent implements OnInit, OnDestroy {
           value: dataSocket.dataTopic,
           name: dataSocket.date
         });
+        if (datosVista.series.length === 10) {
+          datosVista.series.shift();
+        }
         this.areaChartStacked[indexArray] = [datosVista];
       }
     }
