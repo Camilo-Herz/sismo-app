@@ -169,8 +169,8 @@ li {
 
 @media (min-width: 50em) {
   .button {
-      font-size: 18px;
-      width: 25%;
+    font-size: 18px;
+    width: 25%;
   }
 }
 
@@ -201,4 +201,46 @@ li {
 
 .margin5px {
   margin-bottom: 5px;
+}
+
+/* ////////////////////// tablas */
+
+/* Curso CSS estilos aprenderaprogramar.com*/
+
+table {
+  font-family: "Lucida Sans Unicode", "Lucida Grande", Sans-Serif;
+  font-size: 12px;
+  margin: 10px auto;
+  width: 85%;
+  text-align: left;
+  border-collapse: collapse;
+}
+
+th {
+  font-size: 13px;
+  font-weight: normal;
+  padding: 8px;
+  background: #dadada;
+  border-top: 4px solid #bdbdbd;
+  border-bottom: 1px solid #fff;
+  color: #060606;
+  text-align: center;
+}
+
+td {
+  padding: 8px;
+  background: #ffe8e800;
+  border-bottom: 1px solid #676767;
+  color: #5a5a5a;
+  border-top: 1px solid transparent;
+  text-align: center;
+}
+
+tr:hover td {
+  background: #ececec;
+  color: #575757;
+}
+
+caption {
+  margin-bottom: 12px;
 }
