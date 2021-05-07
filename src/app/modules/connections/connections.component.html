@@ -48,12 +48,14 @@
                     </tr>
                     <tr *ngFor="let item2 of item.topics">
                         <td>
-                            <p class="cursorPointer" (click)="editTopic(item2, item.idProject, item.topics)">{{item2}}
+                            <p class="cursorPointer" (click)="editTopic(item2.name, item.idProject, item.topics)">
+                                {{item2.name}}
                             </p>
                         </td>
-                        <td>49</td>
+                        <td>{{item2.valueAlert}}</td>
                         <td>
-                            <input type="checkbox" id="cbox1" value="first_checkbox">
+                            <input type="checkbox" id="cbox1" [checked]="item2.alert"
+                                (click)="activeAlert($event, item2.name, item.idProject, item.topics)">
                         </td>
                     </tr>
                 </table>

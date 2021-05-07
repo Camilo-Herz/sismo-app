@@ -80,20 +80,14 @@ export class ModalComponent implements OnInit {
         });
         break;
       case 'editTopic':
-        this.data.payload.arrayTopics.forEach((element: any, index: number) => {
-          if (element === this.data.payload.topic) {
-            this.data.payload.arrayTopics[index] = this.payload.topic;
-          }
-        });
-        const itemEdit = {
-          newTopics: this.data.payload.arrayTopics,
-          idProject: this.data.payload.idProject
-        }
-        this.workflow.callWorkflowPut('project', this.data.payload.id, itemEdit).finally(() => {
-          this.payload = {};
-          this.data = this.clear();
-        });
+        this.editTopicContent(1);
         break
+      case 'activeAlert':
+        this.editTopicContent(2);
+        break;
+      case 'turnOffAlerts':
+        this.editTopicContent(3);
+        break;
       default:
         break;
     }
@@ -103,6 +97,39 @@ export class ModalComponent implements OnInit {
 
   public onChange(data: any, controleName: string): void {
     this.payload[controleName] = data.target.value;
+  }
+
+  private editTopicContent(key: number) {
+    this.data.payload.arrayTopics.forEach((element: any, index: number) => {
+      if (element.name === this.data.payload.topic) {
+        switch (key) {
+          case 1:
+            this.data.payload.arrayTopics[index].name = this.payload.topic;
+            break;
+          case 2:
+            this.data.payload.arrayTopics[index].units = this.payload.units;
+            this.data.payload.arrayTopics[index].valueAlert = this.payload.valueAlert;
+            this.data.payload.arrayTopics[index].alert = true;
+            break;
+          case 3:
+            this.data.payload.arrayTopics[index].units = 'NA';
+            this.data.payload.arrayTopics[index].valueAlert = 'NA';
+            this.data.payload.arrayTopics[index].alert = false;
+            break;
+          default:
+            break;
+        }
+      }
+    });
+    const itemEdit = {
+      newTopics: this.data.payload.arrayTopics,
+      idProject: this.data.payload.idProject,
+      editTopic: true
+    }
+    this.workflow.callWorkflowPut('project', this.data.payload.id, itemEdit).finally(() => {
+      this.payload = {};
+      this.data = this.clear();
+    });
   }
 
   addTopic() {

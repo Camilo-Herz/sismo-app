@@ -7,7 +7,7 @@ import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.servic
   templateUrl: './connections.component.html',
   styleUrls: ['./connections.component.css']
 })
-export class ConnectionsComponent implements OnInit, OnDestroy  {
+export class ConnectionsComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription;
   dataView: any = {};
@@ -61,6 +61,27 @@ export class ConnectionsComponent implements OnInit, OnDestroy  {
         topic: topic,
         idProject: idProj,
         arrayTopics: topicsProject
+      }
+    });
+    this.workflow.getPayload().subscribe((resp) => {
+      this.dataView.projects = resp.projects;
+    });
+  }
+
+  public activeAlert(opt: any, topic: string, idProj: string, topicsProject: any) {
+    this.subscription.unsubscribe();
+    this.workflow.modalActive({
+      type: 'activeAlert',
+      message: 'Ingrese el valor maximo para recibir alertas del topic ' + topic + ' y sus unidades',
+      labelBtnDerecha: 'Aceptar',
+      labelBtnIzquierda: 'Cancelar',
+      stepId: '',
+      payload: {
+        id: this.dataView.id,
+        topic: topic,
+        idProject: idProj,
+        arrayTopics: topicsProject,
+        opt: opt.target.checked
       }
     });
     this.workflow.getPayload().subscribe((resp) => {
