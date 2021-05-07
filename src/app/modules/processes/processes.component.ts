@@ -14,27 +14,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
   ///////////////////////////////////////////////////////////////////////////////
   ////////////////////////Configuracion de las graficas//////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
-  single: any = [{
-    "name": "Germany",
-    "value": 40632,
-    "extra": {
-      "code": "de"
-    }
-  },
-  {
-    "name": "United States",
-    "value": 50000,
-    "extra": {
-      "code": "us"
-    }
-  },
-  {
-    "name": "France",
-    "value": 36745,
-    "extra": {
-      "code": "fr"
-    }
-  }];
+  single: any = [];
   swimLineChart: any = [];
   areaChartStacked: any = [];
   areaChartStackedFor: any = [];
@@ -101,6 +81,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
           value: dataSocket.dataTopic,
           name: dataSocket.date
         });
+        //////////////////////// parametrico //////////////////////
         if (datosVista.series.length === 10) {
           datosVista.series.shift();
         }
@@ -118,6 +99,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
         this.dataView = resp;
         this.graphCard();
         this.swimlaneLineChart();
+        this.dataFrequency();
       }
     });
     this.socketWebService.emitEvent({
@@ -167,6 +149,38 @@ export class ProcessesComponent implements OnInit, OnDestroy {
         series
       });
     });
+  }
+
+  private dataFrequency() {
+    const totalFrequencies: { sensor: any; valueFilter: any; frequency: any; }[] = [];
+    this.dataView.topics.map((element: any) => {
+      const sensor = this.dataView.datasets.filter((elementFilter: any) => elementFilter.topic === element.name);
+      sensor.forEach((dataSensor: any) => {
+        const frequency = sensor.filter((elementFilter: any) => elementFilter.dataTopic === dataSensor.dataTopic);
+        const findSensor: any = totalFrequencies.find((elementFind) => (elementFind.valueFilter === dataSensor.dataTopic)
+          && (elementFind.sensor === dataSensor.topic));
+        if (!findSensor) {
+          totalFrequencies.push({
+            sensor: element.name,
+            valueFilter: dataSensor.dataTopic,
+            frequency: frequency.length
+          });
+        }
+      });
+    });
+    //////////////////////// parametrico //////////////////////
+    this.dataView.topics.map((element: any) => {
+      const newValues: { name: any; value: any; }[] = [];
+      const valuesFilter = totalFrequencies.filter((elementFilterFr) => elementFilterFr.sensor === element.name);
+      valuesFilter.forEach((elementValues: any) => {
+        newValues.push({
+          name: elementValues.valueFilter,
+          value: elementValues.frequency
+        });
+      });
+      this.single.push(newValues);
+    });
+    console.log('', this.single);
   }
 
   private colorHEX() {

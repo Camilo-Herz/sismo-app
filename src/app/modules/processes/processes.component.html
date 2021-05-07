@@ -27,11 +27,11 @@
             [timeline]="true" [results]="swimLineChart">
         </ngx-charts-line-chart>
     </div>
-    <p class="titleGraphics">Una grafica que quiero usar</p>
-    <div class="align">
-        <ngx-charts-bar-vertical [view]="[700, 400]" [scheme]="colorScheme" [results]="single" [gradient]="false"
+    <p class="titleGraphics">Frecuencia de los ultimos 10 datos</p>
+    <div class="align" *ngFor="let item of dataView.topics; let i = index">
+        <ngx-charts-bar-vertical [view]="[700, 400]" [scheme]="colorScheme" [results]="single[i]" [gradient]="false"
             [xAxis]="true" [yAxis]="true" [legend]="true" [showXAxisLabel]="true" [showYAxisLabel]="true"
-            [xAxisLabel]="'Country'" [yAxisLabel]="'Population'">
+            [xAxisLabel]="item.units" [yAxisLabel]="'Frecuencia'">
         </ngx-charts-bar-vertical>
     </div>
 </div>
