@@ -3,35 +3,33 @@
 <div class="pageRight">
     <p class="title">{{dataView.nombreProceso}}</p>
     <p class="description">{{dataView.descripcionProceso}}</p>
-    <p class="titleGraphics">Linea de tiempo real</p>
-    <div class="align" *ngFor="let item of areaChartStackedFor; let i = index">
+    <p class="separationTitle">Linea de tiempo real</p>
+    <div class="displayFlex" *ngFor="let item of areaChartStackedFor; let i = index">
         <ngx-charts-area-chart-stacked [view]="view" [scheme]="colorScheme" [legend]="true" [showXAxisLabel]="true"
             [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true" [xAxisLabel]="'Year'" [yAxisLabel]="'Population'"
             [timeline]="true" [results]="areaChartStacked[i]" [animations]="false">
         </ngx-charts-area-chart-stacked>
     </div>
-    <p class="titleGraphics">Valor mas alto registrado</p>
-    <div class="align">
-        <ngx-charts-linear-gauge [view]="[300, 300]" [scheme]="colorScheme" [value]="5" [previousValue]="50" [units]="'chiliones'">
-        </ngx-charts-linear-gauge>
-    </div>
-    <p class="titleGraphics">Promedio de los sensores</p>
-    <div class="align">
+    <p class="separationTitle">Promedio de los sensores</p>
+    <div class="displayFlex">
         <ngx-charts-number-card [view]="view" [scheme]="colorScheme" [results]="grafCard" [cardColor]="cardColor">
         </ngx-charts-number-card>
     </div>
-    <p class="titleGraphics">Historico</p>
-    <div class="align">
+    <p class="separationTitle">Historico</p>
+    <div class="displayFlex">
         <ngx-charts-line-chart [view]="view" [scheme]="colorScheme" [legend]="true" [showXAxisLabel]="true"
             [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true" [xAxisLabel]="'Year'" [yAxisLabel]="'Population'"
             [timeline]="true" [results]="swimLineChart">
         </ngx-charts-line-chart>
     </div>
-    <p class="titleGraphics">Una grafica que quiero usar</p>
-    <div class="align">
-        <ngx-charts-bar-vertical [view]="[700, 400]" [scheme]="colorScheme" [results]="single" [gradient]="false"
-            [xAxis]="true" [yAxis]="true" [legend]="true" [showXAxisLabel]="true" [showYAxisLabel]="true"
-            [xAxisLabel]="'Country'" [yAxisLabel]="'Population'">
-        </ngx-charts-bar-vertical>
+    <p class="separationTitle">Frecuencia de los ultimos 10 datos</p>
+    <div class="displayGrid" *ngFor="let item of dataView.topics; let i = index">
+        <p class="titleGraphics">{{item.name}}</p><br>
+        <div>
+            <ngx-charts-bar-vertical [view]="[700, 400]" [scheme]="colorScheme" [results]="single[i]" [gradient]="false"
+                [xAxis]="true" [yAxis]="true" [legend]="true" [showXAxisLabel]="true" [showYAxisLabel]="true"
+                [xAxisLabel]="item.units" [yAxisLabel]="'Frecuencia'">
+            </ngx-charts-bar-vertical>
+        </div>
     </div>
 </div>

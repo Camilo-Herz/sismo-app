@@ -3,7 +3,7 @@
     font-size: xx-large;
 }
 
-.align {
+.displayFlex {
     display: flex;
     justify-content: center;
 }
@@ -14,9 +14,21 @@
     color: grey;
 }
 
-.titleGraphics {
+.separationTitle {
     text-align: center;
     font-size: x-large;
     color: dimgray;
     background: bisque;
 }
+
+.displayGrid{
+    display: grid;
+    justify-content: center;
+}
+
+.titleGraphics{
+    text-align: center;
+    font-size: x-large;
+    color: dimgray;
+}
+
