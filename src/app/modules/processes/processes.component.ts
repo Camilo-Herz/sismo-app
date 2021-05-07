@@ -154,7 +154,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
 
   swimlaneLineChart() {
     this.dataView.topics.map((element: any) => {
-      const sensorData = this.dataView.datasets.filter((elementFilter: any) => elementFilter.topic === element);
+      const sensorData = this.dataView.datasets.filter((elementFilter: any) => elementFilter.topic === element.name);
       let series: any = [];
       sensorData.forEach((data: any) => {
         series.push({
@@ -163,7 +163,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
         });
       });
       this.swimLineChart.push({
-        name: element,
+        name: element.name,
         series
       });
     });

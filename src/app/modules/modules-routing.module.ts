@@ -31,12 +31,12 @@ const routes: Routes = [
   {
     path: 'connections',
     component: ConnectionsComponent,
-    // canActivate: [GuardsService]
+    canActivate: [GuardsService]
   },
   {
     path: 'guides',
     component: GuidesComponent,
-    // canActivate: [GuardsService]
+    canActivate: [GuardsService]
   },
   {
     path: 'examples',

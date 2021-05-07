@@ -2,6 +2,38 @@
 
 <!-- Modales -->
 <ng-container [ngSwitch]="data.type">
+    <section class="contModal contModal--isShow" id="modalDefault" *ngSwitchCase="'activeAlert'">
+        <div class="modal modal--min" *ngIf="!data.payload.opt">
+            <div class="modal__body">
+                <p>¿Seguro desea desactivar las alertas?</p>
+            </div>
+            <div class="contButtons contButtons--minMgrTop contButtons contButtons--minMgrTop--sameWidth">
+                <button *ngIf="data.labelBtnIzquierda !== undefined" type="button" class="button button--secondary"
+                    (click)="actionBtnIzquierda()">{{data.labelBtnIzquierda}}</button>
+                <button type="button" class="button button--primary"
+                    (click)="actionBtnDerecha('turnOffAlerts')">{{data.labelBtnDerecha}}</button>
+            </div>
+        </div>
+        <div class="modal modal--min" *ngIf="data.payload.opt">
+            <div class="modal__body">
+                <p>{{data.message}}</p>
+            </div>
+            <div class="input-field">
+                <i class=""></i>
+                <input type="text" placeholder="Valor maximo" value="" (change)="onChange($event, 'valueAlert')">
+            </div>
+            <div class="input-field">
+                <i class=""></i>
+                <input type="text" placeholder="Unidades" value="" (change)="onChange($event, 'units')">
+            </div>
+            <div class="contButtons contButtons--minMgrTop contButtons--minMgrTop--sameWidth">
+                <button *ngIf="data.labelBtnIzquierda !== undefined" type="button" class="button button--secondary"
+                    (click)="actionBtnIzquierda()">{{data.labelBtnIzquierda}}</button>
+                <button type="button" class="button button--primary"
+                    (click)="actionBtnDerecha('activeAlert')">{{data.labelBtnDerecha}}</button>
+            </div>
+        </div>
+    </section>
     <section class="contModal contModal--isShow" id="modalDefault" *ngSwitchCase="'editTopic'">
         <div class="modal modal--min">
             <div class="modal__body">
@@ -9,7 +41,7 @@
             </div>
             <div class="input-field">
                 <i class=""></i>
-                <input type="text" placeholder="URL OPC-UA" value="{{data.payload.topic}}"
+                <input type="text" placeholder="Nuevo nombre" value="{{data.payload.topic}}"
                     (change)="onChange($event, 'topic')">
             </div>
             <div class="contButtons contButtons--minMgrTop contButtons--minMgrTop--sameWidth">
