@@ -168,7 +168,6 @@ export class ProcessesComponent implements OnInit, OnDestroy {
         }
       });
     });
-    //////////////////////// parametrico //////////////////////
     this.dataView.topics.map((element: any) => {
       const newValues: { name: any; value: any; }[] = [];
       const valuesFilter = totalFrequencies.filter((elementFilterFr) => elementFilterFr.sensor === element.name);
@@ -180,7 +179,6 @@ export class ProcessesComponent implements OnInit, OnDestroy {
       });
       this.single.push(newValues);
     });
-    console.log('', this.single);
   }
 
   private colorHEX() {
