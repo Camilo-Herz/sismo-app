@@ -94,6 +94,10 @@ export class WorkFlowService {
     this.payload.next(payload);
   }
 
+  public graphPHP() {
+    
+  }
+
   private generateRandomString = (num: number) => {
     const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let result1= ' ';
@@ -101,7 +105,6 @@ export class WorkFlowService {
     for ( let i = 0; i < num; i++ ) {
         result1 += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
-
     return result1;
 }
 
