@@ -82,7 +82,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
           name: dataSocket.date
         });
         //////////////////////// parametrico //////////////////////
-        if (datosVista.series.length === 10) {
+        if (datosVista.series.length === 50) {
           datosVista.series.shift();
         }
         this.areaChartStacked[indexArray] = [datosVista];
@@ -100,7 +100,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
         this.graphCard();
         this.swimlaneLineChart();
         this.dataFrequency();
-        this.boxDiagram();
+        // this.boxDiagram();
       }
     });
     this.socketWebService.emitEvent({
@@ -196,60 +196,60 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     return letras[numero];
   }
 
-  private boxDiagram() {
-    const valuesBoxDiagram: { name: any; Q1: any; Q2: any; Q3: any; }[] = [];
-    const valuesArray = this.swimLineChart;
-    valuesArray.forEach((element: any, index: number) => {
-      element.series.sort((a: any, b: any) => {
-        if (a.value > b.value) {
-          return 1;
-        }
-        if (a.value < b.value) {
-          return -1;
-        }
-        return 0;
-      });
-      valuesArray[index] = element;
-      valuesBoxDiagram.push({
-        name: element.name,
-        Q1: this.firstQuartile(valuesArray[index]),
-        Q2: this.secondQuartile(valuesArray[index]),
-        Q3: this.thirdQuartile()
-      });
-    });
-    console.log('1 -> ', valuesBoxDiagram);
-    console.log('2 -> ', this.swimLineChart);
-  }
+  // private boxDiagram() {
+  //   const valuesBoxDiagram: { name: any; Q1: any; Q2: any; Q3: any; }[] = [];
+  //   const valuesArray = this.swimLineChart;
+  //   valuesArray.forEach((element: any, index: number) => {
+  //     element.series.sort((a: any, b: any) => {
+  //       if (a.value > b.value) {
+  //         return 1;
+  //       }
+  //       if (a.value < b.value) {
+  //         return -1;
+  //       }
+  //       return 0;
+  //     });
+  //     valuesArray[index] = element;
+  //     valuesBoxDiagram.push({
+  //       name: element.name,
+  //       Q1: this.firstQuartile(valuesArray[index]),
+  //       Q2: this.secondQuartile(valuesArray[index]),
+  //       Q3: this.thirdQuartile()
+  //     });
+  //   });
+  //   console.log('1 -> ', valuesBoxDiagram);
+  //   console.log('2 -> ', this.swimLineChart);
+  // }
 
-  private firstQuartile(value: any) {
-    const lengthArray = value.series.length;
-    if (lengthArray % 2 == 0) {
-      const numMedian = Math.ceil(lengthArray / 4);
-      const val1 = value.series[numMedian - 1].value 
-      const val2 = (numMedian < 2) ? 0 : value.series[numMedian - 2].value;
-      const prom = ( val1 + val2) / 2;
-      return prom;
-    } else {
-      const numMedian = Math.ceil(lengthArray / 4);
-      return value.series[numMedian - 1].value;
-    }
-  }
+  // private firstQuartile(value: any) {
+  //   const lengthArray = value.series.length;
+  //   if (lengthArray % 2 == 0) {
+  //     const numMedian = Math.ceil(lengthArray / 4);
+  //     const val1 = value.series[numMedian - 1].value 
+  //     const val2 = (numMedian < 2) ? 0 : value.series[numMedian - 2].value;
+  //     const prom = ( val1 + val2) / 2;
+  //     return prom;
+  //   } else {
+  //     const numMedian = Math.ceil(lengthArray / 4);
+  //     return value.series[numMedian - 1].value;
+  //   }
+  // }
 
-  private secondQuartile(value: any) {
-    const lengthArray = value.series.length;
-    if (lengthArray % 2 == 0) {
-      const numMedian = lengthArray / 2;
-      const prom = (value.series[numMedian - 1].value + value.series[numMedian].value) / 2;
-      return prom;
-    } else {
-      const numMedian = Math.ceil(lengthArray / 2);
-      return value.series[numMedian - 1].value;
-    }
-  }
+  // private secondQuartile(value: any) {
+  //   const lengthArray = value.series.length;
+  //   if (lengthArray % 2 == 0) {
+  //     const numMedian = lengthArray / 2;
+  //     const prom = (value.series[numMedian - 1].value + value.series[numMedian].value) / 2;
+  //     return prom;
+  //   } else {
+  //     const numMedian = Math.ceil(lengthArray / 2);
+  //     return value.series[numMedian - 1].value;
+  //   }
+  // }
 
-  private thirdQuartile() {
+  // private thirdQuartile() {
 
-  }
+  // }
 
 
 }
