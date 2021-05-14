@@ -1,8 +1,13 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/nvd3/1.8.4/nv.d3.min.css" />
+
 <app-menu></app-menu>
 
 <div class="pageRight">
     <p class="title">{{dataView.nombreProceso}}</p>
     <p class="description">{{dataView.descripcionProceso}}</p>
+    <div>
+        <nvd3 [options]="options" [data]="data"></nvd3>
+    </div>
     <p class="separationTitle">Linea de tiempo real</p>
     <div class="displayFlex" *ngFor="let item of areaChartStackedFor; let i = index">
         <ngx-charts-area-chart-stacked [view]="view" [scheme]="colorScheme" [legend]="true" [showXAxisLabel]="true"

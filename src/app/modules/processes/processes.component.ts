@@ -11,6 +11,11 @@ import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.servic
 })
 export class ProcessesComponent implements OnInit, OnDestroy {
 
+  name = 'Angular 6 - d3';
+  options: any;
+  data: any;
+  sec: number = 0;
+
   ///////////////////////////////////////////////////////////////////////////////
   ////////////////////////Configuracion de las graficas//////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
@@ -92,6 +97,10 @@ export class ProcessesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    var str = "PB 10 CV 2662";
+    str = str.replace(/ +/g, "");
+    this.displayBoxPlotChart();
+
     this.socketWebService.connect();
     this.dataSocket = this.router.snapshot.paramMap.get('data');
     this.subscription = this.workflow.getPayload().subscribe((resp) => {
@@ -100,7 +109,6 @@ export class ProcessesComponent implements OnInit, OnDestroy {
         this.graphCard();
         this.swimlaneLineChart();
         this.dataFrequency();
-        // this.boxDiagram();
       }
     });
     this.socketWebService.emitEvent({
@@ -196,60 +204,37 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     return letras[numero];
   }
 
-  // private boxDiagram() {
-  //   const valuesBoxDiagram: { name: any; Q1: any; Q2: any; Q3: any; }[] = [];
-  //   const valuesArray = this.swimLineChart;
-  //   valuesArray.forEach((element: any, index: number) => {
-  //     element.series.sort((a: any, b: any) => {
-  //       if (a.value > b.value) {
-  //         return 1;
-  //       }
-  //       if (a.value < b.value) {
-  //         return -1;
-  //       }
-  //       return 0;
-  //     });
-  //     valuesArray[index] = element;
-  //     valuesBoxDiagram.push({
-  //       name: element.name,
-  //       Q1: this.firstQuartile(valuesArray[index]),
-  //       Q2: this.secondQuartile(valuesArray[index]),
-  //       Q3: this.thirdQuartile()
-  //     });
-  //   });
-  //   console.log('1 -> ', valuesBoxDiagram);
-  //   console.log('2 -> ', this.swimLineChart);
-  // }
-
-  // private firstQuartile(value: any) {
-  //   const lengthArray = value.series.length;
-  //   if (lengthArray % 2 == 0) {
-  //     const numMedian = Math.ceil(lengthArray / 4);
-  //     const val1 = value.series[numMedian - 1].value 
-  //     const val2 = (numMedian < 2) ? 0 : value.series[numMedian - 2].value;
-  //     const prom = ( val1 + val2) / 2;
-  //     return prom;
-  //   } else {
-  //     const numMedian = Math.ceil(lengthArray / 4);
-  //     return value.series[numMedian - 1].value;
-  //   }
-  // }
-
-  // private secondQuartile(value: any) {
-  //   const lengthArray = value.series.length;
-  //   if (lengthArray % 2 == 0) {
-  //     const numMedian = lengthArray / 2;
-  //     const prom = (value.series[numMedian - 1].value + value.series[numMedian].value) / 2;
-  //     return prom;
-  //   } else {
-  //     const numMedian = Math.ceil(lengthArray / 2);
-  //     return value.series[numMedian - 1].value;
-  //   }
-  // }
-
-  // private thirdQuartile() {
-
-  // }
-
+  displayBoxPlotChart(): void {
+    this.options = {
+      chart: {
+        type: 'boxPlotChart',
+        height: 450,
+        margin: {
+          top: 20,
+          right: 20,
+          bottom: 30,
+          left: 50
+        },
+        color: ['darkblue', 'darkorange', 'green', 'darkred', 'darkviolet'],
+        x: function (d: any) { return d.label; },
+        //y: function(d){return d.values.Q3;},
+        maxBoxWidth: 55,
+        yDomain: [0, 500]
+      }
+    };
+    this.data = [
+      {
+        label: "Sample A",
+        values: {
+          Q1: 180,
+          Q2: 200,
+          Q3: 250,
+          whisker_low: 115,
+          whisker_high: 400,
+          outliers: [50, 100, 425]
+        }
+      }
+    ];
+  }
 
 }
