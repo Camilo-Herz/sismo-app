@@ -224,9 +224,10 @@ export class ProcessesComponent implements OnInit, OnDestroy {
   private firstQuartile(value: any) {
     const lengthArray = value.series.length;
     if (lengthArray % 2 == 0) {
-      const numMedian = Math.ceil(lengthArray / 4);   
+      const numMedian = Math.ceil(lengthArray / 4);
+      const val1 = value.series[numMedian - 1].value 
       const val2 = (numMedian < 2) ? 0 : value.series[numMedian - 2].value;
-      const prom = (value.series[numMedian - 1].value + val2) / 2;
+      const prom = ( val1 + val2) / 2;
       return prom;
     } else {
       const numMedian = Math.ceil(lengthArray / 4);
