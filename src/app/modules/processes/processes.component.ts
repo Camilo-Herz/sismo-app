@@ -217,24 +217,13 @@ export class ProcessesComponent implements OnInit, OnDestroy {
         },
         color: ['darkblue', 'darkorange', 'green', 'darkred', 'darkviolet'],
         x: function (d: any) { return d.label; },
-        //y: function(d){return d.values.Q3;},
         maxBoxWidth: 55,
-        yDomain: [0, 500]
+        yDomain: [0, 105]
       }
     };
-    this.data = [
-      {
-        label: "Sample A",
-        values: {
-          Q1: 180,
-          Q2: 200,
-          Q3: 250,
-          whisker_low: 115,
-          whisker_high: 400,
-          outliers: [50, 100, 425]
-        }
-      }
-    ];
+    this.workflow.getBoxPlotData().subscribe((resp) => {
+      this.data = resp;
+    });
   }
 
 }

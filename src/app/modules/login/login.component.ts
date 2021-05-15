@@ -49,6 +49,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadScript('https://apis.google.com/js/platform.js');
+    this.workflow.boxPlot();
   }
 
   public onChange(data: any, controleName: string, action: string): void {
