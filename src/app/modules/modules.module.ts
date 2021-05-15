@@ -12,6 +12,7 @@ import { ProcessesComponent } from './processes/processes.component';
 import { ExamplesComponent } from './examples/examples.component';
 import { ConnectionsComponent } from './connections/connections.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { NvD3Module } from 'ng2-nvd3';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     ReactiveFormsModule,
     NgxChartsModule,
     LayoutModule,
-    PdfViewerModule
+    PdfViewerModule,
+    NvD3Module
   ],
   exports: [
     LayoutModule
