@@ -12,6 +12,7 @@ export class WorkFlowService {
 
   private dataUser = new BehaviorSubject<any>(null);
   private payload = new BehaviorSubject<any>(null);
+  private boxPlotData = new BehaviorSubject<any>(null);
   private clientId = '';
 
   constructor(
@@ -94,19 +95,48 @@ export class WorkFlowService {
     this.payload.next(payload);
   }
 
-  public graphPHP() {
-    
-  }
-
   private generateRandomString = (num: number) => {
-    const characters ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-    let result1= ' ';
+    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let result1 = ' ';
     const charactersLength = characters.length;
-    for ( let i = 0; i < num; i++ ) {
-        result1 += characters.charAt(Math.floor(Math.random() * charactersLength));
+    for (let i = 0; i < num; i++) {
+      result1 += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result1;
-}
+  }
+
+  public boxPlot() {
+    const formData = new FormData();
+    formData.append('requestdata', 'size,rawdata,datatype,median,interquartilerange,q1,q3,minimum,maximum,outliers');
+    formData.append('func', 'submit_data');
+    formData.append('data_type', 'Population');
+    formData.append('data', '1,2,3,4,5,6,7,8,9,100,102');
+    var datos: any = [];
+    this.http.post(environment.boxPlotCalculation, formData, { responseType: 'text' }).subscribe((resp: any) => {
+      datos.push({
+        label: "Sample A",
+        values: {
+          Q1: resp.substr(resp.indexOf("<q1>") + 4, resp.lastIndexOf("</q1>") - resp.indexOf("<q1>") - 4),
+          Q2: resp.substr(resp.indexOf("<median>") + 8, resp.lastIndexOf("</median>") - resp.indexOf("<median>") - 8),
+          Q3: resp.substr(resp.indexOf("<q3>") + 4, resp.lastIndexOf("</q3>") - resp.indexOf("<q3>") - 4),
+          whisker_low: resp.substr(resp.indexOf("<minimum>") + 9, resp.lastIndexOf("</minimum>") - resp.indexOf("<minimum>") - 9),
+          whisker_high: resp.substr(resp.indexOf("<maximum>") + 9, resp.lastIndexOf("</maximum>") - resp.indexOf("<maximum>") - 9),
+          outliers: this.outlier(resp)
+        }
+
+      })
+      this.boxPlotData.next(datos);
+    })
+  }
+
+  outlier(resp: any) {
+    let outlier: any = [];
+    while (resp.indexOf("<outlier>") > -1) {
+      outlier.push(resp.substr(resp.indexOf("<outlier>") + 9, resp.indexOf("</outlier>") - resp.indexOf("<outlier>") - 9));
+      resp = resp.substr(resp.indexOf("</outlier>") + 10,);
+    }
+    return outlier;
+  }
 
   parseJwt(token: string) {
     const base64Url = token.split('.')[1];
@@ -114,6 +144,10 @@ export class WorkFlowService {
       return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
     }).join(''));
     return JSON.parse(base64);
+  }
+
+  getBoxPlotData(): Observable<any> {
+    return this.boxPlotData.asObservable();
   }
 
   getDataUser(): Observable<any> {

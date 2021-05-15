@@ -5,15 +5,18 @@
 <div class="pageRight">
     <p class="title">{{dataView.nombreProceso}}</p>
     <p class="description">{{dataView.descripcionProceso}}</p>
-    <div>
-        <nvd3 [options]="options" [data]="data"></nvd3>
-    </div>
     <p class="separationTitle">Linea de tiempo real</p>
     <div class="displayFlex" *ngFor="let item of areaChartStackedFor; let i = index">
         <ngx-charts-area-chart-stacked [view]="view" [scheme]="colorScheme" [legend]="true" [showXAxisLabel]="true"
             [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true" [xAxisLabel]="'Year'" [yAxisLabel]="'Population'"
             [timeline]="true" [results]="areaChartStacked[i]" [animations]="false">
         </ngx-charts-area-chart-stacked>
+    </div>
+    <p class="separationTitle">Diagrama de cajas y bigotes</p>
+    <div class="displayFlex">
+        <div>
+            <nvd3 [options]="options" [data]="data"></nvd3>
+        </div>
     </div>
     <p class="separationTitle">Promedio de los sensores</p>
     <div class="displayFlex">
