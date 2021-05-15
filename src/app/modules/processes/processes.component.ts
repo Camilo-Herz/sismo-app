@@ -11,10 +11,7 @@ import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.servic
 })
 export class ProcessesComponent implements OnInit, OnDestroy {
 
-  name = 'Angular 6 - d3';
-  options: any;
-  data: any;
-  sec = 0;
+
 
   ///////////////////////////////////////////////////////////////////////////////
   //////////////////////// Configuracion de las graficas∆//////////////////////////
@@ -31,6 +28,9 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     domain: [this.colorHEX(), this.colorHEX(), this.colorHEX(), this.colorHEX(), this.colorHEX(), this.colorHEX()]
   };
   cardColor = '#232837';
+
+  options: any;
+  data: any;
 
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
@@ -215,8 +215,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
           bottom: 30,
           left: 50
         },
-        color: ['darkblue', 'darkorange', 'green', 'darkred', 'darkviolet'],
-        x: (d: any) => d.label,
+        color: this.colorScheme.domain,
         maxBoxWidth: 55,
         yDomain: [0, 105]
       }

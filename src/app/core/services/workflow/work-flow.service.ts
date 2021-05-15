@@ -110,7 +110,7 @@ export class WorkFlowService {
     formData.append('requestdata', 'size,rawdata,datatype,median,interquartilerange,q1,q3,minimum,maximum,outliers');
     formData.append('func', 'submit_data');
     formData.append('data_type', 'Population');
-    formData.append('data', '1,2,3,4,5,6,7,8,9,100,102');
+    formData.append('data', '1,2,3,4,5,6,7,8,9,10,102');
     const datos: any = [];
     this.http.post(environment.boxPlotCalculation, formData, { responseType: 'text' }).subscribe((resp: any) => {
       datos.push({
