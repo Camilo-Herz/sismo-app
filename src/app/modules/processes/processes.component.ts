@@ -14,10 +14,10 @@ export class ProcessesComponent implements OnInit, OnDestroy {
   name = 'Angular 6 - d3';
   options: any;
   data: any;
-  sec: number = 0;
+  sec = 0;
 
   ///////////////////////////////////////////////////////////////////////////////
-  ////////////////////////Configuracion de las graficas//////////////////////////
+  //////////////////////// Configuracion de las graficas∆//////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
   single: any = [];
   swimLineChart: any = [];
@@ -30,7 +30,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
   colorScheme = {
     domain: [this.colorHEX(), this.colorHEX(), this.colorHEX(), this.colorHEX(), this.colorHEX(), this.colorHEX()]
   };
-  cardColor: string = '#232837';
+  cardColor = '#232837';
 
   ///////////////////////////////////////////////////////////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
@@ -50,7 +50,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     });
   }
 
-  private valueInitAreaChartStacked(dataSocket: any) {
+  private valueInitAreaChartStacked(dataSocket: any): any {
     this.areaChartStackedFor.push('');
     return [
       {
@@ -65,8 +65,8 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     ];
   }
 
-  private graphicData(dataSocket: any) {
-    let topicExists = this.areaChartStacked.find((element: any) => element[0].name === dataSocket.topic);
+  private graphicData(dataSocket: any): void {
+    const topicExists = this.areaChartStacked.find((element: any) => element[0].name === dataSocket.topic);
     if (this.areaChartStacked.length === 0 || !topicExists) {
       let valueInit: any = {};
       valueInit = this.valueInitAreaChartStacked(dataSocket);
@@ -97,8 +97,8 @@ export class ProcessesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    var str = "PB 10 CV 2662";
-    str = str.replace(/ +/g, "");
+    let str = 'PB 10 CV 2662';
+    str = str.replace(/ +/g, '');
     this.displayBoxPlotChart();
 
     this.socketWebService.connect();
@@ -124,7 +124,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
   }
 
   graphCard() {
-    let sensorAverage: any = [];
+    const sensorAverage: any = [];
     this.dataView.datasets.map((elementRep: any) => {
       const sensors = sensorAverage.filter((elementLocal: any) => elementRep.topic === elementLocal.name);
       if (sensors.length === 0) {
@@ -146,7 +146,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
   swimlaneLineChart() {
     this.dataView.topics.map((element: any) => {
       const sensorData = this.dataView.datasets.filter((elementFilter: any) => elementFilter.topic === element.name);
-      let series: any = [];
+      const series: any = [];
       sensorData.forEach((data: any) => {
         series.push({
           value: parseInt(data.dataTopic, 10),
@@ -190,16 +190,16 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     });
   }
 
-  private colorHEX() {
-    let coolor = "";
+  private colorHEX(): string {
+    let coolor = '';
     for (let i = 0; i < 6; i++) {
       coolor = coolor + this.generarLetra();
     }
-    return "#" + coolor;
+    return '#' + coolor;
   }
 
   private generarLetra() {
-    const letras = ["a", "b", "c", "d", "e", "f", "0", "1", "2", "3", "4", "5", "6", "7", "8", "9"];
+    const letras = ['a', 'b', 'c', 'd', 'e', 'f', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     const numero: any = (Math.random() * 15).toFixed(0);
     return letras[numero];
   }
@@ -216,7 +216,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
           left: 50
         },
         color: ['darkblue', 'darkorange', 'green', 'darkred', 'darkviolet'],
-        x: function (d: any) { return d.label; },
+        x: (d: any) => d.label,
         maxBoxWidth: 55,
         yDomain: [0, 105]
       }
