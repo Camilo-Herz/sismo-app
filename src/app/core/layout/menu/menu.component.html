@@ -15,10 +15,8 @@
             </div>
             <div class="sidebar-header">
                 <div class="user-pic">
-                    <img class="img-responsive img-rounded alignMeddle"
-                        [src]="dataMenu.profilePicture"
-                        onError="this.src='../../../../assets/img/userNull.jpg'"
-                        alt="User picture">
+                    <img class="img-responsive img-rounded alignMeddle" [src]="dataMenu.profilePicture"
+                        onError="this.src='../../../../assets/img/userNull.jpg'" alt="User picture">
                 </div>
                 <div class="user-info">
                     <span class="user-name">{{dataMenu.secondName}}
@@ -60,9 +58,9 @@
                         </a>
                     </li>
                     <li>
-                        <a (click)="navigate('NA')" class="cursorPointer">
-                            <i class="fa fa-area-chart" aria-hidden="true"></i>
-                            <span>Gráficas</span>
+                        <a (click)="navigate('downloads')" class="cursorPointer">
+                            <i class="fa fa-download" aria-hidden="true"></i>
+                            <span>Descargables</span>
                         </a>
                     </li>
                     <li class="header-menu">

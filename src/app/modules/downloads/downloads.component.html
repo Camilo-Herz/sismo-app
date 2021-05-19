@@ -1,0 +1,15 @@
+<app-menu></app-menu>
+
+<div class="pageRight">
+    <p class="title">Descargables</p>
+
+    <div class="cont-dahs1">
+        <div class="cardDashboard cardDownload radiusCards width50" *ngFor="let item of dataView.files; let i=index">
+            <br><strong>{{item.name}}</strong>
+            <p class="desciption">{{item.description}}</p>
+            <a [href]="item.link" target="_blank">
+                <i class="fa fa-cloud-download fa-3x cursorPointer" aria-hidden="true"></i>
+            </a>
+        </div>
+    </div>
+</div>

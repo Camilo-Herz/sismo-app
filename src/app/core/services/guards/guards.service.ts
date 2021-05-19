@@ -13,14 +13,13 @@ export class GuardsService implements CanActivate {
   ) { }
 
   public canActivate(): boolean {
-    let statusLogin: boolean = false;
+    let statusLogin = false;
     this.workflow.getPayload().subscribe((resp) => {
       if (resp !== null) {
-        statusLogin = true
+        statusLogin = true;
       } else {
-        let id = sessionStorage.getItem('client') || '';
-        id = id.substr(6);
-        this.workflow.callWorkflowPut('logout', id, { forbidden: true});
+        sessionStorage.clear();
+        this.workflow.callWorkflowPut('logout', '', { forbidden: true});
         this.router.navigate(['forbidden']);
       }
     });

@@ -30,18 +30,18 @@ export class GuidesComponent implements OnInit, OnDestroy {
     });
   }
 
-  private decodePDF(base64: any) {
-    var binary_string = base64.replace(/\\n/g, '');
-    binary_string = window.atob(base64);
-    var len = binary_string.length;
-    var bytes = new Uint8Array(len);
-    for (var i = 0; i < len; i++) {
-      bytes[i] = binary_string.charCodeAt(i);
+  private decodePDF(base64: any): any {
+    let binaryString = base64.replace(/\\n/g, '');
+    binaryString = window.atob(base64);
+    const len = binaryString.length;
+    const bytes = new Uint8Array(len);
+    for (let i = 0; i < len; i++) {
+      bytes[i] = binaryString.charCodeAt(i);
     }
     return bytes.buffer;
   }
 
-  public showPDF(key: string) {
+  public showPDF(key: string): void {
     this.viewPDF[key] = !this.viewPDF[key];
   }
 
