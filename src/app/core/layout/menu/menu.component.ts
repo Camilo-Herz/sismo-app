@@ -56,6 +56,7 @@ export class MenuComponent implements OnInit {
   }
 
   public logout(): void {
-    this.workflow.callWorkflowPut('logout', '', {});
+    sessionStorage.clear();
+    this.workflow.callWorkflowPut('logout', '', {forbidden: false});
   }
 }
