@@ -13,6 +13,7 @@ import { ExamplesComponent } from './examples/examples.component';
 import { ConnectionsComponent } from './connections/connections.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { NvD3Module } from 'ng2-nvd3';
+import { DownloadsComponent } from './downloads/downloads.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { NvD3Module } from 'ng2-nvd3';
     DashboardComponent,
     ProcessesComponent,
     ExamplesComponent,
-    ConnectionsComponent
+    ConnectionsComponent,
+    DownloadsComponent
   ],
   imports: [
     CommonModule,

@@ -28,12 +28,10 @@ export class SocketWebService extends Socket {
   }
 
   connect = () => {
-    console.log('conectado');
     this.ioSocket.connect();
   }
 
   disconnect = () => {
-    console.log('desconectado');
     this.ioSocket.disconnect();
   }
 }

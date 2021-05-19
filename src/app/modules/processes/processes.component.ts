@@ -109,6 +109,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
         this.graphCard();
         this.swimlaneLineChart();
         this.dataFrequency();
+        this.workflow.boxPlot('');
       }
     });
     this.socketWebService.emitEvent({
@@ -123,7 +124,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     this.socketWebService.disconnect();
   }
 
-  graphCard() {
+  graphCard(): void {
     const sensorAverage: any = [];
     this.dataView.datasets.map((elementRep: any) => {
       const sensors = sensorAverage.filter((elementLocal: any) => elementRep.topic === elementLocal.name);
@@ -140,10 +141,10 @@ export class ProcessesComponent implements OnInit, OnDestroy {
         });
       }
     });
-    this.grafCard = sensorAverage
+    this.grafCard = sensorAverage;
   }
 
-  swimlaneLineChart() {
+  swimlaneLineChart(): void {
     this.dataView.topics.map((element: any) => {
       const sensorData = this.dataView.datasets.filter((elementFilter: any) => elementFilter.topic === element.name);
       const series: any = [];
@@ -160,7 +161,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     });
   }
 
-  private dataFrequency() {
+  private dataFrequency(): void {
     const totalFrequencies: { sensor: any; valueFilter: any; frequency: any; }[] = [];
     this.dataView.topics.map((element: any) => {
       const sensor = this.dataView.datasets.filter((elementFilter: any) => elementFilter.topic === element.name);
@@ -198,30 +199,27 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     return '#' + coolor;
   }
 
-  private generarLetra() {
+  private generarLetra(): any {
     const letras = ['a', 'b', 'c', 'd', 'e', 'f', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9'];
     const numero: any = (Math.random() * 15).toFixed(0);
     return letras[numero];
   }
 
   displayBoxPlotChart(): void {
-    this.options = {
-      chart: {
-        type: 'boxPlotChart',
-        height: 450,
-        margin: {
-          top: 20,
-          right: 20,
-          bottom: 30,
-          left: 50
-        },
-        color: this.colorScheme.domain,
-        maxBoxWidth: 55,
-        yDomain: [0, 105]
-      }
-    };
     this.workflow.getBoxPlotData().subscribe((resp) => {
-      this.data = resp;
+      if (resp) {
+        this.data = resp;
+        const valueHigh = parseInt(this.data[0].values.outliers[0], 10) + 15;
+        this.options = {
+          chart: {
+            type: 'boxPlotChart',
+            height: 400,
+            color: this.colorScheme.domain,
+            yDomain: [this.data[0].values.whisker_low, valueHigh]
+          }
+        };
+      }
+
     });
   }
 

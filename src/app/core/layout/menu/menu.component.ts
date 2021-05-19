@@ -33,12 +33,15 @@ export class MenuComponent implements OnInit {
     });
   }
 
-  public navigate(dir: string) {
+  public navigate(dir: string): void {
     switch (dir) {
       case 'dashboard':
         this.workflow.callWorkflowGet('pageNavigation', dir, this.dataMenu.id);
         break;
       case 'connections':
+        this.workflow.callWorkflowGet('pageNavigation', dir, this.dataMenu.id);
+        break;
+      case 'downloads':
         this.workflow.callWorkflowGet('pageNavigation', dir, this.dataMenu.id);
         break;
       case 'guides':
@@ -52,7 +55,7 @@ export class MenuComponent implements OnInit {
     }
   }
 
-  public logout() {
+  public logout(): void {
     this.workflow.callWorkflowPut('logout', '', {});
   }
 }

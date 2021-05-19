@@ -105,28 +105,36 @@ export class WorkFlowService {
     return result1;
   }
 
-  public boxPlot(): void {
+  public boxPlot(data: string): void {
+    data = '1,2,3,4,5,6,7,8,9,10,20,45,68';
     const formData = new FormData();
     formData.append('requestdata', 'size,rawdata,datatype,median,interquartilerange,q1,q3,minimum,maximum,outliers');
     formData.append('func', 'submit_data');
     formData.append('data_type', 'Population');
-    formData.append('data', '1,2,3,4,5,6,7,8,9,10,102');
+    formData.append('data', data);
     const datos: any = [];
     this.http.post(environment.boxPlotCalculation, formData, { responseType: 'text' }).subscribe((resp: any) => {
+      const outliers = this.outlier(resp);
       datos.push({
-        label: 'Sample A',
+        label: 'Temperatura',
         values: {
           Q1: resp.substr(resp.indexOf('<q1>') + 4, resp.lastIndexOf('</q1>') - resp.indexOf('<q1>') - 4),
           Q2: resp.substr(resp.indexOf('<median>') + 8, resp.lastIndexOf('</median>') - resp.indexOf('<median>') - 8),
           Q3: resp.substr(resp.indexOf('<q3>') + 4, resp.lastIndexOf('</q3>') - resp.indexOf('<q3>') - 4),
           whisker_low: resp.substr(resp.indexOf('<minimum>') + 9, resp.lastIndexOf('</minimum>') - resp.indexOf('<minimum>') - 9),
-          whisker_high: resp.substr(resp.indexOf('<maximum>') + 9, resp.lastIndexOf('</maximum>') - resp.indexOf('<maximum>') - 9),
-          outliers: this.outlier(resp)
+          whisker_high: this.whiskerHigh(data, outliers),
+          outliers
         }
-
       });
       this.boxPlotData.next(datos);
     });
+  }
+
+  private whiskerHigh(data: any, outliers: any): string {
+    const dataArray = data.split(',');
+    const lengthData = dataArray.length;
+    const lengthOutliers = outliers.length;
+    return dataArray[(lengthData - lengthOutliers) - 1];
   }
 
   private outlier(resp: any): any {

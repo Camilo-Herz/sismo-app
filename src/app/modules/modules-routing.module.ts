@@ -8,6 +8,7 @@ import { ProcessesComponent } from './processes/processes.component';
 import { ExamplesComponent } from './examples/examples.component';
 import { ConnectionsComponent } from './connections/connections.component';
 import { GuardsService } from '../core/services/guards/guards.service';
+import { DownloadsComponent } from './downloads/downloads.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,11 @@ const routes: Routes = [
   {
     path: 'connections',
     component: ConnectionsComponent,
+    canActivate: [GuardsService]
+  },
+  {
+    path: 'downloads',
+    component: DownloadsComponent,
     canActivate: [GuardsService]
   },
   {
