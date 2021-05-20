@@ -106,6 +106,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     this.subscription = this.workflow.getPayload().subscribe((resp) => {
       if (resp && resp.datasets) {
         this.dataView = resp;
+        this.viewG = this.dataView.topics[0].name;
         this.graphCard();
         this.swimlaneLineChart();
         this.dataFrequency();

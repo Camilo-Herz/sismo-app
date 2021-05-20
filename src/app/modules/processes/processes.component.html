@@ -35,8 +35,8 @@
                 </div>
                 <div class="divTitleProcess">
                     <div class="borderLine">
-                        <div *ngFor="let item of dataView.topics" [ngClass]="{'verticalLineBorder': viewG === item.name}" class="verticalLine">
-                            <p class="separationTitle cursorPointer" (click)="viewG = item.name">{{item.name}}</p>
+                        <div *ngFor="let item of dataView.topics" [ngClass]="{'optSelect verticalLineBorder': viewG === item.name}" class="verticalLine">
+                            <p [ngClass]="{'optSelect': viewG === item.name}" class="separationTitle" (click)="viewG = item.name">{{item.name}}</p>
                         </div>
                     </div>
                     <div class="displayFlex">
@@ -101,7 +101,7 @@
                 </div>
                 <div class="divTitleProcess">
                     <div class="borderLine">
-                        <div *ngFor="let item of dataView.topics" [ngClass]="{'verticalLineBorder': viewG === item.name}" class="verticalLine">
+                        <div *ngFor="let item of dataView.topics" [ngClass]="{'optSelect verticalLineBorder': viewG === item.name}" class="verticalLine">
                             <p class="separationTitle cursorPointer" (click)="viewG = item.name">{{item.name}}</p>
                         </div>
                     </div>
@@ -117,4 +117,5 @@
             </div>
         </div>
     </div>
+    <div class="margin30"></div>
 </div>
