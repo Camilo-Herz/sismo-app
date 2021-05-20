@@ -11,7 +11,7 @@ import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.servic
 })
 export class ProcessesComponent implements OnInit, OnDestroy {
 
-
+  viewG = '';
 
   ///////////////////////////////////////////////////////////////////////////////
   //////////////////////// Configuracion de las graficas∆//////////////////////////
@@ -109,7 +109,6 @@ export class ProcessesComponent implements OnInit, OnDestroy {
         this.graphCard();
         this.swimlaneLineChart();
         this.dataFrequency();
-        this.workflow.boxPlot('');
       }
     });
     this.socketWebService.emitEvent({
@@ -206,6 +205,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
   }
 
   displayBoxPlotChart(): void {
+    this.workflow.boxPlot('1,2,3,4,5,6,7,8,9,10,20,45,68');
     this.workflow.getBoxPlotData().subscribe((resp) => {
       if (resp) {
         this.data = resp;
@@ -219,8 +219,6 @@ export class ProcessesComponent implements OnInit, OnDestroy {
           }
         };
       }
-
     });
   }
-
 }
