@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { modal } from '../../interfaces/interfacesWorkflow';
 import { ModalService } from '../modal/modal.service';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -108,26 +109,40 @@ export class WorkFlowService {
   public boxPlot(data: string): void {
     data = '1,2,3,4,5,6,7,8,9,10,20,45,68';
     const formData = new FormData();
-    formData.append('requestdata', 'size,rawdata,datatype,median,interquartilerange,q1,q3,minimum,maximum,outliers');
-    formData.append('func', 'submit_data');
-    formData.append('data_type', 'Population');
-    formData.append('data', data);
-    const datos: any = [];
+    formData.append('decimal', '.');
+    formData.append('numero', ',');
+    formData.append('input_datos', data);
     this.http.post(environment.boxPlotCalculation, formData, { responseType: 'text' }).subscribe((resp: any) => {
-      const outliers = this.outlier(resp);
-      datos.push({
-        label: 'Temperatura',
-        values: {
-          Q1: resp.substr(resp.indexOf('<q1>') + 4, resp.lastIndexOf('</q1>') - resp.indexOf('<q1>') - 4),
-          Q2: resp.substr(resp.indexOf('<median>') + 8, resp.lastIndexOf('</median>') - resp.indexOf('<median>') - 8),
-          Q3: resp.substr(resp.indexOf('<q3>') + 4, resp.lastIndexOf('</q3>') - resp.indexOf('<q3>') - 4),
-          whisker_low: resp.substr(resp.indexOf('<minimum>') + 9, resp.lastIndexOf('</minimum>') - resp.indexOf('<minimum>') - 9),
-          whisker_high: this.whiskerHigh(data, outliers),
-          outliers
-        }
+      const formData2 = new FormData();
+      formData2.append('data', data);
+      let dataResp = '';
+      this.http.post(environment.outliers, formData2, { responseType: 'text' }).subscribe((resp2: any) => {
+        // tslint:disable-next-line: max-line-length
+        dataResp = resp2.substr(resp2.indexOf('<div class=r1>') + 14, this.rewrite(resp2, '<div class=r1>').indexOf('</div>')).replace(/ /g, '').split(',');
+        this.outlier(resp,data,dataResp);
       });
-      this.boxPlotData.next(datos);
     });
+  }
+
+  private outlier(resp: string, data: any, outliers:any): any {
+    const datos: any = [];
+    datos.push({
+      label: 'Temperatura',
+      values: {
+        Q1: resp.substr(resp.indexOf('id="label_quartil1">') + 20, this.rewrite(resp, 'id="label_quartil1">').indexOf('</label>')),
+        Q2: resp.substr(resp.indexOf('id="label_mediana">') + 19, this.rewrite(resp, 'id="label_mediana">').indexOf('</label>')),
+        Q3: resp.substr(resp.indexOf('id="label_quartil2">') + 20, this.rewrite(resp, 'id="label_quartil2">').indexOf('</label>')),
+        whisker_low: resp.substr(resp.indexOf('id="label_minimo">') + 18, this.rewrite(resp, 'id="label_minimo">').indexOf('</label>')),
+        whisker_high: this.whiskerHigh(data, outliers),
+        outliers
+      }
+    });
+    this.boxPlotData.next(datos);
+  }
+
+  private rewrite(resp: any, filter: any): string {
+    const respaux = resp.substr(resp.indexOf(filter) + filter.length,);
+    return respaux;
   }
 
   private whiskerHigh(data: any, outliers: any): string {
@@ -135,15 +150,6 @@ export class WorkFlowService {
     const lengthData = dataArray.length;
     const lengthOutliers = outliers.length;
     return dataArray[(lengthData - lengthOutliers) - 1];
-  }
-
-  private outlier(resp: any): any {
-    const outlier: any = [];
-    while (resp.indexOf('<outlier>') > -1) {
-      outlier.push(resp.substr(resp.indexOf('<outlier>') + 9, resp.indexOf('</outlier>') - resp.indexOf('<outlier>') - 9));
-      resp = resp.substr(resp.indexOf('</outlier>') + 10);
-    }
-    return outlier;
   }
 
   private parseJwt(token: string): object {
