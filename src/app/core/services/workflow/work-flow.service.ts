@@ -107,7 +107,6 @@ export class WorkFlowService {
   }
 
   public boxPlot(data: string): void {
-    data = '1,2,3,4,5,6,7,8,9,10,20,45,68';
     const formData = new FormData();
     formData.append('decimal', '.');
     formData.append('numero', ',');
@@ -119,12 +118,12 @@ export class WorkFlowService {
       this.http.post(environment.outliers, formData2, { responseType: 'text' }).subscribe((resp2: any) => {
         // tslint:disable-next-line: max-line-length
         dataResp = resp2.substr(resp2.indexOf('<div class=r1>') + 14, this.rewrite(resp2, '<div class=r1>').indexOf('</div>')).replace(/ /g, '').split(',');
-        this.outlier(resp,data,dataResp);
+        this.outlier(resp, data, dataResp);
       });
     });
   }
 
-  private outlier(resp: string, data: any, outliers:any): any {
+  private outlier(resp: string, data: any, outliers: any): any {
     const datos: any = [];
     datos.push({
       label: 'Temperatura',
