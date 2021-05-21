@@ -11,18 +11,25 @@ import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.servic
 })
 export class ProcessesComponent implements OnInit, OnDestroy {
 
-  viewG = '';
+  selectedChart: any = {
+    boxPlot: '',
+    frequency: '',
+    historical: ''
+  };
 
   ///////////////////////////////////////////////////////////////////////////////
   //////////////////////// Configuracion de las graficas∆//////////////////////////
   ///////////////////////////////////////////////////////////////////////////////
   single: any = [];
-  swimLineChart: any = [];
+  swimLineChart: any = {
+    completeData: [],
+    dataToDisplay: [],
+    selected: []
+  };
   areaChartStacked: any = [];
   areaChartStackedFor: any = [];
 
   grafCard: any = [];
-  view: any = [700, 400];
 
   colorScheme = {
     domain: [this.colorHEX(), this.colorHEX(), this.colorHEX(), this.colorHEX(), this.colorHEX(), this.colorHEX()]
@@ -97,19 +104,18 @@ export class ProcessesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    let str = 'PB 10 CV 2662';
-    str = str.replace(/ +/g, '');
-    this.displayBoxPlotChart();
-
     this.socketWebService.connect();
     this.dataSocket = this.router.snapshot.paramMap.get('data');
     this.subscription = this.workflow.getPayload().subscribe((resp) => {
       if (resp && resp.datasets) {
         this.dataView = resp;
-        this.viewG = this.dataView.topics[0].name;
+        this.selectedChart.boxPlot = this.dataView.topics[0].name;
+        this.selectedChart.frequency = this.dataView.topics[0].name;
         this.graphCard();
         this.swimlaneLineChart();
         this.dataFrequency();
+        this.displayBoxPlotChart(this.selectedChart.boxPlot);
+        this.activateHistoricalData('', 'Rxdata1');
       }
     });
     this.socketWebService.emitEvent({
@@ -154,7 +160,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
           name: data.date
         });
       });
-      this.swimLineChart.push({
+      this.swimLineChart.completeData.push({
         name: element.name,
         series
       });
@@ -205,21 +211,55 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     return letras[numero];
   }
 
-  displayBoxPlotChart(): void {
-    this.workflow.boxPlot('1,2,3,4,5,6,7,8,9,10,20,45,68');
+  public displayBoxPlotChart(topic: string): void {
+    const dataBox: any[] = [];
+    const data = this.dataView.datasets.filter((element: any) => element.topic === topic);
+    data.forEach((element: any) => {
+      dataBox.push(element.dataTopic);
+    });
+    dataBox.sort();
+    const dataJoin = dataBox.join();
+    this.workflow.boxPlot(dataJoin, topic);
     this.workflow.getBoxPlotData().subscribe((resp) => {
       if (resp) {
         this.data = resp;
-        const valueHigh = parseInt(this.data[0].values.outliers[0], 10) + 15;
+        const limitUp = parseInt(dataBox[0], 10) - 10;
+        const limitDown = parseInt(dataBox[dataBox.length - 1], 10) + 10;
         this.options = {
           chart: {
             type: 'boxPlotChart',
-            height: 400,
+            height: 450,
+            margin: {
+              top: 20,
+              right: 20,
+              bottom: 60,
+              left: 40
+            },
             color: this.colorScheme.domain,
-            yDomain: [this.data[0].values.whisker_low, valueHigh]
+            maxBoxWidth: 75,
+            yDomain: [limitUp, limitDown]
           }
         };
       }
     });
+  }
+
+  public activateHistoricalData(opt: any, name: string): void {
+    const x: any[] = [];
+    const searchName = this.swimLineChart.selected.find((element: any) => element === name);
+    if (searchName === undefined) {
+      this.swimLineChart.selected.push(name);
+    } else {
+      const index = this.swimLineChart.selected.indexOf(searchName);
+      this.swimLineChart.selected.splice(index, 1);
+    }
+    this.swimLineChart.completeData.forEach((element: any) => {
+      this.swimLineChart.selected.forEach((elementView: any) => {
+        if (element.name === elementView) {
+          x.push(element);
+        }
+      });
+    });
+    this.swimLineChart.dataToDisplay = x;
   }
 }
