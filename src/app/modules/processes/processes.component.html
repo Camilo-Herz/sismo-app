@@ -11,8 +11,12 @@
     <div class="divGenral" *ngFor="let item of areaChartStackedFor; let i = index">
         <div>
             <div class="tarjeta">
-                <div class="divTitleProcess">
+                <div>
                     <p class="separationTitle">Linea de tiempo real</p>
+                </div>
+                <div class="divTitleProcess">
+                    <div class="borderLine">
+                    </div>
                     <div class="displayFlex">
                         <ngx-charts-area-chart-stacked [view]="[700, 400]" [scheme]="colorScheme" [legend]="true"
                             [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true"
