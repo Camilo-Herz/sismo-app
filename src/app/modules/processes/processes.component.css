@@ -15,9 +15,20 @@
 }
 
 .separationTitle {
+    color: #848484;
     text-align: center;
+    line-height: 50px;
+    font-family: "Tahoma";
     font-size: large;
-    color: dimgray;
+}
+
+.separationTitle:hover {
+    cursor: pointer;
+    color: #4a4a4a;
+}
+
+.optSelect {
+    color: #e02d2c !important;
 }
 
 .displayGrid {
@@ -92,4 +103,12 @@
 
 .borderLine {
     border-right: 1px solid #eee;
+}
+
+.margin30 {
+    margin: 30px;
+}
+
+.margin10 {
+    margin-left: 8px;
 }

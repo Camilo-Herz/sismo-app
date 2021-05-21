@@ -106,7 +106,7 @@ export class WorkFlowService {
     return result1;
   }
 
-  public boxPlot(data: string): void {
+  public boxPlot(data: string, sensor: string): void {
     const formData = new FormData();
     formData.append('decimal', '.');
     formData.append('numero', ',');
@@ -114,19 +114,19 @@ export class WorkFlowService {
     this.http.post(environment.boxPlotCalculation, formData, { responseType: 'text' }).subscribe((resp: any) => {
       const formData2 = new FormData();
       formData2.append('data', data);
-      let dataResp = '';
+      let dataResp = [];
       this.http.post(environment.outliers, formData2, { responseType: 'text' }).subscribe((resp2: any) => {
-        // tslint:disable-next-line: max-line-length
         dataResp = resp2.substr(resp2.indexOf('<div class=r1>') + 14, this.rewrite(resp2, '<div class=r1>').indexOf('</div>')).replace(/ /g, '').split(',');
-        this.outlier(resp, data, dataResp);
+        dataResp = (dataResp[0] === 'Ninguna') ? [this.whiskerHigh(data, dataResp)] : dataResp;
+        this.outlier(resp, data, dataResp, sensor);
       });
     });
   }
 
-  private outlier(resp: string, data: any, outliers: any): any {
+  private outlier(resp: string, data: any, outliers: any, sensor: string): any {
     const datos: any = [];
     datos.push({
-      label: 'Temperatura',
+      label: sensor,
       values: {
         Q1: resp.substr(resp.indexOf('id="label_quartil1">') + 20, this.rewrite(resp, 'id="label_quartil1">').indexOf('</label>')),
         Q2: resp.substr(resp.indexOf('id="label_mediana">') + 19, this.rewrite(resp, 'id="label_mediana">').indexOf('</label>')),
