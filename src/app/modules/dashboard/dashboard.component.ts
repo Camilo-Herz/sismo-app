@@ -71,7 +71,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  public process(dataprocess: any) {
+  public process(dataprocess: any): void {
+    console.log(dataprocess);
+    
     dataprocess.userId = this.dataView.id;
     this.workflow.callWorkflowPost('processes', dataprocess).finally(() => {
     });

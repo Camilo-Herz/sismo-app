@@ -262,4 +262,17 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     });
     this.swimLineChart.dataToDisplay = x;
   }
+
+  public process(): void {
+    const dataprocess = {
+      userId: this.dataView.id,
+      idProject: this.dataView.idProject,
+      descripcionProceso: this.dataView.descripcionProceso,
+      endpointOPC: this.dataView.endpointOPC,
+      nombreProceso: this.dataView.nombreProceso,
+      topics: this.dataView.topics
+    };
+    this.workflow.callWorkflowPost('processes', dataprocess).finally(() => {
+    });
+  }
 }
