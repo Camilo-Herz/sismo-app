@@ -13,7 +13,8 @@
           <input type="password" placeholder="Contraseña" formControlName="password"
             (ngModelChange)="onChange($event, 'password', 'login')" />
         </div>
-        <input type="submit" value="Iniciar sesión" class="btn solid" (click)="callOnSignIn()" />
+        <button type="button" class="button button--primary" (click)="callOnSignIn()"
+          [disabled]='!loginForm.valid'>Iniciar sesión</button>
       </form>
       <form action="#" class="sign-up-form" [formGroup]="registerForm">
         <h2 class="title">Regístrate</h2>
