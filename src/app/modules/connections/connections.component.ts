@@ -27,15 +27,22 @@ export class ConnectionsComponent implements OnInit, OnDestroy {
     });
   }
 
-  public showTopics(key: string) {
+  public showTopics(key: string): void {
     this.viewTopics[key] = !this.viewTopics[key];
   }
 
-  public editUri(key: string) {
+  public editUri(key: string): void {
     this.editUriOPC[key] = !this.editUriOPC[key];
+    Object.keys(this.editUriOPC).map((keyEdit) => {
+      if (keyEdit !== key) {
+        this.editUriOPC[keyEdit] = false;
+      }
+    });
   }
 
   public onChange(data: any, controlName: string): void {
+    console.log(data.target.value);
+    
     const value = (data.target.value === '') ? '' : data.target.value;
     const auxPayload = this.payload.endpointsOPC.filter((item: any) => item.idProject === controlName);
     if (auxPayload.length === 0) {
@@ -48,7 +55,7 @@ export class ConnectionsComponent implements OnInit, OnDestroy {
     }
   }
 
-  public editTopic(topic: string, idProj: string, topicsProject: any) {
+  public editTopic(topic: string, idProj: string, topicsProject: any): void {
     this.subscription.unsubscribe();
     this.workflow.modalActive({
       type: 'editTopic',
@@ -58,7 +65,7 @@ export class ConnectionsComponent implements OnInit, OnDestroy {
       stepId: '',
       payload: {
         id: this.dataView.id,
-        topic: topic,
+        topic,
         idProject: idProj,
         arrayTopics: topicsProject
       }
@@ -68,7 +75,7 @@ export class ConnectionsComponent implements OnInit, OnDestroy {
     });
   }
 
-  public activeAlert(opt: any, topic: string, idProj: string, topicsProject: any) {
+  public activeAlert(opt: any, topic: string, idProj: string, topicsProject: any): void {
     this.subscription.unsubscribe();
     this.workflow.modalActive({
       type: 'activeAlert',
@@ -78,7 +85,7 @@ export class ConnectionsComponent implements OnInit, OnDestroy {
       stepId: '',
       payload: {
         id: this.dataView.id,
-        topic: topic,
+        topic,
         idProject: idProj,
         arrayTopics: topicsProject,
         opt: opt.target.checked

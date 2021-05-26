@@ -19,9 +19,9 @@
                 </div>
                 <div class="divWidth2">
                     <div class="contentDisplay">
-                        <button *ngIf="!editUriOPC['uri'+i]" type="button" class="button margin10px"
+                        <button *ngIf="!editUriOPC['uri'+i]" type="button" class="btnRed margin10px"
                             (click)="editUri('uri'+i)">Editar</button>
-                        <button *ngIf="editUriOPC['uri'+i]" type="button" class="btnRed margin10px"
+                        <button *ngIf="editUriOPC['uri'+i]" type="button" class="button margin10px"
                             (click)="editUri('uri'+i)"> Cancelar</button>
                         <button type="button" class="btnRed" (click)="onCall(item.idProject, i)"
                             [disabled]="!editUriOPC['uri'+i]"> Aceptar</button>

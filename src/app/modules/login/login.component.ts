@@ -28,7 +28,8 @@ export class LoginComponent implements OnInit {
     this.flagCss = false;
     this.registerForm = this.formBuilder.group({
       user: ['', [
-        Validators.required
+        Validators.required,
+        Validators.pattern('[a-zA-Z0-9]*')
       ]],
       password: ['', [
         Validators.required
@@ -39,7 +40,8 @@ export class LoginComponent implements OnInit {
     });
     this.loginForm = this.formBuilder.group({
       user: ['', [
-        Validators.required
+        Validators.required,
+        Validators.pattern('[a-zA-Z0-9]*')
       ]],
       password: ['', [
         Validators.required
@@ -54,10 +56,18 @@ export class LoginComponent implements OnInit {
   public onChange(data: any, controleName: string, action: string): void {
     switch (action) {
       case 'login':
-        this.payloadLogin[controleName] = data;
+        if (controleName === 'user') {
+          this.payloadLogin[controleName] = data.toLowerCase();
+        } else {
+          this.payloadLogin[controleName] = data;
+        }
         break;
       case 'register':
-        this.payloadRegister[controleName] = data;
+        if (controleName === 'user') {
+          this.payloadRegister[controleName] = data.toLowerCase();
+        } else {
+          this.payloadRegister[controleName] = data;
+        }
         break;
       default:
         break;

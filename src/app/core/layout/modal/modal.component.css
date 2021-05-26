@@ -296,3 +296,7 @@
     position: absolute;
     cursor: pointer;
 }
+
+.button:disabled {
+    background-color: #8b8b8b;
+}
