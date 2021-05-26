@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApplicationService } from '../../services/application/application.service';
 import { ModalService } from '../../services/modal/modal.service';
 import { WorkFlowService } from '../../services/workflow/work-flow.service';
@@ -12,6 +12,7 @@ import { WorkFlowService } from '../../services/workflow/work-flow.service';
 export class ModalComponent implements OnInit {
 
   registerForm: FormGroup;
+  registerFormAlert: FormGroup;
   payload: any = {};
   data: {
     type: string,
@@ -35,33 +36,59 @@ export class ModalComponent implements OnInit {
       endpointOPC: ['', []],
       topics: this.formBuilder.array([this.formBuilder.group({ topic: [''] })])
     });
+    this.registerFormAlert = this.formBuilder.group({
+      maxValue: ['', [
+        Validators.required
+      ]],
+      units: ['', [
+        Validators.required
+      ]]
+    });
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.modalService.getModal()
       .subscribe(
         response => {
           if (response) {
             this.data = response;
+            this.validator();
           }
         }
       );
   }
 
-  actionBtnIzquierda() {
+  validator(): void {
+    switch (this.data.type) {
+      case 'newProject':
+        this.registerForm.get('nombreProceso')?.setValidators(Validators.required);
+        this.registerForm.get('descripcionProceso')?.setValidators(Validators.required);
+        this.registerForm.get('endpointOPC')?.setValidators(Validators.required);
+        this.registerForm.get('topics')?.setValidators(Validators.required);
+        break;
+      case 'editTopic':
+        this.registerForm.reset();
+        break;
+      default:
+        break;
+    }
+    this.registerForm.updateValueAndValidity();
+  }
+
+  actionBtnIzquierda(): void {
     this.payload = {};
     this.registerForm.reset();
     this.data = this.clear();
   }
 
-  actionBtnDerecha(action: string) {
+  actionBtnDerecha(action: string): void {
     switch (action) {
       case 'modal':
         if (this.data.payload && this.data.payload.deleteProject) {
           const dataDelete = {
             deleteProject: true,
             idProject: this.data.payload.idProject
-          }
+          };
           this.deleteCard(dataDelete);
           this.data = this.clear();
         } else {
@@ -81,7 +108,7 @@ export class ModalComponent implements OnInit {
         break;
       case 'editTopic':
         this.editTopicContent(1);
-        break
+        break;
       case 'activeAlert':
         this.editTopicContent(2);
         break;
@@ -93,13 +120,13 @@ export class ModalComponent implements OnInit {
     }
   }
 
-  ramdom = () => { return Math.floor(Math.random() * (1000 - 10)) + 10; }
+  ramdom = () => Math.floor(Math.random() * (1000 - 10)) + 10;
 
   public onChange(data: any, controleName: string): void {
     this.payload[controleName] = data.target.value;
   }
 
-  private editTopicContent(key: number) {
+  private editTopicContent(key: number): void {
     this.data.payload.arrayTopics.forEach((element: any, index: number) => {
       if (element.name === this.data.payload.topic) {
         switch (key) {
@@ -125,31 +152,32 @@ export class ModalComponent implements OnInit {
       newTopics: this.data.payload.arrayTopics,
       idProject: this.data.payload.idProject,
       editTopic: true
-    }
+    };
     this.workflow.callWorkflowPut('project', this.data.payload.id, itemEdit).finally(() => {
       this.payload = {};
       this.data = this.clear();
     });
   }
 
-  addTopic() {
-    const control = <FormArray>this.registerForm.controls['topics'];
+  addTopic(): void {
+    const control = this.registerForm.controls.topics as FormArray;
     control.push(this.formBuilder.group({ topic: [] }));
   }
 
-  removeTopic(indexTopic: number, action: String) {
-    const control = <FormArray>this.registerForm.controls['topics'];
+  removeTopic(indexTopic: number, action: string): void {
+    const control = this.registerForm.controls.topics as FormArray;
     if (action === 'removeAt') {
       control.removeAt(indexTopic);
+      delete this.payload['topic' + indexTopic];
     } else {
       while (control.length !== 1) {
-        control.removeAt(0)
+        control.removeAt(0);
       }
     }
   }
 
-  clearDataPayload() {
-    let dataTopics: any = [];
+  clearDataPayload(): void {
+    const dataTopics: any = [];
     Object.keys(this.payload).map((key) => {
       if (key.indexOf('topic') === 0) {
         dataTopics.push(this.payload[key]);
@@ -159,8 +187,18 @@ export class ModalComponent implements OnInit {
     this.payload.topics = dataTopics;
   }
 
+  validArray(): boolean {
+    let resp = true;
+    Object.keys(this.payload).map((key) => {
+      if (key.indexOf('topic') === 0) {
+        resp = false;
+      }
+    });
+    return resp;
+  }
 
-  get getTopics() {
+
+  get getTopics(): any {
     return this.registerForm.get('topics') as FormArray;
   }
 
@@ -175,7 +213,7 @@ export class ModalComponent implements OnInit {
     };
   }
 
-  deleteCard(dataDelete: object) {
+  deleteCard(dataDelete: object): void {
     this.workflow.callWorkflowPut('project', this.data.payload.id, dataDelete).finally(() => { });
   }
 

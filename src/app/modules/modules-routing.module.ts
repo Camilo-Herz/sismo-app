@@ -9,6 +9,7 @@ import { ExamplesComponent } from './examples/examples.component';
 import { ConnectionsComponent } from './connections/connections.component';
 import { GuardsService } from '../core/services/guards/guards.service';
 import { DownloadsComponent } from './downloads/downloads.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {
@@ -47,6 +48,11 @@ const routes: Routes = [
   {
     path: 'examples',
     component: ExamplesComponent,
+    canActivate: [GuardsService]
+  },
+  {
+    path: 'profile',
+    component: ProfileComponent,
     canActivate: [GuardsService]
   }
 ];

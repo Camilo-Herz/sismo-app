@@ -260,10 +260,13 @@ export class ProcessesComponent implements OnInit, OnDestroy {
         }
       });
     });
+    console.log('111 ', x);
+
     this.swimLineChart.dataToDisplay = x;
   }
 
   public process(): void {
+    this.resetData();
     const dataprocess = {
       userId: this.dataView.id,
       idProject: this.dataView.idProject,
@@ -274,5 +277,22 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     };
     this.workflow.callWorkflowPost('processes', dataprocess).finally(() => {
     });
+  }
+
+  private resetData(): void {
+    this.selectedChart = {
+      boxPlot: '',
+      frequency: '',
+      historical: ''
+    };
+    this.single = [];
+    this.swimLineChart = {
+      completeData: [],
+      dataToDisplay: [],
+      selected: []
+    };
+    this.areaChartStacked = [];
+    this.areaChartStackedFor = [];
+    this.grafCard = [];
   }
 }

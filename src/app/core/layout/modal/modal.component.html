@@ -15,23 +15,28 @@
             </div>
         </div>
         <div class="modal modal--min" *ngIf="data.payload.opt">
-            <div class="modal__body">
-                <p>{{data.message}}</p>
-            </div>
-            <div class="input-field">
-                <i class=""></i>
-                <input type="text" placeholder="Valor maximo" value="" (change)="onChange($event, 'valueAlert')">
-            </div>
-            <div class="input-field">
-                <i class=""></i>
-                <input type="text" placeholder="Unidades" value="" (change)="onChange($event, 'units')">
-            </div>
-            <div class="contButtons contButtons--minMgrTop contButtons--minMgrTop--sameWidth">
-                <button *ngIf="data.labelBtnIzquierda !== undefined" type="button" class="button button--secondary"
-                    (click)="actionBtnIzquierda()">{{data.labelBtnIzquierda}}</button>
-                <button type="button" class="button button--primary"
-                    (click)="actionBtnDerecha('activeAlert')">{{data.labelBtnDerecha}}</button>
-            </div>
+            <form action="#" [formGroup]="registerFormAlert">
+
+                <div class="modal__body">
+                    <p>{{data.message}}</p>
+                </div>
+                <div class="input-field">
+                    <i class=""></i>
+                    <input type="text" placeholder="Valor maximo" formControlName="maxValue" value=""
+                        (change)="onChange($event, 'valueAlert')">
+                </div>
+                <div class="input-field">
+                    <i class=""></i>
+                    <input type="text" placeholder="Unidades" formControlName="units" value=""
+                        (change)="onChange($event, 'units')">
+                </div>
+                <div class="contButtons contButtons--minMgrTop contButtons--minMgrTop--sameWidth">
+                    <button *ngIf="data.labelBtnIzquierda !== undefined" type="button" class="button button--secondary"
+                        (click)="actionBtnIzquierda()">{{data.labelBtnIzquierda}}</button>
+                    <button type="button" class="button button--primary"
+                        (click)="actionBtnDerecha('activeAlert')" [disabled]='!registerFormAlert.valid'>{{data.labelBtnDerecha}}</button>
+                </div>
+            </form>
         </div>
     </section>
     <section class="contModal contModal--isShow" id="modalDefault" *ngSwitchCase="'editTopic'">
@@ -42,13 +47,13 @@
             <div class="input-field">
                 <i class=""></i>
                 <input type="text" placeholder="Nuevo nombre" value="{{data.payload.topic}}"
-                    (change)="onChange($event, 'topic')">
+                    (keyup)="onChange($event, 'topic')">
             </div>
             <div class="contButtons contButtons--minMgrTop contButtons--minMgrTop--sameWidth">
                 <button *ngIf="data.labelBtnIzquierda !== undefined" type="button" class="button button--secondary"
                     (click)="actionBtnIzquierda()">{{data.labelBtnIzquierda}}</button>
-                <button type="button" class="button button--primary"
-                    (click)="actionBtnDerecha('editTopic')">{{data.labelBtnDerecha}}</button>
+                <button type="button" class="button button--primary" (click)="actionBtnDerecha('editTopic')"
+                    [disabled]='payload.topic === undefined || payload.topic === ""'>{{data.labelBtnDerecha}}</button>
             </div>
         </div>
     </section>
@@ -90,7 +95,7 @@
                         <div class="input-field max-width-topic">
                             <i class=""></i>
                             <input type="text" placeholder="Topic" formControlName="topic"
-                                (change)="onChange($event, 'topic' + indexTopic )" />
+                                (keyup)="onChange($event, 'topic' + indexTopic )" />
                         </div>
                         <img src="../../../assets/img/icon-menos.svg" alt="check" class="img-menos"
                             (click)="removeTopic(indexTopic, 'removeAt')">
@@ -101,8 +106,8 @@
             <div class="contButtons contButtons--minMgrTop contButtons contButtons--minMgrTop--sameWidth">
                 <button *ngIf="data.labelBtnIzquierda !== undefined" type="button" class="button button--secondary"
                     (click)="actionBtnIzquierda()">{{data.labelBtnIzquierda}}</button>
-                <button type="button" class="button button--primary"
-                    (click)="actionBtnDerecha('newProject')">{{data.labelBtnDerecha}}</button>
+                <button type="button" class="button button--primary" (click)="actionBtnDerecha('newProject')"
+                    [disabled]='!registerForm.valid || validArray()'>{{data.labelBtnDerecha}}</button>
             </div>
         </div>
     </section>

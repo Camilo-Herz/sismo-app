@@ -6,18 +6,14 @@
         <div class="input-field">
           <i class="fa fa-user"></i>
           <input type="text" placeholder="Usuario" formControlName="user"
-          (ngModelChange)="onChange($event, 'user', 'login')"/>
+            (ngModelChange)="onChange($event, 'user', 'login')" />
         </div>
         <div class="input-field">
           <i class="fa fa-key"></i>
           <input type="password" placeholder="Contraseña" formControlName="password"
-          (ngModelChange)="onChange($event, 'password', 'login')"/>
+            (ngModelChange)="onChange($event, 'password', 'login')" />
         </div>
-        <input type="submit" value="Login" class="btn solid" (click)="callOnSignIn()"/>
-        <p class="social-text">Inicia sesión con Google</p>
-        <div class="social-media">
-          <div class="g-signin2" data-onsuccess="onSignIn"></div>
-        </div>
+        <input type="submit" value="Iniciar sesión" class="btn solid" (click)="callOnSignIn()" />
       </form>
       <form action="#" class="sign-up-form" [formGroup]="registerForm">
         <h2 class="title">Regístrate</h2>
@@ -38,8 +34,9 @@
         </div>
         <div class="social-media customBtnGoogle">
           <div (click)="callRegisterUser()" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
-          <div *ngIf="!registerForm.valid" class="social-media customBtnGoogle btnFalso"><img
-              src="../../../assets/img/google.svg" class="margenImgGoogle">Iniciar sesión</div>
+          <div *ngIf="!registerForm.valid || payloadRegister.password !== payloadRegister.confirmPassword"
+            class="social-media customBtnGoogle btnFalso"><img src="../../../assets/img/google.svg"
+              class="margenImgGoogle">Registrate</div>
         </div>
       </form>
     </div>
@@ -50,7 +47,7 @@
       <div class="content">
         <h3>Eres nuevo en SISMO ?</h3>
         <p>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Debitis, ex ratione. Aliquid!
+          Desde SISMO podrás monitorizar todos tus procesos y sensores que tengas vinculados en el app.
         </p>
         <button (click)="flagCss = !flagCss" class="btn transparent" id="sign-up-btn">
           Regístrate
@@ -64,7 +61,7 @@
       <div class="content">
         <h3>Ya tienes tu sismo cuenta ?</h3>
         <p>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum laboriosam ad deleniti.
+          Para poder monitorizar tus procesos y sensores deberas registrar una cuenta con tu correo institucional.
         </p>
         <button (click)="flagCss = !flagCss" class="btn transparent" id="sign-in-btn">
           Accede

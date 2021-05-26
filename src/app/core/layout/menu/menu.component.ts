@@ -50,6 +50,9 @@ export class MenuComponent implements OnInit {
       case 'examples':
         this.router.navigate(['examples']);
         break;
+      case 'profile':
+        this.router.navigate(['profile']);
+        break;
       default:
         break;
     }
@@ -57,6 +60,6 @@ export class MenuComponent implements OnInit {
 
   public logout(): void {
     sessionStorage.clear();
-    this.workflow.callWorkflowPut('logout', '', {forbidden: false});
+    this.workflow.callWorkflowPut('logout', '', { forbidden: false });
   }
 }
