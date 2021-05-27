@@ -16,15 +16,14 @@ export class MenuComponent implements OnInit {
 
   constructor(
     public router: Router,
-    private workflow: WorkFlowService,
-    private applicationService: ApplicationService,
+    private workflow: WorkFlowService
   ) { }
 
   ngOnInit(): void {
     this.subscription = this.workflow.getDataUser().subscribe((resp) => {
       if (resp) {
         this.dataMenu = resp;
-        const fullName = this.dataMenu.name.split(" ");
+        const fullName = this.dataMenu.name.split(' ');
         this.dataMenu.firstName = fullName[0];
         this.dataMenu.secondName = fullName[1];
         this.dataMenu.firstLastName = fullName[2];
