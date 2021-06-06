@@ -14,12 +14,12 @@ export class SocketWebService extends Socket {
       url: environment.workflowUrl,
       options: {
         query: {
-          nameRoom: sessionStorage.getItem('clientId')
+          nameRoom: sessionStorage.getItem('clientId') + '@' + sessionStorage.getItem('projectId')
         }
       }
     });
     // escucha cuando un evento desde el back es emitido -> event hace referencia a la llave
-    this.ioSocket.on('event', (res: any) => this.callback.emit(res))
+    this.ioSocket.on('event', (res: any) => this.callback.emit(res));
   }
 
   //  emite eventos al back -> event hace referencia a la llave con que se va a recibir

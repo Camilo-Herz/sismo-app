@@ -13,16 +13,16 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   single: any = [
     {
-      "name": "Germany",
-      "value": Math.random() * (100 - 10) + 10
+      name: 'Presion',
+      value: Math.random() * (100 - 10) + 10
     },
     {
-      "name": "United States",
-      "value": Math.random() * (100 - 10) + 10
+      name: 'Nivel',
+      value: Math.random() * (100 - 10) + 10
     },
     {
-      "name": "France",
-      "value": Math.random() * (100 - 10) + 10
+      name: 'Caudal',
+      value: Math.random() * (100 - 10) + 10
     }
   ];
   colorScheme = {
@@ -39,7 +39,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  public modalActive() {
+  public modalActive(): void {
     this.subscription.unsubscribe();
     this.workflow.modalActive({
       type: 'newProject',
@@ -56,7 +56,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     });
   }
 
-  public deleteCard(idProject: string) {
+  public deleteCard(idProject: string): void {
     this.workflow.modalActive({
       type: 'error',
       message: '¿Esta seguro de eliminar el proyecto? Recuerde que no podra restaurarlo despues de ser eliminado.',
@@ -66,14 +66,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
       payload: {
         id: this.dataView.id,
         deleteProject: true,
-        idProject: idProject
+        idProject
       }
     });
   }
 
   public process(dataprocess: any): void {
-    console.log(dataprocess);
-    
+    sessionStorage.setItem('projectId', dataprocess.idProject);
     dataprocess.userId = this.dataView.id;
     this.workflow.callWorkflowPost('processes', dataprocess).finally(() => {
     });
