@@ -33,8 +33,8 @@
                 <div class="contButtons contButtons--minMgrTop contButtons--minMgrTop--sameWidth">
                     <button *ngIf="data.labelBtnIzquierda !== undefined" type="button" class="button button--secondary"
                         (click)="actionBtnIzquierda()">{{data.labelBtnIzquierda}}</button>
-                    <button type="button" class="button button--primary"
-                        (click)="actionBtnDerecha('activeAlert')" [disabled]='!registerFormAlert.valid'>{{data.labelBtnDerecha}}</button>
+                    <button type="button" class="button button--primary" (click)="actionBtnDerecha('activeAlert')"
+                        [disabled]='!registerFormAlert.valid'>{{data.labelBtnDerecha}}</button>
                 </div>
             </form>
         </div>
@@ -54,6 +54,27 @@
                     (click)="actionBtnIzquierda()">{{data.labelBtnIzquierda}}</button>
                 <button type="button" class="button button--primary" (click)="actionBtnDerecha('editTopic')"
                     [disabled]='payload.topic === undefined || payload.topic === ""'>{{data.labelBtnDerecha}}</button>
+            </div>
+        </div>
+    </section>
+    <section class="contModal contModal--isShow" id="modalDefault" *ngSwitchCase="'editDataBase'">
+        <div class="modal modal--min">
+            <div class="modal__body">
+                <p>{{data.message}}</p>
+            </div>
+            <div class="input-field">
+                <i class=""></i>
+                <input type="password" placeholder="Nueva clave" (keyup)="onChange($event, 'valueChange')">
+            </div>
+            <div class="input-field" *ngIf="this.data.payload.editPassword">
+                <i class=""></i>
+                <input type="password" placeholder="Confirme la clave" (keyup)="onChange($event, 'valueChangeConfirm')">
+            </div>
+            <div class="contButtons contButtons--minMgrTop contButtons--minMgrTop--sameWidth">
+                <button *ngIf="data.labelBtnIzquierda !== undefined" type="button" class="button button--secondary"
+                    (click)="actionBtnIzquierda()">{{data.labelBtnIzquierda}}</button>
+                <button type="button" class="button button--primary" (click)="actionBtnDerecha('editDataBase')"
+                    [disabled]='payload.valueChange === undefined ||payload.valueChange === "" || payload.valueChange !== payload.valueChangeConfirm'>{{data.labelBtnDerecha}}</button>
             </div>
         </div>
     </section>

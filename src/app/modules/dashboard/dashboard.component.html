@@ -5,10 +5,10 @@
         <div class="head">
             <br>
             <span class="title-view">Tablero</span>
-            <input class="input-search" type="text" placeholder="Buscar" />
+            <input class="input-search" type="search" [(ngModel)]="search" placeholder="Buscar" />
         </div>
         <div class="cont-dahs1">
-            <div class="cardDashboard card-1 radiusCards" (click)="modalActive()">
+            <div class="cardDashboard card-1 radiusCards" (click)="modalActive()" *ngIf="search === ''">
                 <div class="wrapper radiusCards">
                     <h1 class="textCenter marginTitle">Nuevo proyecto</h1>
                     <p class="textCenter"> Asocia nuevos procesos y sensores</p>
@@ -26,7 +26,8 @@
                     </ul>
                 </div>
             </div>
-            <div class="cardDashboard card-1 radiusCards" *ngFor="let item of dataView.projects; let i=index">
+            <div class="cardDashboard card-1 radiusCards"
+                *ngFor="let item of (dataView.projects | filter:search)as folder; let i=index ">
                 <br><strong>{{item.nombreProceso}}<i class="fa fa-trash-o fa-lg imgTrash"
                         (click)="deleteCard(item.idProject)"></i></strong>
                 <ngx-charts-bar-horizontal *ngIf="i % 2 === 0" [view]="[270, 200]" [scheme]="colorScheme"

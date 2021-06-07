@@ -10,6 +10,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   subscription = new Subscription;
   dataView: any = {};
+  search = '';
 
   single: any = [
     {

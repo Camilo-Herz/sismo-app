@@ -29,27 +29,18 @@ export class ProfileComponent implements OnInit {
     });
   }
 
-  public editTopic(user: string, type: string): void {
-    let msg = '';
-    if (type === 'usr') {
-      msg = 'Solo puede modificar el usuario';
-    } else {
-      msg = 'Cambio de contraseña';
-    }
+  public editDataBase(user: string, type: string): void {
     this.subscription.unsubscribe();
     this.workflow.modalActive({
-      type: 'editTopic',
-      message: msg,
+      type: 'editDataBase',
+      message: 'Cambio de contraseña, el boton solo se habilitara cuando las dos claves coincidan.',
       labelBtnDerecha: 'Aceptar',
       labelBtnIzquierda: 'Cancelar',
       stepId: '',
       payload: {
-        id: this.dataView.id,
-        user
+        editPassword: true,
+        id: this.dataView.id
       }
-    });
-    this.workflow.getPayload().subscribe((resp) => {
-      this.dataView.projects = resp.projects;
     });
   }
 
