@@ -15,6 +15,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { NvD3Module } from 'ng2-nvd3';
 import { DownloadsComponent } from './downloads/downloads.component';
 import { ProfileComponent } from './profile/profile.component';
+import { FilterPipe } from '../core/layout/pipes/filter/filter.pipe';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { ProfileComponent } from './profile/profile.component';
     ExamplesComponent,
     ConnectionsComponent,
     DownloadsComponent,
-    ProfileComponent
+    ProfileComponent,
+    FilterPipe
   ],
   imports: [
     CommonModule,

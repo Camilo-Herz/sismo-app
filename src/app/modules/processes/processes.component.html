@@ -7,137 +7,153 @@
     <p class="description">{{dataView.descripcionProceso}}</p>
 
     <!-- Linea de tiempo real -->
-
-    <div class="divGenral" *ngFor="let item of areaChartStackedFor; let i = index">
-        <div>
-            <div class="tarjeta">
-                <div>
-                    <p class="separationTitle">Linea de tiempo real</p>
-                </div>
-                <div class="divTitleProcess">
-                    <div class="borderLine">
+    <ng-container *ngIf="dataView.datasets.length > 0;then graph else newDeb">
+    </ng-container>
+    <ng-template #graph>
+        <div class="divGenral" *ngFor="let item of areaChartStackedFor; let i = index">
+            <div>
+                <div class="tarjeta">
+                    <div>
+                        <p class="separationTitle">Linea de tiempo real</p>
                     </div>
-                    <div class="displayFlex">
-                        <ngx-charts-area-chart-stacked [view]="[700, 400]" [scheme]="colorScheme" [legend]="true"
-                            [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true"
-                            [xAxisLabel]="'Year'" [yAxisLabel]="'Population'" [timeline]="true"
-                            [results]="areaChartStacked[i]" [animations]="false">
-                        </ngx-charts-area-chart-stacked>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Diagrama de cajas y bigotes -->
-
-    <div class="divGenral">
-        <div>
-            <div class="tarjeta">
-                <div>
-                    <p class="separationTitle">Diagrama de cajas y bigotes</p>
-                </div>
-                <div class="divTitleProcess">
-                    <div class="borderLine">
-                        <div *ngFor="let item of dataView.topics"
-                            [ngClass]="{'optSelect verticalLineBorder': selectedChart.boxPlot === item.name}"
-                            class="verticalLine">
-                            <p [ngClass]="{'optSelect': selectedChart.boxPlot === item.name}" class="separationTitle"
-                                (click)="selectedChart.boxPlot = item.name" (click)="displayBoxPlotChart(item.name)">
-                                {{item.name}}</p>
+                    <div class="divTitleProcess">
+                        <div class="borderLine">
                         </div>
-                    </div>
-                    <div class="displayFlex">
-                        <div>
-                            <nvd3 [options]="options" [data]="data"></nvd3>
+                        <div class="displayFlex">
+                            <ngx-charts-area-chart-stacked [view]="[700, 400]" [scheme]="colorScheme" [legend]="true"
+                                [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true"
+                                [xAxisLabel]="'Year'" [yAxisLabel]="'Population'" [timeline]="true"
+                                [results]="areaChartStacked[i]" [animations]="false">
+                            </ngx-charts-area-chart-stacked>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!-- Promedio de los sensores -->
+        <!-- Diagrama de cajas y bigotes -->
 
-    <div class="divGenral">
-        <div>
-            <div class="tarjeta">
-                <div>
-                    <p class="separationTitle">Promedio de los sensores</p>
-                </div>
-                <div class="divTitleProcess">
-                    <div class="displayFlex">
-                        <ngx-charts-number-card [view]="[700, 400]" [scheme]="colorScheme" [results]="grafCard"
-                            [cardColor]="cardColor">
-                        </ngx-charts-number-card>
+        <div class="divGenral">
+            <div>
+                <div class="tarjeta">
+                    <div>
+                        <p class="separationTitle">Diagrama de cajas y bigotes</p>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Historico -->
-
-    <div class="divGenral">
-        <div>
-            <div class="tarjeta">
-                <div>
-                    <p class="separationTitle">Historico</p>
-                </div>
-                <div class="divTitleProcess">
-                    <div class="borderLine">
-                        <div *ngFor="let item of dataView.topics; let i=index" class="verticalLine">
-                            <input type="checkbox" id="cbox1" (click)="activateHistoricalData($event, item.name)"
-                                [checked]="(i === 0) ? true : false">
-                            <p class="separationTitle cursorPointer margin10">
-                                {{item.name}}</p>
+                    <div class="divTitleProcess">
+                        <div class="borderLine">
+                            <div *ngFor="let item of dataView.topics"
+                                [ngClass]="{'optSelect verticalLineBorder': selectedChart.boxPlot === item.name}"
+                                class="verticalLine">
+                                <p [ngClass]="{'optSelect': selectedChart.boxPlot === item.name}"
+                                    class="separationTitle" (click)="selectedChart.boxPlot = item.name"
+                                    (click)="displayBoxPlotChart(item.name)">
+                                    {{item.name}}</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="displayFlex">
-                        <ngx-charts-line-chart [view]="[700, 400]" [scheme]="colorScheme" [legend]="true"
-                            [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true"
-                            [xAxisLabel]="'Year'" [yAxisLabel]="'Population'" [timeline]="true"
-                            [results]="swimLineChart.dataToDisplay">
-                        </ngx-charts-line-chart>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <!-- Frecuencia de los ultimos 10 datos -->
-
-    <div class="divGenral">
-        <div>
-            <div class="tarjeta">
-                <div>
-                    <p class="separationTitle">Frecuencia de los ultimos 10 datos</p>
-                </div>
-                <div class="divTitleProcess">
-                    <div class="borderLine">
-                        <div *ngFor="let item of dataView.topics"
-                            [ngClass]="{'optSelect verticalLineBorder': selectedChart.frequency === item.name}"
-                            class="verticalLine">
-                            <p class="separationTitle cursorPointer" (click)="selectedChart.frequency = item.name">
-                                {{item.name}}</p>
-                        </div>
-                    </div>
-                    <div class="displayFlex" *ngFor="let item of dataView.topics; let i = index">
-                        <div *ngIf="selectedChart.frequency === item.name">
-                            <ngx-charts-bar-vertical [view]="[500, 400]" [scheme]="colorScheme" [results]="single[i]"
-                                [gradient]="false" [xAxis]="true" [yAxis]="true" [legend]="true" [showXAxisLabel]="true"
-                                [showYAxisLabel]="true" [xAxisLabel]="item.units" [yAxisLabel]="'Frecuencia'">
-                            </ngx-charts-bar-vertical>
+                        <div class="displayFlex">
+                            <div>
+                                <nvd3 [options]="options" [data]="data"></nvd3>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="margin30"></div>
-    <div class="write" (click)="process()">
-        <i class="fa fa-refresh" aria-hidden="true"></i>
-    </div>
+
+        <!-- Promedio de los sensores -->
+
+        <div class="divGenral">
+            <div>
+                <div class="tarjeta">
+                    <div>
+                        <p class="separationTitle">Promedio de los sensores</p>
+                    </div>
+                    <div class="divTitleProcess">
+                        <div class="displayFlex">
+                            <ngx-charts-number-card [view]="[700, 400]" [scheme]="colorScheme" [results]="grafCard"
+                                [cardColor]="cardColor">
+                            </ngx-charts-number-card>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Historico -->
+
+        <div class="divGenral">
+            <div>
+                <div class="tarjeta">
+                    <div>
+                        <p class="separationTitle">Historico</p>
+                    </div>
+                    <div class="divTitleProcess">
+                        <div class="borderLine">
+                            <div *ngFor="let item of dataView.topics; let i=index" class="verticalLine">
+                                <input type="checkbox" id="cbox1" (click)="activateHistoricalData($event, item.name)"
+                                    [checked]="(i === 0) ? true : false">
+                                <p class="separationTitle cursorPointer margin10">
+                                    {{item.name}}</p>
+                            </div>
+                        </div>
+                        <div class="displayFlex">
+                            <ngx-charts-line-chart [view]="[700, 400]" [scheme]="colorScheme" [legend]="true"
+                                [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxis]="true" [yAxis]="true"
+                                [xAxisLabel]="'Year'" [yAxisLabel]="'Population'" [timeline]="true"
+                                [results]="swimLineChart.dataToDisplay">
+                            </ngx-charts-line-chart>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <!-- Frecuencia de los ultimos 10 datos -->
+
+        <div class="divGenral">
+            <div>
+                <div class="tarjeta">
+                    <div>
+                        <p class="separationTitle">Frecuencia de los ultimos 10 datos</p>
+                    </div>
+                    <div class="divTitleProcess">
+                        <div class="borderLine">
+                            <div *ngFor="let item of dataView.topics"
+                                [ngClass]="{'optSelect verticalLineBorder': selectedChart.frequency === item.name}"
+                                class="verticalLine">
+                                <p class="separationTitle cursorPointer" (click)="selectedChart.frequency = item.name">
+                                    {{item.name}}</p>
+                            </div>
+                        </div>
+                        <div class="displayFlex" *ngFor="let item of dataView.topics; let i = index">
+                            <div *ngIf="selectedChart.frequency === item.name">
+                                <ngx-charts-bar-vertical [view]="[500, 400]" [scheme]="colorScheme"
+                                    [results]="single[i]" [gradient]="false" [xAxis]="true" [yAxis]="true"
+                                    [legend]="true" [showXAxisLabel]="true" [showYAxisLabel]="true"
+                                    [xAxisLabel]="item.units" [yAxisLabel]="'Frecuencia'">
+                                </ngx-charts-bar-vertical>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="margin30"></div>
+        <div class="write" (click)="process()">
+            <i class="fa fa-refresh" aria-hidden="true"></i>
+        </div>
+    </ng-template>
+    <ng-template #newDeb>
+        <div class="divGenral">
+            <div>
+                <div class="tarjeta">
+                    <div>
+                        <p class="separationTitle">Actualmente no cuenta con datos para este proceso</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ng-template>
 </div>

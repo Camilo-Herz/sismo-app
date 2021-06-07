@@ -7,8 +7,6 @@
 
     <div class="container">
         <div class="info-box">
-            <div class="edit cursorPointer" (click)="editTopic(dataView.user, 'usr')">EDITAR <i
-                    class="fa fa-pencil-square-o"></i></div>
             <div class="info top">
                 <p class="label">NOMBRE</p>
                 <p class="data">{{dataView.secondName | uppercase}}</p>
@@ -30,7 +28,7 @@
         </div>
 
         <div class="info-box">
-            <div class="edit cursorPointer" (click)="editTopic(dataView.user, 'psd')">EDITAR <i class="fa fa-pencil-square-o"></i></div>
+            <div class="edit cursorPointer" (click)="editDataBase(dataView.user, 'psd')">EDITAR <i class="fa fa-pencil-square-o"></i></div>
             <div class="info top">
                 <p class="label">CONSTRASEÑA</p>
                 <p class="data">•••••••••••••</p>

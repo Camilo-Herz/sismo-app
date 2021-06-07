@@ -7,6 +7,7 @@ import { ModalComponent } from './modal/modal.component';
 import { ForbiddenComponent } from './forbidden/forbidden.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoaderComponent } from './loader/loader.component';
+import { FilterPipe } from './pipes/filter/filter.pipe';
 
 @NgModule({
   declarations: [

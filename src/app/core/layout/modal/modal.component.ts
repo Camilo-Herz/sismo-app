@@ -115,9 +115,23 @@ export class ModalComponent implements OnInit {
       case 'turnOffAlerts':
         this.editTopicContent(3);
         break;
+      case 'editDataBase':
+        this.editDataBase();
+        break;
       default:
         break;
     }
+  }
+
+  private editDataBase(): void {
+    const itemEdit = {
+      editPassword: this.data.payload.editPassword,
+      valueChange: this.payload.valueChange
+    };
+    this.workflow.callWorkflowPut('project', this.data.payload.id, itemEdit).finally(() => {
+      this.payload = {};
+      this.data = this.clear();
+    });
   }
 
   ramdom = () => Math.floor(Math.random() * (1000 - 10)) + 10;
