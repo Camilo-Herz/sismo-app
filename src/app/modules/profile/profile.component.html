@@ -1,37 +1,46 @@
 <app-menu></app-menu>
 
 <div class="pageRight">
-    <div class="header">
-        <div class="headertitle">Configuraciones de la cuenta</div>
-    </div>
 
-    <div class="container">
-        <div class="info-box">
-            <div class="info top">
-                <p class="label">NOMBRE</p>
-                <p class="data">{{dataView.secondName | uppercase}}</p>
-            </div>
-            <div class="info">
-                <p class="label">APELLIDO</p>
-                <p class="data">{{dataView.firstLastName | uppercase}}</p>
-            </div>
+    <p class="title">Configuraciones de la cuenta</p>
+    <p class="description">En esta seccion podra visualizar los datos basicos de sucuenta de SISMO y podra cambiar su
+        contraseña</p>
 
-            <div class="info">
-                <p class="label">USUARIO</p>
-                <p class="data">{{dataView.user | uppercase}}</p>
-            </div>
+    <div class="divGenral">
+        <div>
+            <div class="tarjeta">
+                <div class="divTitleProcess">
+                    <div class="displayFlex">
+                        <div class="info-box">
+                            <div class="info top">
+                                <p class="label">NOMBRE</p>
+                                <p class="data">{{dataView.secondName | uppercase}}</p>
+                            </div>
+                            <div class="info">
+                                <p class="label">APELLIDO</p>
+                                <p class="data">{{dataView.firstLastName | uppercase}}</p>
+                            </div>
 
-            <div class="info">
-                <p class="label ">CORREO ELECTRONICO</p>
-                <p class="data">{{dataView.email | uppercase}}</p>
-            </div>
-        </div>
+                            <div class="info">
+                                <p class="label">USUARIO</p>
+                                <p class="data">{{dataView.user | uppercase}}</p>
+                            </div>
 
-        <div class="info-box">
-            <div class="edit cursorPointer" (click)="editDataBase(dataView.user, 'psd')">EDITAR <i class="fa fa-pencil-square-o"></i></div>
-            <div class="info top">
-                <p class="label">CONSTRASEÑA</p>
-                <p class="data">•••••••••••••</p>
+                            <div class="info">
+                                <p class="label ">CORREO ELECTRONICO</p>
+                                <p class="data">{{dataView.email | uppercase}}</p>
+                            </div>
+                        </div>
+                        <div class="info-box">
+                            <div class="edit cursorPointer" (click)="editDataBase(dataView.user, 'psd')">EDITAR <i
+                                    class="fa fa-pencil-square-o"></i></div>
+                            <div class="info top">
+                                <p class="label">CONSTRASEÑA</p>
+                                <p class="data">•••••••••••••</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
