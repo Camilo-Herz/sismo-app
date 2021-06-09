@@ -67,15 +67,15 @@
                         <span>Extra</span>
                     </li>
                     <li>
-                        <a (click)="navigate('guides')" class="cursorPointer">
-                            <i class="fa fa-book"></i>
-                            <span>Documentación</span>
+                        <a (click)="navigate('pilot')" class="cursorPointer">
+                            <i class="fa fa-folder"></i>
+                            <span>Pilotos</span>
                         </a>
                     </li>
                     <li>
-                        <a (click)="navigate('examples')" class="cursorPointer">
-                            <i class="fa fa-folder"></i>
-                            <span>Ejemplos</span>
+                        <a (click)="navigate('guides')" class="cursorPointer">
+                            <i class="fa fa-book"></i>
+                            <span>Documentación</span>
                         </a>
                     </li>
                 </ul>
@@ -84,6 +84,9 @@
         </div>
         <!-- sidebar-content  -->
         <div class="sidebar-footer">
+            <a class="cursorPointer">
+                <i class="fa fa-caret-square-o-left" aria-hidden="true"></i>
+            </a>
             <a (click)="navigate('profile')" class="cursorPointer">
                 <i class="fa fa-cog"></i>
             </a>
