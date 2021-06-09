@@ -46,7 +46,7 @@ export class MenuComponent implements OnInit {
       case 'guides':
         this.workflow.callWorkflowGet('pageNavigation', dir, 'NA');
         break;
-      case 'examples':
+      case 'pilot':
         this.router.navigate(['examples']);
         break;
       case 'profile':
