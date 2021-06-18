@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { ModalService } from 'src/app/core/services/modal/modal.service';
 import { SocketWebService } from 'src/app/core/services/socketWeb/socket-web.service';
 import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.service';
 
@@ -10,6 +11,8 @@ import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.servic
   styleUrls: ['./processes.component.css']
 })
 export class ProcessesComponent implements OnInit, OnDestroy {
+
+  typeMenu = '1';
 
   selectedChart: any = {
     boxPlot: '',
@@ -50,7 +53,8 @@ export class ProcessesComponent implements OnInit, OnDestroy {
   constructor(
     private socketWebService: SocketWebService,
     private workflow: WorkFlowService,
-    private router: ActivatedRoute
+    private router: ActivatedRoute,
+    private modalService: ModalService
   ) {
     this.socketWebService.callback.subscribe((dataSocket: any) => {
       this.graphicData(dataSocket);
@@ -106,6 +110,11 @@ export class ProcessesComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.socketWebService.connect();
     this.dataSocket = this.router.snapshot.paramMap.get('data');
+    this.modalService.getNewView().subscribe((type) => {
+      if (type) {
+        this.typeMenu = type;
+      }
+    });
     this.subscription = this.workflow.getPayload().subscribe((resp) => {
       if (resp && resp.datasets) {
         this.dataView = resp;
@@ -295,4 +304,5 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     this.areaChartStackedFor = [];
     this.grafCard = [];
   }
+
 }
