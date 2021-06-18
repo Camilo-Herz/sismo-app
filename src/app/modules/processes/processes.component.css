@@ -145,4 +145,13 @@
     transform: rotate(-80deg);
     margin-right: 10px;
   }
+
+  .pageRightType2 {
+    width: 94%;
+    height: 100vh;
+    margin-left: 6%;
+    background: #e6e7e8;
+    padding-left: 0px;
+    display: table;
+  }
   

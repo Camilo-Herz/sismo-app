@@ -5,7 +5,12 @@
     <a id="show-sidebar" class="btn btn-sm btn-dark" href="#">
         <i class="fas fa-bars"></i>
     </a>
-    <nav id="sidebar" class="sidebar-wrapper navBar">
+
+    <!-- //////////////////////////////////////////////////////////////////////// -->
+    <!-- ////////////////////////////// Menu 1 ////////////////////////////////// -->
+    <!-- //////////////////////////////////////////////////////////////////////// -->
+
+    <nav id="sidebar" class="sidebar-wrapper navBar" *ngIf="typeMenu === '1'">
         <div class="sidebar-content">
             <div class="sidebar-brand">
                 <a (click)="navigate('dashboard')" class="cursorPointer">SISMO APP</a>
@@ -84,7 +89,7 @@
         </div>
         <!-- sidebar-content  -->
         <div class="sidebar-footer">
-            <a class="cursorPointer">
+            <a (click)="location('2')" class="cursorPointer" title="Disponible unicamente para los procesos">
                 <i class="fa fa-caret-square-o-left" aria-hidden="true"></i>
             </a>
             <a (click)="navigate('profile')" class="cursorPointer">
@@ -92,6 +97,64 @@
             </a>
             <a (click)="logout()" class="cursorPointer">
                 <i class="fa fa-power-off"></i>
+            </a>
+        </div>
+    </nav>
+
+    <!-- //////////////////////////////////////////////////////////////////////// -->
+    <!-- ////////////////////////////// Menu 2 ////////////////////////////////// -->
+    <!-- //////////////////////////////////////////////////////////////////////// -->
+
+    <nav id="sidebar" class="sidebar-wrapper widthType6_5 navBar" *ngIf="typeMenu === '2'">
+        <div class="sidebar-content">
+            <div class="sidebar-brand">
+                <a (click)="navigate('dashboard')" class="cursorPointer">SISMO</a>
+            </div>
+            <div class="textCenter">
+                <div class="user-pic">
+                    <img class="img-responsive img-rounded alignMeddle" width="50%" [src]="dataMenu.profilePicture"
+                        onError="this.src='../../../../assets/img/userNull.jpg'" alt="User picture">
+                </div>
+            </div>
+            <div class="sidebar-menu widthType25 textCenter">
+                <ul>
+                    <li class="header-menu">
+                    </li>
+                    <li>
+                        <a (click)="navigate('dashboard')" class="cursorPointer">
+                            <i class="fa fa-columns"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="navigate('connections')" class="cursorPointer">
+                            <i class="fa fa-sitemap" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="navigate('downloads')" class="cursorPointer">
+                            <i class="fa fa-download" aria-hidden="true"></i>
+                        </a>
+                    </li>
+                    <li class="header-menu">
+                    </li>
+                    <li>
+                        <a (click)="navigate('pilot')" class="cursorPointer">
+                            <i class="fa fa-folder"></i>
+                        </a>
+                    </li>
+                    <li>
+                        <a (click)="navigate('guides')" class="cursorPointer">
+                            <i class="fa fa-book"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- sidebar-menu  -->
+        </div>
+        <!-- sidebar-content  -->
+        <div class="sidebar-footer">
+            <a (click)="location('1')" class="cursorPointer">
+                <i class="fa fa-caret-square-o-left" aria-hidden="true"></i>
             </a>
         </div>
     </nav>

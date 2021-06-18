@@ -2,7 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.service';
+import { ProcessesComponent } from 'src/app/modules/processes/processes.component';
+import { environment } from 'src/environments/environment';
 import { ApplicationService } from '../../services/application/application.service';
+import { ModalService } from '../../services/modal/modal.service';
 
 @Component({
   selector: 'app-menu',
@@ -13,10 +16,12 @@ export class MenuComponent implements OnInit {
 
   subscription = new Subscription;
   dataMenu: any = {};
+  typeMenu = '1';
 
   constructor(
     public router: Router,
-    private workflow: WorkFlowService
+    private workflow: WorkFlowService,
+    private modalService: ModalService
   ) { }
 
   ngOnInit(): void {
@@ -60,5 +65,15 @@ export class MenuComponent implements OnInit {
   public logout(): void {
     sessionStorage.clear();
     this.workflow.callWorkflowPut('logout', '', { forbidden: false });
+  }
+
+  public location(value: string): void {
+    const path = window.location.href.substr(-7);
+    console.log(path);
+    
+    if (path === 'process') {
+      this.typeMenu = value;
+      this.modalService.setNewView(value);
+    }
   }
 }

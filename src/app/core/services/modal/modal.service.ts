@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class ModalService {
 
   private isShow = new BehaviorSubject<any>(null);
+  private dash = new BehaviorSubject<any>(null);
 
   constructor() { }
 
@@ -16,5 +17,13 @@ export class ModalService {
 
   getModal(): Observable<any> {
     return this.isShow.asObservable();
+  }
+
+  setNewView(value: string) {
+    this.dash.next(value);
+  }
+
+  getNewView(): Observable<any> {
+    return this.dash.asObservable();
   }
 }

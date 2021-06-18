@@ -17,6 +17,18 @@
     border-radius: 0.25rem;
 }
 
+.textCenter {
+    text-align: center;
+}
+
+.widthType6_5 {
+    width: 6.5% !important;
+}
+
+.widthType25 {
+    width: 25% !important;
+}
+
 .alignMeddle {
     vertical-align: middle;
 }
