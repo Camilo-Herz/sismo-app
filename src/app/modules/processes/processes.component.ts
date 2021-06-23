@@ -204,6 +204,21 @@ export class ProcessesComponent implements OnInit, OnDestroy {
       });
       this.single.push(newValues);
     });
+    ////// ordenamiento de los datos ///////
+    this.single.map((data: any) => {
+      data.sort((a: any, b: any) => {
+        if (a.value < b.value) {
+          return 1;
+        }
+        if (a.value > b.value) {
+          return -1;
+        }
+        return 0;
+      });
+    });
+    this.single.forEach((element: any, index: any) => {
+      this.single[index] = this.single[index].slice(0, 10);
+    });
   }
 
   private colorHEX(): string {
@@ -269,8 +284,6 @@ export class ProcessesComponent implements OnInit, OnDestroy {
         }
       });
     });
-    console.log('111 ', x);
-
     this.swimLineChart.dataToDisplay = x;
   }
 
