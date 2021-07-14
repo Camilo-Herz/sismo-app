@@ -20,3 +20,9 @@
   .alignDescription {
     text-align: center;
   }
+
+  .textDescription {
+    color: dimgrey;
+    font-size: unset;
+    margin: 10px 70px;
+  }
