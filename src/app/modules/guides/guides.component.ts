@@ -20,6 +20,7 @@ export class GuidesComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    history.forward();
     this.subscription = this.workflow.getPayload().subscribe((resp) => {
       if (resp.documents) {
         resp.documents.forEach((element: any) => {

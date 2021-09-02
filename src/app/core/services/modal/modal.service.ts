@@ -8,6 +8,7 @@ export class ModalService {
 
   private isShow = new BehaviorSubject<any>(null);
   private dash = new BehaviorSubject<any>(null);
+  private loader = new BehaviorSubject<any>(null);
 
   constructor() { }
 
@@ -25,5 +26,13 @@ export class ModalService {
 
   getNewView(): Observable<any> {
     return this.dash.asObservable();
+  }
+
+  setActiveLoader(value: boolean) {
+    this.loader.next(value);
+  }
+
+  getActiveLoader(): Observable<any> {
+    return this.loader.asObservable();
   }
 }

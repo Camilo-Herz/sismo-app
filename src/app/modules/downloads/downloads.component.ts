@@ -17,6 +17,7 @@ export class DownloadsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    history.forward();
     this.subscription = this.workflow.getPayload().subscribe((resp) => {
       if (resp.files) {
         this.dataView = resp;

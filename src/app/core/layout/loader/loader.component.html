@@ -1,6 +1,7 @@
-<section class="contStudyProcess-loading opacity-loading contStudyProcess"
-id="StudyProcess">
-<div class="modalContainer" id="loaderModal">
-  <div class="spinnerContainer"><span class="spinner"></span></div>
-</div>
-</section>
+<ng-container *ngIf="active">
+  <section class="contStudyProcess-loading opacity-loading contStudyProcess" id="StudyProcess">
+    <div class="modalContainer" id="loaderModal">
+      <div class="spinnerContainer"><span class="spinner"></span></div>
+    </div>
+  </section>
+</ng-container>

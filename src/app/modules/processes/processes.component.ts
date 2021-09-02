@@ -12,8 +12,9 @@ import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.servic
 })
 export class ProcessesComponent implements OnInit, OnDestroy {
 
-  typeMenu = '1';
+  isIEOrEdge = /msie\s|trident\/|Edge\//i.test(window.navigator.userAgent);
 
+  typeMenu = '1';
   selectedChart: any = {
     boxPlot: '',
     frequency: '',
@@ -108,6 +109,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
+    history.forward();
     this.socketWebService.connect();
     this.dataSocket = this.router.snapshot.paramMap.get('data');
     this.modalService.getNewView().subscribe((type) => {
@@ -318,4 +320,34 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     this.grafCard = [];
   }
 
+  public getBrowserName(): any {
+    const boxGraphic = {
+      navigator: '',
+      error: this.workflow.getPostErrorboxPlot()
+    };
+    const agent = window.navigator.userAgent.toLowerCase();
+    switch (true) {
+      case agent.indexOf('edge') > -1:
+        boxGraphic.navigator = 'edge';
+        break;
+      case agent.indexOf('opr') > -1 && !!(window as any).opr:
+        boxGraphic.navigator = 'opera';
+        break;
+      case agent.indexOf('chrome') > -1 && !!(window as any).chrome:
+        boxGraphic.navigator = 'chrome';
+        break;
+      case agent.indexOf('trident') > -1:
+        boxGraphic.navigator = 'ie';
+        break;
+      case agent.indexOf('firefox') > -1:
+        boxGraphic.navigator = 'firefox';
+        break;
+      case agent.indexOf('safari') > -1:
+        boxGraphic.navigator = 'safari';
+        break;
+      default:
+        boxGraphic.navigator = 'other';
+    }
+    return boxGraphic;
+  }
 }
