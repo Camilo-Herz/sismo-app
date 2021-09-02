@@ -1,0 +1,7 @@
+{
+    "/calculadoras-matematicas/*": {
+        "target": "https://es.calcuworld.com",
+        "secure": false,
+        "logLevel": "debug"
+    }
+}
