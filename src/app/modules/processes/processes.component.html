@@ -38,7 +38,7 @@
                     <div>
                         <p class="separationTitle">Diagrama de cajas y bigotes</p>
                     </div>
-                    <div class="divTitleProcess">
+                    <div class="divTitleProcess" *ngIf="getBrowserName().error === false">
                         <div class="borderLine">
                             <div *ngFor="let item of dataView.topics"
                                 [ngClass]="{'optSelect verticalLineBorder': selectedChart.boxPlot === item.name}"
@@ -54,6 +54,48 @@
                                 <nvd3 [options]="options" [data]="data"></nvd3>
                             </div>
                         </div>
+                    </div>
+                    <div *ngIf="getBrowserName().error === true">
+                        <img src="../../../assets/img/edge.png" alt="check" class="img-menos" width="40px"
+                            *ngIf="getBrowserName().navigator === 'edge'">
+                        <img src="../../../assets/img/google_Chrome_icon.png" alt="check" class="img-menos" width="40px"
+                            *ngIf="getBrowserName().navigator === 'chrome'">
+                        <img src="../../../assets/img/ie_logo.png" alt="check" class="img-menos" width="40px"
+                            *ngIf="getBrowserName().navigator === 'ie'">
+                        <img src="../../../assets/img/mozilla.png" alt="check" class="img-menos" width="40px"
+                            *ngIf="getBrowserName().navigator === 'firefox'">
+                        <img src="../../../assets/img/opera.png" alt="check" class="img-menos" width="40px"
+                            *ngIf="getBrowserName().navigator === 'opera'">
+                        <img src="../../../assets/img/safari-240.png" alt="check" class="img-menos" width="40px"
+                            *ngIf="getBrowserName().navigator === 'safari'">
+                        <p class="textAlternative">Es posible que por politicas de CORS de la pagina "calcuworld" en el
+                            reuso del script para calcular los valores, no se muestre la grafica, para solucionar
+                            este error le recomendamos instalar la siguiente extension para su navegador:
+                        </p>
+                        <a class="textAlternative" *ngIf="getBrowserName().navigator === 'chrome'"
+                            href="https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=es"
+                            target="_blank">
+                            https://chrome.google.com/webstore/detail/allow-cors-access-control/lhobafahddgcelffkeicbaginigeejlf?hl=es
+                            <br>
+                        </a>
+                        <a class="textAlternative" *ngIf="getBrowserName().navigator === 'firefox'"
+                            href="https://addons.mozilla.org/es/firefox/addon/access-control-allow-origin/"
+                            target="_blank">
+                            https://addons.mozilla.org/es/firefox/addon/access-control-allow-origin/
+                            <br>
+                        </a>
+                        <a class="textAlternative" *ngIf="getBrowserName().navigator === 'opera'"
+                            href="https://addons.opera.com/es-419/extensions/details/cors-toggle/" target="_blank">
+                            https://addons.opera.com/es-419/extensions/details/cors-toggle/
+                            <br>
+                        </a>
+                        <a class="textAlternative" *ngIf="getBrowserName().navigator === 'safari'"
+                            href="https://addons.opera.com/es-419/extensions/details/cors-toggle/" target="_blank">
+                            Las versiones posteriores de Safari le permiten desactivar las restricciones de origen
+                            cruzado. Simplemente habilite el menú de desarrollador desde Preferencias >> Avanzado y
+                            seleccione "Deshabilitar restricciones de origen cruzado" en el menú de desarrollo.
+                            <br>
+                        </a>
                     </div>
                 </div>
             </div>

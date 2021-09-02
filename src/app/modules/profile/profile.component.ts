@@ -17,6 +17,7 @@ export class ProfileComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    history.forward();
     this.subscription = this.workflow.getDataUser().subscribe((resp) => {
       if (resp) {
         this.dataView = resp;

@@ -15,6 +15,7 @@ export class WorkFlowService {
   private payload = new BehaviorSubject<any>(null);
   private boxPlotData = new BehaviorSubject<any>(null);
   private clientId = '';
+  public callPostError: any;
 
   constructor(
     public router: Router,
@@ -24,10 +25,13 @@ export class WorkFlowService {
 
   async callWorkflowPost(stepId: string, payload: any): Promise<any> {
     console.log('Datos enviados:', payload);
+    this.modalService.setActiveLoader(true);
     this.http.post<{}>(`${environment.workflowUrl}/api/${stepId}`, payload).subscribe((resp: any) => {
       console.log('Datos recibidos: ', resp);
       this.actionResponse(resp);
+      this.modalService.setActiveLoader(false);
     }, err => {
+      this.modalService.setActiveLoader(false);
       this.modalActive({
         type: 'error',
         message: 'Endpoint no encontrado, intente mas tarde.',
@@ -39,17 +43,21 @@ export class WorkFlowService {
 
   async callWorkflowPut(step: string, id: string, payload: any): Promise<any> {
     console.log('step: ', step, 'id: ', id, 'payload: ', payload);
+    this.modalService.setActiveLoader(true);
     this.http.put<{}>(`${environment.workflowUrl}/api/${step}/${id}`, payload).subscribe((resp: any) => {
       console.log('Datos recibidos: ', resp);
       this.actionResponse(resp);
+      this.modalService.setActiveLoader(false);
     });
   }
 
   async callWorkflowGet(step: string, dir: string, id: string): Promise<any> {
     console.log('step: ', step, 'id: ', dir, 'payload: ');
+    this.modalService.setActiveLoader(true);
     this.http.get<{}>(`${environment.workflowUrl}/api/${step}/${dir}/${id}`).subscribe((resp: any) => {
       console.log('Datos recibidos: ', resp);
       this.actionResponse(resp);
+      this.modalService.setActiveLoader(false);
     });
   }
 
@@ -119,8 +127,16 @@ export class WorkFlowService {
         dataResp = resp2.substr(resp2.indexOf('<div class=r1>') + 14, this.rewrite(resp2, '<div class=r1>').indexOf('</div>')).replace(/ /g, '').split(',');
         dataResp = (dataResp[0] === 'Ninguna') ? [this.whiskerHigh(data, dataResp)] : dataResp;
         this.outlier(resp, data, dataResp, sensor);
+        this.callPostError = false;
       });
+    }, err => {
+      this.callPostError = true;
+      console.log('Error boxplot', err);
     });
+  }
+
+  public getPostErrorboxPlot(): any {
+    return this.callPostError;
   }
 
   private outlier(resp: string, data: any, outliers: any, sensor: string): any {

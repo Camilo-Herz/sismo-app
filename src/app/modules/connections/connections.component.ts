@@ -22,6 +22,7 @@ export class ConnectionsComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit(): void {
+    history.forward();
     this.subscription = this.workflow.getPayload().subscribe((resp) => {
       this.dataView = resp;
     });

@@ -11,7 +11,6 @@ import { ApplicationService } from '../../core/services/application/application.
 })
 export class LoginComponent implements OnInit {
 
-  loading: boolean;
   payloadRegister: any = {};
   payloadLogin: any = {};
   flagCss: boolean;
@@ -24,7 +23,6 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private applicationService: ApplicationService
   ) {
-    this.loading = false;
     this.flagCss = false;
     this.registerForm = this.formBuilder.group({
       user: ['', [
@@ -53,6 +51,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    history.forward();
     this.loadScript('https://apis.google.com/js/platform.js');
   }
 
@@ -88,7 +87,6 @@ export class LoginComponent implements OnInit {
   }
 
   public callRegisterUser(): void {
-    this.loading = true;
     let dataLogin = this.applicationService.getDataLogin();
     setTimeout(() => {
       if (dataLogin !== undefined) {
@@ -101,25 +99,21 @@ export class LoginComponent implements OnInit {
 
   private onCall(dataLogin: any): void {
     delete this.payloadRegister.confirmPassword;
-    Object.assign(this.payloadRegister, dataLogin)
+    Object.assign(this.payloadRegister, dataLogin);
     this.workflow.callWorkflowPost('register', this.payloadRegister).finally(() => {
       this.registerForm.reset();
       this.payloadRegister = {};
-      this.loading = false;
     });
   }
 
-  public callOnSignIn() {
-    this.loading = true;
+  public callOnSignIn(): void {
     this.workflow.callWorkflowPost('login', this.payloadLogin).finally(() => {
       this.loginForm.get('password')?.reset();
       this.payloadRegister.password = '';
-      this.loading = false;
     });
   }
 
   ngOnDestroy(): void {
-    this.loading = false;
     this.subscription.unsubscribe();
   }
 }

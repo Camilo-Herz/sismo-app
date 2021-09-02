@@ -114,6 +114,7 @@
 }
 
 /* Estilos Refrescar*/
+
 .write {
     z-index: 10000;
     position: fixed;
@@ -131,27 +132,35 @@
     overflow: hidden;
     transition: all .1s ease;
     cursor: pointer;
-  }
-  .write:hover {
+}
+
+.write:hover {
     height: 60px;
     width: 170px;
-  }
-  .write:hover:after {
+}
+
+.write:hover:after {
     display: inline-table;
     content: " Actualizar graficas";
-  }
-  .write:hover .fa-pencil {
+}
+
+.write:hover .fa-pencil {
     transition: all .3s ease;
     transform: rotate(-80deg);
     margin-right: 10px;
-  }
+}
 
-  .pageRightType2 {
+.pageRightType2 {
     width: 94%;
     height: 100vh;
     margin-left: 6%;
     background: #e6e7e8;
     padding-left: 0px;
     display: table;
-  }
-  
+}
+
+.textAlternative {
+    font-size: medium;
+    padding: 0px 55px 0px 55px;
+    color: darkgray;
+}
