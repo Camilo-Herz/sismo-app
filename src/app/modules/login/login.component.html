@@ -13,8 +13,7 @@
           <input type="password" placeholder="Contraseña" formControlName="password"
             (ngModelChange)="onChange($event, 'password', 'login')" />
         </div>
-        <button type="submit" class="button button--primary"
-          [disabled]='!loginForm.valid'>Iniciar sesión</button>
+        <button type="submit" class="button button--primary" [disabled]='!loginForm.valid'>Iniciar sesión</button>
       </form>
       <form action="#" class="sign-up-form" [formGroup]="registerForm">
         <h2 class="title">Regístrate</h2>
@@ -23,16 +22,37 @@
           <input type="text" placeholder="Usuario" formControlName="user"
             (ngModelChange)="onChange($event, 'user', 'register')" />
         </div>
+        <ng-container *ngIf="this.registerForm.get('user')?.errors !== null && 
+          (this.payloadRegister.user !== undefined && this.payloadRegister.user !== '')">
+          <ul>
+            <li>El usuario debe tener minimo 4 caracteres</li>
+            <li>Solo se permiten caracteres afanumericos</li>
+          </ul>
+        </ng-container>
         <div class="input-field">
           <i class="fa fa-key"></i>
           <input type="password" placeholder="Contraseña" formControlName="password"
             (ngModelChange)="onChange($event, 'password', 'register')" />
         </div>
+        <ng-container *ngIf="registerForm.get('password')?.errors !== null && 
+        (this.payloadRegister.password !== undefined && this.payloadRegister.password !== '')">
+          <ul>
+            <li>
+              La contraseña debe tener minimo 5 caracteres</li>
+          </ul>
+        </ng-container>
         <div class="input-field">
           <i class="fa fa-key"></i>
           <input type="password" placeholder="Confrimar Contraseña" formControlName="confirmPassword"
             (ngModelChange)="onChange($event, 'confirmPassword', 'register')" />
         </div>
+        <ng-container *ngIf="registerForm.get('password')?.value !== registerForm.get('confirmPassword')?.value 
+        && payloadRegister.confirmPassword !== undefined && payloadRegister.confirmPassword !== ''">
+          <ul>
+            <li>
+              Las contraseñas no coinciden</li>
+          </ul>
+        </ng-container>
         <div class="social-media customBtnGoogle">
           <div (click)="callRegisterUser()" class="g-signin2" data-onsuccess="onSignIn" data-theme="dark"></div>
           <div *ngIf="!registerForm.valid || payloadRegister.password !== payloadRegister.confirmPassword"
@@ -48,7 +68,8 @@
       <div class="content">
         <h3>Eres nuevo en SISMO ?</h3>
         <p>
-          Desde SISMO podrás monitorizar todos tus procesos y sensores que tengas vinculados en el app.
+          Para poder monitorizar tus procesos y sensores deberas registrarte en SISMO con tu correo
+          institucional.
         </p>
         <button (click)="flagCss = !flagCss" class="btn transparent" id="sign-up-btn">
           Regístrate
@@ -60,9 +81,9 @@
     </div>
     <div class="panel right-panel">
       <div class="content">
-        <h3>Ya tienes tu sismo cuenta ?</h3>
+        <h3>Ya tienes una cuenta en SISMO ?</h3>
         <p>
-          Para poder monitorizar tus procesos y sensores deberas registrar una cuenta con tu correo institucional.
+          Desde SISMO podrás monitorizar todos tus procesos y sensores que tengas vinculados en el app.
         </p>
         <button (click)="flagCss = !flagCss" class="btn transparent" id="sign-in-btn">
           Accede

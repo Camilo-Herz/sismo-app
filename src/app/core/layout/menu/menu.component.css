@@ -504,3 +504,9 @@ body {
 .chiller-theme .sidebar-footer>a:last-child {
     border-right: none;
 }
+
+.borderInput {
+    outline: none;
+    /* background-color: #dfe; */
+    border: 0;
+}

@@ -28,13 +28,16 @@ export class LoginComponent implements OnInit {
     this.flagCss = false;
     this.registerForm = this.formBuilder.group({
       user: ['', [
+        Validators.minLength(4),
         Validators.required,
         Validators.pattern('[a-zA-Z0-9]*')
       ]],
       password: ['', [
+        Validators.minLength(5),
         Validators.required
       ]],
       confirmPassword: ['', [
+        Validators.minLength(5),
         Validators.required
       ]]
     });

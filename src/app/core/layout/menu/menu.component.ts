@@ -17,6 +17,7 @@ export class MenuComponent implements OnInit {
   subscription = new Subscription;
   dataMenu: any = {};
   typeMenu = '1';
+  search = '';
 
   constructor(
     public router: Router,
@@ -62,6 +63,12 @@ export class MenuComponent implements OnInit {
     }
   }
 
+  public filter(value: string): boolean {
+    this.search = this.search.toLowerCase();
+    value = value.toLowerCase();
+    return value.includes(this.search) ? true : false;
+  }
+
   public logout(): void {
     sessionStorage.clear();
     this.workflow.callWorkflowPut('logout', '', { forbidden: false });
@@ -70,7 +77,7 @@ export class MenuComponent implements OnInit {
   public location(value: string): void {
     const path = window.location.href.substr(-7);
     console.log(path);
-    
+
     if (path === 'process') {
       this.typeMenu = value;
       this.modalService.setNewView(value);
