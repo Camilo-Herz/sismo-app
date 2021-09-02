@@ -93,7 +93,7 @@
     </section>
     <section class="contModal contModal--isShow" id="modalDefault" *ngSwitchCase="'newProject'">
         <div class="modal modal--min">
-            <form action="#" [formGroup]="registerForm">
+            <form action="#" [formGroup]="registerForm" class="formArray">
                 <h2 class="modalTextForm">{{data.message}}</h2>
                 <hr>
                 <div class="input-field">
@@ -112,7 +112,8 @@
                         (change)="onChange($event, 'endpointOPC')" />
                 </div>
                 <div formArrayName="topics">
-                    <div *ngFor="let item of getTopics.controls; let indexTopic=index" [formGroupName]="indexTopic">
+                    <div class="sepDiv" *ngFor="let item of getTopics.controls; let indexTopic=index"
+                        [formGroupName]="indexTopic">
                         <div class="input-field max-width-topic">
                             <i class=""></i>
                             <input type="text" placeholder="Topic" formControlName="topic"
@@ -122,7 +123,9 @@
                             (click)="removeTopic(indexTopic, 'removeAt')">
                     </div>
                 </div>
-                <img src="../../../assets/img/icon-mas.svg" alt="check" class="img-mas" (click)="addTopic()">
+                <div class="centerBtnAdd" (click)="addTopic()">
+                    <img src="../../../assets/img/icon-mas.svg" alt="check" class="img-mas">
+                </div>
             </form>
             <div class="contButtons contButtons--minMgrTop contButtons contButtons--minMgrTop--sameWidth">
                 <button *ngIf="data.labelBtnIzquierda !== undefined" type="button" class="button button--secondary"
