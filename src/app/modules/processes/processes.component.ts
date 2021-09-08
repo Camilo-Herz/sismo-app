@@ -126,7 +126,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
         this.swimlaneLineChart();
         this.dataFrequency();
         this.displayBoxPlotChart(this.selectedChart.boxPlot);
-        this.activateHistoricalData('', 'Rxdata1');
+        this.activateHistoricalData('', this.dataView.topics[0].name);
       }
     });
     this.socketWebService.emitEvent({
