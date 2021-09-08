@@ -1,7 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, Subscription } from 'rxjs';
-import { ModalService } from 'src/app/core/services/modal/modal.service';
+import { Subscription } from 'rxjs';
+import { BehaviorsService } from 'src/app/core/services/behaviors/behaviors.service';
 import { SocketWebService } from 'src/app/core/services/socketWeb/socket-web.service';
 import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.service';
 
@@ -55,7 +55,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     private socketWebService: SocketWebService,
     private workflow: WorkFlowService,
     private router: ActivatedRoute,
-    private modalService: ModalService
+    private BehaviorsService: BehaviorsService
   ) {
     this.socketWebService.callback.subscribe((dataSocket: any) => {
       this.graphicData(dataSocket);
@@ -112,7 +112,7 @@ export class ProcessesComponent implements OnInit, OnDestroy {
     history.forward();
     this.socketWebService.connect();
     this.dataSocket = this.router.snapshot.paramMap.get('data');
-    this.modalService.getNewView().subscribe((type) => {
+    this.BehaviorsService.getNewView().subscribe((type) => {
       if (type) {
         this.typeMenu = type;
       }

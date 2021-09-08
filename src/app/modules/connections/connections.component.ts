@@ -1,5 +1,6 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { BehaviorsService } from 'src/app/core/services/behaviors/behaviors.service';
 import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.service';
 
 @Component({
@@ -9,6 +10,9 @@ import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.servic
 })
 export class ConnectionsComponent implements OnInit, OnDestroy {
 
+  @ViewChildren('items')
+  items!: QueryList<any>;
+  checkSelect: any;
   subscription = new Subscription;
   dataView: any = {};
   viewTopics: any = {};
@@ -18,11 +22,13 @@ export class ConnectionsComponent implements OnInit, OnDestroy {
   };
 
   constructor(
-    private workflow: WorkFlowService
+    private workflow: WorkFlowService,
+    private behaviorsService: BehaviorsService
   ) { }
 
   ngOnInit(): void {
     history.forward();
+    this.activeCheck();
     this.subscription = this.workflow.getPayload().subscribe((resp) => {
       this.dataView = resp;
     });
@@ -43,7 +49,7 @@ export class ConnectionsComponent implements OnInit, OnDestroy {
 
   public onChange(data: any, controlName: string): void {
     console.log(data.target.value);
-    
+
     const value = (data.target.value === '') ? '' : data.target.value;
     const auxPayload = this.payload.endpointsOPC.filter((item: any) => item.idProject === controlName);
     if (auxPayload.length === 0) {
@@ -76,8 +82,24 @@ export class ConnectionsComponent implements OnInit, OnDestroy {
     });
   }
 
-  public activeAlert(opt: any, topic: string, idProj: string, topicsProject: any): void {
+  private activeCheck(): void {
+    this.behaviorsService.getCancelAction()
+      .subscribe(
+        response => {
+          if (response === false) {
+            this.items.toArray()[this.checkSelect.index].nativeElement.checked = this.checkSelect.value;
+          }
+        }
+      );
+  }
+
+  public activeAlert(opt: any, topic: string, idProj: string, topicsProject: any, i: number): void {
     this.subscription.unsubscribe();
+    this.behaviorsService.setCancelAction(true);
+    this.checkSelect = {
+      index: i,
+      value: !this.items.toArray()[i].nativeElement.checked
+    };
     this.workflow.modalActive({
       type: 'activeAlert',
       message: 'Ingrese el valor maximo para recibir alertas del topic ' + topic + ' y sus unidades',

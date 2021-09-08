@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApplicationService } from '../../services/application/application.service';
-import { ModalService } from '../../services/modal/modal.service';
+import { BehaviorsService } from '../../services/behaviors/behaviors.service';
 import { WorkFlowService } from '../../services/workflow/work-flow.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class ModalComponent implements OnInit {
   };
 
   constructor(
-    private modalService: ModalService,
+    private behaviorsService: BehaviorsService,
     private applicationService: ApplicationService,
     private formBuilder: FormBuilder,
     private workflow: WorkFlowService
@@ -47,7 +47,7 @@ export class ModalComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.modalService.getModal()
+    this.behaviorsService.getModal()
       .subscribe(
         response => {
           if (response) {
@@ -75,10 +75,13 @@ export class ModalComponent implements OnInit {
     this.registerForm.updateValueAndValidity();
   }
 
-  actionBtnIzquierda(): void {
+  actionBtnIzquierda(action: string): void {
     this.payload = {};
     this.registerForm.reset();
     this.data = this.clear();
+    if (action === 'activeAlert') {
+      this.behaviorsService.setCancelAction(false);
+    }
   }
 
   actionBtnDerecha(action: string): void {

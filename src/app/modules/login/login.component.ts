@@ -51,8 +51,46 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log('-->>', this.method(6, 2));
+    console.log('otro ejercicio', this.method2());
+
     history.forward();
     this.loadScript('https://apis.google.com/js/platform.js');
+  }
+
+  method(a: any, b: any): any {
+    if (a <= 0 && b <= 0) {
+      return 1;
+    }
+    if (a % 2 === 0) {
+      return a + this.method(b, b - 1);
+    } else {
+      return b + this.method(a + 1, b);
+    }
+  }
+
+  method2 () {
+    const letras = ['W', 'A', 'W', 'T', 'L', 'W', 'N'];
+    const n = letras.length;
+    let izq = 0;
+    let der = 0;
+    let aux = 0;
+    let salida = '';
+    for (let i = 0; i < n; i++) {
+      if (aux > n) {
+        break;
+      }
+      der = aux + 1;
+      while (der >= izq) {
+        if (der === izq) {
+          salida += letras[aux];
+          aux = aux + izq;
+        }
+        der--;
+      }
+      izq++;
+    }
+    return salida;
   }
 
   public onChange(data: any, controleName: string, action: string): void {

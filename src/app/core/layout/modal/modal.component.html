@@ -9,7 +9,7 @@
             </div>
             <div class="contButtons contButtons--minMgrTop contButtons contButtons--minMgrTop--sameWidth">
                 <button *ngIf="data.labelBtnIzquierda !== undefined" type="button" class="button button--secondary"
-                    (click)="actionBtnIzquierda()">{{data.labelBtnIzquierda}}</button>
+                    (click)="actionBtnIzquierda('activeAlert')">{{data.labelBtnIzquierda}}</button>
                 <button type="button" class="button button--primary"
                     (click)="actionBtnDerecha('turnOffAlerts')">{{data.labelBtnDerecha}}</button>
             </div>
@@ -32,7 +32,7 @@
                 </div>
                 <div class="contButtons contButtons--minMgrTop contButtons--minMgrTop--sameWidth">
                     <button *ngIf="data.labelBtnIzquierda !== undefined" type="button" class="button button--secondary"
-                        (click)="actionBtnIzquierda()">{{data.labelBtnIzquierda}}</button>
+                        (click)="actionBtnIzquierda('activeAlert')">{{data.labelBtnIzquierda}}</button>
                     <button type="button" class="button button--primary" (click)="actionBtnDerecha('activeAlert')"
                         [disabled]='!registerFormAlert.valid'>{{data.labelBtnDerecha}}</button>
                 </div>
@@ -51,7 +51,7 @@
             </div>
             <div class="contButtons contButtons--minMgrTop contButtons--minMgrTop--sameWidth">
                 <button *ngIf="data.labelBtnIzquierda !== undefined" type="button" class="button button--secondary"
-                    (click)="actionBtnIzquierda()">{{data.labelBtnIzquierda}}</button>
+                    (click)="actionBtnIzquierda('')">{{data.labelBtnIzquierda}}</button>
                 <button type="button" class="button button--primary" (click)="actionBtnDerecha('editTopic')"
                     [disabled]='payload.topic === undefined || payload.topic === ""'>{{data.labelBtnDerecha}}</button>
             </div>
@@ -72,7 +72,7 @@
             </div>
             <div class="contButtons contButtons--minMgrTop contButtons--minMgrTop--sameWidth">
                 <button *ngIf="data.labelBtnIzquierda !== undefined" type="button" class="button button--secondary"
-                    (click)="actionBtnIzquierda()">{{data.labelBtnIzquierda}}</button>
+                    (click)="actionBtnIzquierda('')">{{data.labelBtnIzquierda}}</button>
                 <button type="button" class="button button--primary" (click)="actionBtnDerecha('editDataBase')"
                     [disabled]='payload.valueChange === undefined ||payload.valueChange === "" || payload.valueChange !== payload.valueChangeConfirm'>{{data.labelBtnDerecha}}</button>
             </div>
@@ -85,7 +85,7 @@
             </div>
             <div class="contButtons contButtons--minMgrTop contButtons contButtons--minMgrTop--sameWidth">
                 <button *ngIf="data.labelBtnIzquierda !== undefined" type="button" class="button button--secondary"
-                    (click)="actionBtnIzquierda()">{{data.labelBtnIzquierda}}</button>
+                    (click)="actionBtnIzquierda('')">{{data.labelBtnIzquierda}}</button>
                 <button type="button" class="button button--primary"
                     (click)="actionBtnDerecha('modal')">{{data.labelBtnDerecha}}</button>
             </div>
@@ -129,7 +129,7 @@
             </form>
             <div class="contButtons contButtons--minMgrTop contButtons contButtons--minMgrTop--sameWidth">
                 <button *ngIf="data.labelBtnIzquierda !== undefined" type="button" class="button button--secondary"
-                    (click)="actionBtnIzquierda()">{{data.labelBtnIzquierda}}</button>
+                    (click)="actionBtnIzquierda('')">{{data.labelBtnIzquierda}}</button>
                 <button type="button" class="button button--primary" (click)="actionBtnDerecha('newProject')"
                     [disabled]='!registerForm.valid || validArray()'>{{data.labelBtnDerecha}}</button>
             </div>

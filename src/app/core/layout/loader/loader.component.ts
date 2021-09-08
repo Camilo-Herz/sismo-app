@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ModalService } from '../../services/modal/modal.service';
+import { BehaviorsService } from '../../services/behaviors/behaviors.service';
 
 @Component({
   selector: 'app-loader',
@@ -11,14 +11,13 @@ export class LoaderComponent implements OnInit {
   active = false;
 
   constructor(
-    private modalService: ModalService
+    private behaviorsService: BehaviorsService
   ) { }
 
   ngOnInit(): void {
-    this.modalService.getActiveLoader()
+    this.behaviorsService.getActiveLoader()
       .subscribe(
         response => {
-          console.log('****', response);
           this.active = response;
         }
       );
