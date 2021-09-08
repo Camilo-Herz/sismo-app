@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { modal } from '../../interfaces/interfacesWorkflow';
-import { ModalService } from '../modal/modal.service';
+import { BehaviorsService } from '../behaviors/behaviors.service';
 
 @Injectable({
   providedIn: 'root'
@@ -19,19 +19,19 @@ export class WorkFlowService {
 
   constructor(
     public router: Router,
-    private modalService: ModalService,
+    private behaviorsService: BehaviorsService,
     private http: HttpClient
   ) { }
 
   async callWorkflowPost(stepId: string, payload: any): Promise<any> {
     console.log('Datos enviados:', payload);
-    this.modalService.setActiveLoader(true);
+    this.behaviorsService.setActiveLoader(true);
     this.http.post<{}>(`${environment.workflowUrl}/api/${stepId}`, payload).subscribe((resp: any) => {
       console.log('Datos recibidos: ', resp);
       this.actionResponse(resp);
-      this.modalService.setActiveLoader(false);
+      this.behaviorsService.setActiveLoader(false);
     }, err => {
-      this.modalService.setActiveLoader(false);
+      this.behaviorsService.setActiveLoader(false);
       this.modalActive({
         type: 'error',
         message: 'Endpoint no encontrado, intente mas tarde.',
@@ -43,21 +43,21 @@ export class WorkFlowService {
 
   async callWorkflowPut(step: string, id: string, payload: any): Promise<any> {
     console.log('step: ', step, 'id: ', id, 'payload: ', payload);
-    this.modalService.setActiveLoader(true);
+    this.behaviorsService.setActiveLoader(true);
     this.http.put<{}>(`${environment.workflowUrl}/api/${step}/${id}`, payload).subscribe((resp: any) => {
       console.log('Datos recibidos: ', resp);
       this.actionResponse(resp);
-      this.modalService.setActiveLoader(false);
+      this.behaviorsService.setActiveLoader(false);
     });
   }
 
   async callWorkflowGet(step: string, dir: string, id: string): Promise<any> {
     console.log('step: ', step, 'id: ', dir, 'payload: ');
-    this.modalService.setActiveLoader(true);
+    this.behaviorsService.setActiveLoader(true);
     this.http.get<{}>(`${environment.workflowUrl}/api/${step}/${dir}/${id}`).subscribe((resp: any) => {
       console.log('Datos recibidos: ', resp);
       this.actionResponse(resp);
-      this.modalService.setActiveLoader(false);
+      this.behaviorsService.setActiveLoader(false);
     });
   }
 
@@ -82,7 +82,7 @@ export class WorkFlowService {
   }
 
   modalActive(data: modal): void {
-    this.modalService.showModal({
+    this.behaviorsService.showModal({
       type: data.type,
       message: data.message,
       labelBtnIzquierda: data.labelBtnIzquierda,

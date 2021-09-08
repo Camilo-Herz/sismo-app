@@ -46,7 +46,7 @@
                         <th>Valor para alerta</th>
                         <th>Envio de alertas</th>
                     </tr>
-                    <tr *ngFor="let item2 of item.topics">
+                    <tr *ngFor="let item2 of item.topics; let i = index">
                         <td>
                             <p class="cursorPointer" (click)="editTopic(item2.name, item.idProject, item.topics)">
                                 {{item2.name}}
@@ -54,8 +54,8 @@
                         </td>
                         <td>{{item2.valueAlert}}</td>
                         <td>
-                            <input type="checkbox" id="cbox1" [checked]="item2.alert"
-                                (click)="activeAlert($event, item2.name, item.idProject, item.topics)">
+                            <input type="checkbox" id="cbox1" [checked]="item2.alert" #items
+                                (click)="activeAlert($event, item2.name, item.idProject, item.topics, i)">
                         </td>
                     </tr>
                 </table>

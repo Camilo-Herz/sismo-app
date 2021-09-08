@@ -5,7 +5,7 @@ import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.servic
 import { ProcessesComponent } from 'src/app/modules/processes/processes.component';
 import { environment } from 'src/environments/environment';
 import { ApplicationService } from '../../services/application/application.service';
-import { ModalService } from '../../services/modal/modal.service';
+import { BehaviorsService } from '../../services/behaviors/behaviors.service';
 
 @Component({
   selector: 'app-menu',
@@ -22,7 +22,7 @@ export class MenuComponent implements OnInit {
   constructor(
     public router: Router,
     private workflow: WorkFlowService,
-    private modalService: ModalService
+    private behaviorsService: BehaviorsService
   ) { }
 
   ngOnInit(): void {
@@ -80,7 +80,7 @@ export class MenuComponent implements OnInit {
 
     if (path === 'process') {
       this.typeMenu = value;
-      this.modalService.setNewView(value);
+      this.behaviorsService.setNewView(value);
     }
   }
 }

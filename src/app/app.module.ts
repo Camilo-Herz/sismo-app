@@ -4,7 +4,7 @@ import { NgModule } from '@angular/core';
 import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ModalService } from "./core/services/modal/modal.service";
+import { BehaviorsService } from "./core/services/behaviors/behaviors.service";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ModulesModule } from './modules/modules.module';
@@ -33,7 +33,7 @@ import 'nvd3';
     NvD3Module
   ],
   providers: [
-    ModalService
+    BehaviorsService
   ],
   bootstrap: [AppComponent]
 })
