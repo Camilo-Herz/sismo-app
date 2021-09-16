@@ -129,7 +129,8 @@ export class ModalComponent implements OnInit {
   private editDataBase(): void {
     const itemEdit = {
       editPassword: this.data.payload.editPassword,
-      valueChange: this.payload.valueChange
+      valueChange: this.payload.valueChange,
+      recoverPassword: this.data.payload.recoverPassword
     };
     this.workflow.callWorkflowPut('project', this.data.payload.id, itemEdit).finally(() => {
       this.payload = {};

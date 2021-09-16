@@ -40,7 +40,8 @@ export class ProfileComponent implements OnInit {
       stepId: '',
       payload: {
         editPassword: true,
-        id: this.dataView.id
+        id: this.dataView.id,
+        recoverPassword: false
       }
     });
   }
