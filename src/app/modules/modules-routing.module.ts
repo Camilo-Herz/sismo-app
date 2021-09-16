@@ -5,11 +5,11 @@ import { LoginComponent } from './login/login.component';
 import { GuidesComponent } from './guides/guides.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ProcessesComponent } from './processes/processes.component';
-import { ExamplesComponent } from './examples/examples.component';
 import { ConnectionsComponent } from './connections/connections.component';
 import { GuardsService } from '../core/services/guards/guards.service';
 import { DownloadsComponent } from './downloads/downloads.component';
 import { ProfileComponent } from './profile/profile.component';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 const routes: Routes = [
   {
@@ -46,13 +46,13 @@ const routes: Routes = [
     canActivate: [GuardsService]
   },
   {
-    path: 'examples',
-    component: ExamplesComponent,
+    path: 'profile',
+    component: ProfileComponent,
     canActivate: [GuardsService]
   },
   {
-    path: 'profile',
-    component: ProfileComponent,
+    path: 'notifications',
+    component: NotificationsComponent,
     canActivate: [GuardsService]
   }
 ];

@@ -105,7 +105,6 @@ export class ProcessesComponent implements OnInit, OnDestroy {
         this.areaChartStacked[indexArray] = [datosVista];
       }
     }
-    console.log('--> ', this.areaChartStacked);
   }
 
   ngOnInit(): void {

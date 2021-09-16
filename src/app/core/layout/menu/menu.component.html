@@ -87,8 +87,11 @@
         </div>
         <!-- sidebar-content  -->
         <div class="sidebar-footer">
-            <a (click)="location('2')" class="cursorPointer" title="Disponible unicamente para los procesos">
+            <a *ngIf="notificationsActive && typeMenu === '1'" (click)="location('2')" class="cursorPointer" title="Disponible unicamente para los procesos">
                 <i class="fa fa-caret-square-o-left" aria-hidden="true"></i>
+            </a>
+            <a class="cursorPointer">
+                <i (click)="notifications()" class="fa fa-bell" aria-hidden="true"></i>
             </a>
             <a (click)="navigate('profile')" class="cursorPointer">
                 <i class="fa fa-cog"></i>
@@ -151,8 +154,8 @@
         </div>
         <!-- sidebar-content  -->
         <div class="sidebar-footer">
-            <a (click)="location('1')" class="cursorPointer">
-                <i class="fa fa-caret-square-o-left" aria-hidden="true"></i>
+            <a *ngIf="typeMenu === '2'" (click)="location('1')" class="cursorPointer">
+                <i class="fa fa-caret-square-o-right" aria-hidden="true"></i>
             </a>
         </div>
     </nav>

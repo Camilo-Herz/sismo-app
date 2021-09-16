@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { WorkFlowService } from 'src/app/core/services/workflow/work-flow.service';
@@ -9,7 +9,7 @@ import { ApplicationService } from '../../core/services/application/application.
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent implements OnInit, OnDestroy {
 
   payloadRegister: any = {};
   payloadLogin: any = {};
@@ -17,6 +17,7 @@ export class LoginComponent implements OnInit {
   registerForm: FormGroup;
   loginForm: FormGroup;
   subscription = new Subscription;
+  recoverPassword = false;
 
   constructor(
     private workflow: WorkFlowService,
@@ -51,9 +52,6 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log('-->>', this.method(6, 2));
-    console.log('otro ejercicio', this.method2());
-
     history.forward();
     this.loadScript('https://apis.google.com/js/platform.js');
   }
@@ -69,7 +67,7 @@ export class LoginComponent implements OnInit {
     }
   }
 
-  method2 () {
+  method2(): any {
     const letras = ['W', 'A', 'W', 'T', 'L', 'W', 'N'];
     const n = letras.length;
     let izq = 0;
@@ -125,7 +123,7 @@ export class LoginComponent implements OnInit {
   }
 
   public callRegisterUser(): void {
-    let dataLogin = this.applicationService.getDataLogin();
+    const dataLogin = this.applicationService.getDataLogin();
     setTimeout(() => {
       if (dataLogin !== undefined) {
         this.onCall(dataLogin);
@@ -138,6 +136,7 @@ export class LoginComponent implements OnInit {
   private onCall(dataLogin: any): void {
     delete this.payloadRegister.confirmPassword;
     Object.assign(this.payloadRegister, dataLogin);
+    this.payloadRegister.recoverPassword = this.recoverPassword;
     this.workflow.callWorkflowPost('register', this.payloadRegister).finally(() => {
       this.registerForm.reset();
       this.payloadRegister = {};

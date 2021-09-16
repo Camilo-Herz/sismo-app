@@ -10,6 +10,7 @@ export class BehaviorsService {
   private dash = new BehaviorSubject<any>(null);
   private loader = new BehaviorSubject<any>(null);
   private cancelAction = new BehaviorSubject<any>(null);
+  private menuDynamism = new BehaviorSubject<any>(null);
 
   constructor() { }
 
@@ -41,7 +42,16 @@ export class BehaviorsService {
     this.cancelAction.next(value);
   }
 
-  getCancelAction(): Observable<any>  {
+  getCancelAction(): Observable<any> {
     return this.cancelAction.asObservable();
   }
+
+  setMenuDynamism(value: boolean): void {
+    this.menuDynamism.next(value);
+  }
+
+  getMenuDynamism(): Observable<any> {
+    return this.menuDynamism.asObservable();
+  }
+
 }

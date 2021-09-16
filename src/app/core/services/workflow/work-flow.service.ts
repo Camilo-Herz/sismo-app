@@ -48,6 +48,14 @@ export class WorkFlowService {
       console.log('Datos recibidos: ', resp);
       this.actionResponse(resp);
       this.behaviorsService.setActiveLoader(false);
+    }, err => {
+      this.behaviorsService.setActiveLoader(false);
+      this.modalActive({
+        type: 'error',
+        message: 'Endpoint no encontrado, intente mas tarde.',
+        labelBtnDerecha: 'Aceptar',
+        stepId: ''
+      });
     });
   }
 
@@ -58,6 +66,14 @@ export class WorkFlowService {
       console.log('Datos recibidos: ', resp);
       this.actionResponse(resp);
       this.behaviorsService.setActiveLoader(false);
+    }, err => {
+      this.behaviorsService.setActiveLoader(false);
+      this.modalActive({
+        type: 'error',
+        message: 'Endpoint no encontrado, intente mas tarde.',
+        labelBtnDerecha: 'Aceptar',
+        stepId: ''
+      });
     });
   }
 
@@ -66,6 +82,11 @@ export class WorkFlowService {
       case 1:
         this.router.navigate([resp.stepId]);
         this.setPayload(resp.payload, resp.accessToken);
+        if (resp.stepId === 'process') {
+          this.behaviorsService.setMenuDynamism(true);
+        } else {
+          this.behaviorsService.setMenuDynamism(false);
+        }
         break;
       case 2:
         this.modalActive({

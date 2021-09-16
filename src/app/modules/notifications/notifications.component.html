@@ -1,0 +1,17 @@
+<app-menu></app-menu>
+
+<div class="pageRight">
+    <p class="title">Alertas</p>
+
+    <div class="divGenral">
+        <div *ngFor="let item of dataView.alerts; let i=index">
+        <div class="tarjeta">
+            <div class="divTitleProcess">
+                <img class="iconAlert" id="imgMore1" src="../../../assets/img/alert.png" width="30px" alt="">
+                <p class="pTitleProcess">{{item.nombreProceso}}</p>
+            </div>
+            </div>
+        </div>
+        <div class="marginBottom"></div>
+    </div>
+</div>

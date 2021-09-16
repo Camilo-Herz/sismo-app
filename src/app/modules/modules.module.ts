@@ -9,13 +9,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { LayoutModule } from '../core/layout/layout.module';
 import { ProcessesComponent } from './processes/processes.component';
-import { ExamplesComponent } from './examples/examples.component';
 import { ConnectionsComponent } from './connections/connections.component';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { NvD3Module } from 'ng2-nvd3';
 import { DownloadsComponent } from './downloads/downloads.component';
 import { ProfileComponent } from './profile/profile.component';
 import { FilterPipe } from '../core/layout/pipes/filter/filter.pipe';
+import { NotificationsComponent } from './notifications/notifications.component';
 
 @NgModule({
   declarations: [
@@ -23,11 +23,11 @@ import { FilterPipe } from '../core/layout/pipes/filter/filter.pipe';
     LoginComponent,
     DashboardComponent,
     ProcessesComponent,
-    ExamplesComponent,
     ConnectionsComponent,
     DownloadsComponent,
     ProfileComponent,
-    FilterPipe
+    FilterPipe,
+    NotificationsComponent
   ],
   imports: [
     CommonModule,
