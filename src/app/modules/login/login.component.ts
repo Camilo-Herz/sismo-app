@@ -144,9 +144,20 @@ export class LoginComponent implements OnInit, OnDestroy {
       recoverPassword: this.recoverPassword
     };
     Object.assign(dataReq, data);
-    this.workflow.callWorkflowPost('register', dataReq).finally(() => {
-      this.registerForm.reset();
-      this.payloadRegister = {};
+    // this.workflow.callWorkflowPost('recoverPassword', this.payloadRegister).finally(() => {
+    //   this.registerForm.reset();
+    //   this.payloadRegister = {};
+    // });
+    this.workflow.modalActive({
+      type: 'editDataBase',
+      message: 'Cambio de contraseña, el boton solo se habilitara cuando las dos claves coincidan.',
+      labelBtnDerecha: 'Aceptar',
+      labelBtnIzquierda: 'Cancelar',
+      stepId: '',
+      payload: {
+        editPassword: true,
+        id: ''
+      }
     });
   }
 
