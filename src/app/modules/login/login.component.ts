@@ -92,23 +92,25 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
 
   public onChange(data: any, controleName: string, action: string): void {
-    switch (action) {
-      case 'login':
-        if (controleName === 'user') {
-          this.payloadLogin[controleName] = data.toLowerCase();
-        } else {
-          this.payloadLogin[controleName] = data;
-        }
-        break;
-      case 'register':
-        if (controleName === 'user') {
-          this.payloadRegister[controleName] = data.toLowerCase();
-        } else {
-          this.payloadRegister[controleName] = data;
-        }
-        break;
-      default:
-        break;
+    if (data !== null) {
+      switch (action) {
+        case 'login':
+          if (controleName === 'user') {
+            this.payloadLogin[controleName] = data.toLowerCase();
+          } else {
+            this.payloadLogin[controleName] = data;
+          }
+          break;
+        case 'register':
+          if (controleName === 'user') {
+            this.payloadRegister[controleName] = data.toLowerCase();
+          } else {
+            this.payloadRegister[controleName] = data;
+          }
+          break;
+        default:
+          break;
+      }
     }
   }
 
@@ -126,18 +128,31 @@ export class LoginComponent implements OnInit, OnDestroy {
     const dataLogin = this.applicationService.getDataLogin();
     setTimeout(() => {
       if (dataLogin !== undefined) {
-        debugger;
-        this.onCall(dataLogin);
+        if (this.recoverPassword) {
+          this.onCallRecoverPassword(dataLogin);
+        } else {
+          this.onCall(dataLogin);
+        }
       } else {
         this.callRegisterUser();
       }
     }, 2000);
   }
 
+  onCallRecoverPassword(data: any): void {
+    const dataReq = {
+      recoverPassword: this.recoverPassword
+    };
+    Object.assign(dataReq, data);
+    this.workflow.callWorkflowPost('register', dataReq).finally(() => {
+      this.registerForm.reset();
+      this.payloadRegister = {};
+    });
+  }
+
   private onCall(dataLogin: any): void {
     delete this.payloadRegister.confirmPassword;
     Object.assign(this.payloadRegister, dataLogin);
-    this.payloadRegister.recoverPassword = this.recoverPassword;
     this.workflow.callWorkflowPost('register', this.payloadRegister).finally(() => {
       this.registerForm.reset();
       this.payloadRegister = {};
