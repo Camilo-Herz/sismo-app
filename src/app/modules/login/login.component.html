@@ -15,7 +15,7 @@
         </div>
         <button type="submit" class="button button--primary" [disabled]='!loginForm.valid'>Iniciar sesión</button>
         <p (click)="callRegisterUser()" class="marginRecp" data-onsuccess="onSignIn">¿Olvidaste tu contraseña?</p>
-        <p (click)="callRegisterUser()" data-onsuccess="onSignIn">Recuperala iniciando sesion con google</p>
+        <p (click)="callRegisterUser()" data-onsuccess="onSignIn">Recuperala iniciando sesión con google</p>
         <div class="social-media">
           <div (click)="callRegisterUser()" (click)="recoverPassword = true" class="g-signin2" data-onsuccess="onSignIn"></div>
         </div>

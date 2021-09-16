@@ -90,6 +90,6 @@ export class MenuComponent implements OnInit {
   }
 
   public notifications(): void {
-    this.workflow.callWorkflowPost('notifications', {});
+    this.workflow.callWorkflowPost('notifications', {userId: this.dataMenu.id});
   }
 }
