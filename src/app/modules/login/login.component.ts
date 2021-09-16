@@ -126,6 +126,7 @@ export class LoginComponent implements OnInit, OnDestroy {
     const dataLogin = this.applicationService.getDataLogin();
     setTimeout(() => {
       if (dataLogin !== undefined) {
+        debugger;
         this.onCall(dataLogin);
       } else {
         this.callRegisterUser();
