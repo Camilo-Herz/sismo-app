@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // workflowUrl: 'http://localhost:3700',
-  workflowUrl: 'https://sismo-service.herokuapp.com',
+  workflowUrl: 'http://localhost:3700',
+  // workflowUrl: 'https://sismo-service.herokuapp.com',
   boxPlotCalculation: 'https://es.calcuworld.com/calculadoras-matematicas/calculadoras-estadistica/primer-cuartil/',
   outliers: 'https://miniwebtool.com/es/outlier-calculator/',
   title: 'SISMO'

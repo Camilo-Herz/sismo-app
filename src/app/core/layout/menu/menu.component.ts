@@ -14,6 +14,7 @@ import { BehaviorsService } from '../../services/behaviors/behaviors.service';
 })
 export class MenuComponent implements OnInit {
 
+  notificationsActive = false;
   subscription = new Subscription;
   dataMenu: any = {};
   typeMenu = '1';
@@ -26,6 +27,12 @@ export class MenuComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.behaviorsService.getMenuDynamism()
+      .subscribe(
+        response => {
+          this.notificationsActive = response;
+        }
+      );
     this.subscription = this.workflow.getDataUser().subscribe((resp) => {
       if (resp) {
         this.dataMenu = resp;
@@ -76,11 +83,13 @@ export class MenuComponent implements OnInit {
 
   public location(value: string): void {
     const path = window.location.href.substr(-7);
-    console.log(path);
-
     if (path === 'process') {
       this.typeMenu = value;
       this.behaviorsService.setNewView(value);
     }
+  }
+
+  public notifications(): void {
+    this.workflow.callWorkflowPost('notifications', {});
   }
 }

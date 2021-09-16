@@ -14,6 +14,12 @@
             (ngModelChange)="onChange($event, 'password', 'login')" />
         </div>
         <button type="submit" class="button button--primary" [disabled]='!loginForm.valid'>Iniciar sesión</button>
+        <p (click)="callRegisterUser()" class="marginRecp" data-onsuccess="onSignIn">¿Olvidaste tu contraseña?</p>
+        <p (click)="callRegisterUser()" data-onsuccess="onSignIn">Recuperala iniciando sesion con google</p>
+
+        <div class="social-media">
+          <div (click)="callRegisterUser()" (click)="recoverPassword = true" class="g-signin2" data-onsuccess="onSignIn"></div>
+        </div>
       </form>
       <form action="#" class="sign-up-form" [formGroup]="registerForm">
         <h2 class="title">Regístrate</h2>
