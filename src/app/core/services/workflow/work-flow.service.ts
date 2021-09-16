@@ -96,6 +96,20 @@ export class WorkFlowService {
           stepId: resp.stepId
         });
         break;
+      case 3:
+        this.modalActive({
+          type: 'editDataBase',
+          message: 'Cambio de contraseña, el boton solo se habilitara cuando las dos claves coincidan.',
+          labelBtnDerecha: 'Aceptar',
+          labelBtnIzquierda: 'Cancelar',
+          stepId: resp.stepId,
+          payload: {
+            editPassword: true,
+            id: resp.payload.id,
+            recoverPassword: true
+          }
+        });
+        break;
       default:
         this.router.navigate([resp.stepId]);
         break;
