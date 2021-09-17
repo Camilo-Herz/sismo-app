@@ -3,15 +3,16 @@
 <div class="pageRight">
     <p class="title">Alertas</p>
 
-    <div class="divGenral">
-        <div *ngFor="let item of dataView.alerts; let i=index">
-        <div class="tarjeta">
-            <div class="divTitleProcess">
-                <img class="iconAlert" id="imgMore1" src="../../../assets/img/alert.png" width="30px" alt="">
-                <p class="pTitleProcess">Se genero una alerta debido a que su proceso {{item.nameProcess}}</p>
-            </div>
-            </div>
+    <div class="Message Message--orange" *ngFor="let item of dataView.alerts; let i=index">
+        <div class="Message-icon">
+            <i class="fa fa-exclamation fa-4x" style="color: white;"></i>
         </div>
-        <div class="marginBottom"></div>
+        <div class="Message-body">
+            <p class="titleZise">Se genero una alerta</p>
+            <p>El proceso <strong>{{item.nameProcess}}</strong> ha tenido un incremento en los datos capturados del
+                sensor <strong>{{item.sensor}}</strong> el cual ha
+                excedido los <strong>{{item.value}} {{item.units}}</strong>.</p>
+        </div>
+        <button class="Message-close js-messageClose"><i class="fa fa-times"></i></button>
     </div>
 </div>
